@@ -11,8 +11,13 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
+  showSpinner = false;
 
   ngOnInit() {
+  }
+
+  login() {
+    alert('login clicked');
   }
 
 }
