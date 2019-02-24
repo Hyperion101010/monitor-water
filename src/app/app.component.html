@@ -1,8 +1,17 @@
 <mat-toolbar color="primary">
-
+        <button mat-button [matMenuTriggerFor]="menu"><i class="material-icons">
+                menu
+            </i></button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item routerLink="/login">Login</button>
+            <!-- <button mat-menu-item routerLink="/home">Home</button>
+            <button mat-menu-item routerLink="/comparision">Comparision</button>
+            <button mat-menu-item routerLink="/monitoring">Monitoring</button> -->
+        </mat-menu>
+    
     <span>Groundwater Monitoring</span>
 
-    <button mat-button routerLink="/login">Login</button>
+    <!-- <button mat-button routerLink="/login">Login</button> -->
     <button mat-button routerLink="/home">Home</button>
     <button mat-button routerLink="/comparision">Comparision</button>
     <button mat-button routerLink="/monitoring">Monitoring</button>
@@ -12,18 +21,6 @@
     <span class="example-fill-remaining-space"></span>
 
     <span>Right Aligned Text</span>
-    <button mat-button [matMenuTriggerFor]="menu"><i class="material-icons">
-            menu
-        </i></button>
-    <button mat-button [matMenuTriggerFor]="menu"><i class="material-icons">
-            more_vert
-            </i></button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/login">Login</button>
-        <button mat-menu-item routerLink="/home">Home</button>
-        <button mat-menu-item routerLink="/comparision">Comparision</button>
-        <button mat-menu-item routerLink="/monitoring">Monitoring</button>
-    </mat-menu>
-
+ 
 </mat-toolbar>
 <router-outlet></router-outlet>
