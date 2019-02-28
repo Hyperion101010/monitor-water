@@ -36,5 +36,3 @@ const getDB = ()=>{
 }
 
 module.exports = {getDB, connect, getPrimaryKey};
-
-

@@ -3,11 +3,17 @@ const http = require('http');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const express = require('express');
+const uuidv4 = require('uuid/v4');
+openSessions = {}; // To hold open sessions
 
 const app = express();
 
 const db = require('./db/db.js');
+const creds = require('./db/creds.js');
 const collection = "water";
+
+// CORS Handler
+app.use(creds.handleCORS);
 
 app.use('/', express.static(__dirname + '/dist/Hackathon'));
 app.set('views', __dirname + '/dist/Hackathon'); // Set views (index.html) to root directory
@@ -18,10 +24,21 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
     limit: '1000mb'
 }));
 
-// Receive and process Twilio responses - GET
+// Receive and process Login request - GET
 app.get('/login', (req, res) => {
-    console.log(req.query.email, req.query.password);
-    res.write('Success');
+	// console.log(req.query.username, req.query.password);
+	let result = {
+		status: '',
+		sessionId: ''
+	};
+	if (req.query.username === creds.username && req.query.password === creds.password) {
+		result.status = 'Success';
+		result.sessionId = uuidv4();
+		openSessions[result.sessionId] = Date.now();
+	} else {
+		result.status = 'Error';
+	}
+	res.write(JSON.stringify(result));
     res.end();
 });
 
