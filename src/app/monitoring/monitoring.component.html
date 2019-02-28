@@ -2,7 +2,8 @@
   <mat-grid-tile *ngFor="let tile of tiles;let i=index" [colspan]="tile.cols" [rowspan]="tile.rows">
     <div *ngIf="i===0">
       <mat-form-field>
-        <mat-select placeholder="Select State" [(value)]="selectedState" [(ngModel)]="selectedState" (ngModelChange)='handleStateChange(selectedState);'>
+        <mat-select placeholder="Select State" [(value)]="selectedState" [(ngModel)]="selectedState" (ngModelChange)='handleStateChange(selectedState);' required>
+            <mat-option>--</mat-option>
           <div *ngFor="let state of states;">
             <mat-option value="{{state.name}}">{{state.name}}</mat-option>
           </div>
@@ -10,7 +11,8 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select placeholder="Select District" [(value)]="selectedCity">
+        <mat-select placeholder="Select District" [(value)]="selectedCity" required>
+            <mat-option>--</mat-option>
           <div *ngFor="let city of cities;">
             <mat-option value="{{city}}">{{city}}</mat-option>
           </div>
@@ -18,13 +20,15 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select placeholder="Quantum of Extraction" [(value)]="selectedQuantum">
+        <mat-select placeholder="Quantum of Extraction" [(value)]="selectedQuantum" required>
+            <mat-option>--</mat-option>
           <div *ngFor="let quanta of quantumData">
             <mat-option value="{{quanta}}">{{quanta}}</mat-option>
           </div>
         </mat-select>
       </mat-form-field>
     </div>
+
     <div *ngIf="i==3">
       <mat-card class="Chart">
         <mat-card-header>

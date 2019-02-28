@@ -39,7 +39,7 @@ app.get('/login', (req, res) => {
 		result.status = 'Error';
 	}
 	res.write(JSON.stringify(result));
-    res.end();
+    res.end();	
 });
 
 //CRUD Operations
@@ -69,6 +69,34 @@ app.get('/getData',(req,res)=>{
 			else
 				res.json(docs);
 			
+		});
+});
+
+//GET request for State
+app.get('/getData/:state',(req,res)=>{
+	var State = req.params.state;
+	db.getDB().collection(collection).find(
+		{state : State})
+		.toArray((err,docs)=>{
+			if(err)
+				console.log(err);
+			else
+				res.json(docs);
+		});
+});
+
+//GET request for City
+app.get('/getData/:state/:city',(req,res)=>{
+	var State = req.params.state;
+	var City = req.params.city;
+	db.getDB().collection(collection).find(
+		{state : State,
+		 city : City})
+		.toArray((err,docs)=>{
+			if(err)
+				console.log(err);
+			else
+				res.json(docs);
 		});
 });
 
@@ -117,4 +145,3 @@ db.connect((err)=>{
 		});
 	}
 });
-

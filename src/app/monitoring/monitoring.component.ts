@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {FormControl, Validators} from '@angular/forms';
 
 export interface Tile {
   color: string;
@@ -22,8 +24,8 @@ export class MonitoringComponent implements OnInit {
 
   ];
 
-  selectedState: String = '';
-  selectedCity: String = '';
+  selectedState: String = 'Mizoram';
+  selectedCity: String = 'Aizawl';
   selectedQuantum: String = '';
   states = [];
   cities = [];
@@ -74,11 +76,13 @@ export class MonitoringComponent implements OnInit {
     'Puducherry (UT)': ['Karaikal','Mahe','Pondicherry','Yanam'],
   };
 
-  constructor() {
+  constructor(private http: HttpClient) {
     for (let i in this.statesData) {
       this.states.push({
         'name': i
-      });
+      }
+      );
+
     }
     console.log(this.states);
     for (let i in this.quantumData) {
@@ -90,7 +94,10 @@ export class MonitoringComponent implements OnInit {
    }
 
   ngOnInit() {
+    let obs = this.http.get('http://localhost:8100/getData/'+this.selectedState +'/'+this.selectedCity)
+    obs.subscribe((response) => console.log(response));
   }
+
 
   handleStateChange(selectedStateName) {
     this.cities = this.statesData[selectedStateName];
