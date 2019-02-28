@@ -1,51 +1,88 @@
-<!--<mat-form-field>
-  <mat-select placeholder="Select State" [(value)]="selectedState" [(ngModel)]="selectedState" (ngModelChange)='handleStateChange(selectedState);'>
-    <div *ngFor="let state of states;">
-      <mat-option value="{{state.name}}" >{{state.name}}</mat-option>
+<mat-grid-list cols="4" rowHeight="100px">
+  <mat-grid-tile *ngFor="let tile of tiles;let i=index" [colspan]="tile.cols" [rowspan]="tile.rows">
+    <div *ngIf="i===0">
+      <mat-form-field>
+        <mat-select placeholder="Select State" [(value)]="selectedState" [(ngModel)]="selectedState" (ngModelChange)='handleStateChange(selectedState);'>
+          <div *ngFor="let state of states;">
+            <mat-option value="{{state.name}}">{{state.name}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Select District" [(value)]="selectedCity">
+          <div *ngFor="let city of cities;">
+            <mat-option value="{{city}}">{{city}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Quantum of Extraction" [(value)]="selectedQuantum">
+          <div *ngFor="let quanta of quantumData">
+            <mat-option value="{{quanta}}">{{quanta}}</mat-option>
+          </div>
+        </mat-select>
+      </mat-form-field>
     </div>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field>
-    <mat-select placeholder="Select District" [(value)]="selectedCity">
-        <div *ngFor="let city of cities;">
-          <mat-option value="{{city}}">{{city}}</mat-option>
-        </div>
-      </mat-select>  
-</mat-form-field>
-
-<mat-form-field>
-  <mat-select placeholder="Quantum of Extraction" [(value)]="selectedQuantum">
-    <div *ngFor="let quanta of quantumData">
-      <mat-option value="{{quanta}}">{{quanta}}</mat-option>
+    <div *ngIf="i==3">
+      <mat-card class="Chart">
+        <mat-card-header>
+          <mat-card-title>Chart</mat-card-title>
+        </mat-card-header>
+          <img mat-card-image src="http://cgwb.gov.in/MAP/MAJOR%20AQUIFERS.JPG" alt="Major Aquifiers">
+      </mat-card>
     </div>
-  </mat-select>
-</mat-form-field>
 
-<mat-card class = "Alarm">
-    <mat-card-header>
-      <mat-card-title>Warnings and Alarms</mat-card-title>
-    </mat-card-header>
-          <table>
-            <tr>
-              <th>NOC Status </th>
-              <td>Status here</td>
-            </tr>
-            <tr>
-              <th>Water Usage Status </th>              
-              <td>Status here</td>
-            </tr>
-          </table>
-</mat-card>
+    <div *ngIf="i==1">
+      <mat-card class="Alarm">
+        <mat-card-header>
+          <mat-card-title>Warnings and Alarms</mat-card-title>
+        </mat-card-header>
 
-<mat-card class="Statistics">
-  <mat-card-header>
-    <mat-card-title>Statistics</mat-card-title>
-  </mat-card-header>
-</mat-card>
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <h4>NOC Validity</h4>
+          </mat-list-item>
+          <mat-list role="sublist">
+            <mat-list-item role="sublistitem">
+              <mat-icon matListIcon>arrow_right_alt</mat-icon>
+              <span>Safe:297350</span>
+            </mat-list-item>
 
-<mat-card class="Chart">
-  <mat-card-header>
-    <mat-card-title>Chart</mat-card-title>
-  </mat-card-header>
-</mat-card>-->
+            <mat-list-item role="sublistitem">
+              <mat-icon matListIcon>arrow_right_alt</mat-icon>
+              <span>Renew:523952</span>
+            </mat-list-item>
+
+            <mat-list-item role="sublistitem">
+              <mat-icon matListIcon>arrow_right_alt</mat-icon>
+              <span>Expired: 248 </span>
+            </mat-list-item>
+          </mat-list>
+
+          <mat-list-item role="listitem">
+            <h4>Water Usage</h4>
+          </mat-list-item>
+          <mat-list role="sublist">
+
+            <mat-list-item role="sublistitem">
+              <mat-icon matListIcon>arrow_right_alt</mat-icon>
+              <span>Safe: 27305</span>
+            </mat-list-item>
+
+            <mat-list-item role="sublistitem">
+              <mat-icon matListIcon>arrow_right_alt</mat-icon>
+              <span>Critical: 25830</span>
+            </mat-list-item>
+
+          </mat-list>
+        </mat-list>
+      </mat-card>
+    </div>
+
+    <div *ngIf="i==2">
+      <!---Donut Graph here-->
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

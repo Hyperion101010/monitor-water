@@ -1,19 +1,17 @@
-// mat-form-field {
-//     padding: 10px;
-// }
-// .Chart{
-//     width: 45%;
-//     background-color: lavenderblush;
-// }
+mat-form-field {
+    padding: 10px;
+}
 
-// .Alarm{
-//     margin-top: 84px;
-//     width: 50%;
-//     float:right;
-//     background-color: lightcoral;
-// }
-// .Statistics{
-//     width: 50%;
-//     float: right;
-//     background-color: lightseagreen;
-// }
+.Chart{
+    max-width: 600px;
+}
+
+.Alarm{
+    margin-top: 100px;
+    float:right;
+    width: 90%;
+}
+
+mat-list{
+    padding: 0px;
+}
