@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   showSpinner = false;
 
   ngOnInit() {
+    sessionStorage.removeItem('sessionId');
   }
 
   login() {
