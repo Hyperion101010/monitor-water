@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComparisionComponent } from './comparision/comparision.component';
 import { MonitoringComponent } from './monitoring/monitoring.component';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +34,7 @@ import { MonitoringComponent } from './monitoring/monitoring.component';
     DemoMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
