@@ -15,12 +15,16 @@ var subject = 'warning / alert';
 var message = 'Hello, this is to bring to your attention that your water consumtion is exceeding the expected limits. Please take necessary action. Regards, CGWA';
 
 // Load client secrets from a local file.
-fs.readFile('credentials.json', (err, content) => {
-  if (err) return console.log('Error loading client secret file:', err);
-  // Authorize a client with credentials, then call the Gmail API.
-  // authorize(JSON.parse(content), listLabels);
-  authorize(JSON.parse(content), to, subject, message, sendMessage);
-});
+
+exports.sendMail = function(toMail) {
+  to = toMail;
+  fs.readFile('credentials.json', (err, content) => {
+    if (err) return console.log('Error loading client secret file:', err);
+    // Authorize a client with credentials, then call the Gmail API.
+    // authorize(JSON.parse(content), listLabels);
+    authorize(JSON.parse(content), to, subject, message, sendMessage);
+  });  
+}
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the

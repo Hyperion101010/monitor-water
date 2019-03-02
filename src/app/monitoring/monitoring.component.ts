@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import {FormControl, Validators} from '@angular/forms';
 import { MonitordbService } from '../monitordb.service';
 
-
 export interface Tile {
   color: string;
   cols: number;
@@ -16,7 +15,7 @@ export interface Tile {
   styleUrls: ['./monitoring.component.scss']
 })
 export class MonitoringComponent implements OnInit {
- 
+
   tiles: Tile[] = [
     {cols: 2, rows: 1, color: 'white'},
     {cols: 2, rows: 1, color: 'white'},
@@ -25,6 +24,8 @@ export class MonitoringComponent implements OnInit {
     {cols: 2, rows: 6, color: 'lightyellow'},
     {cols: 1, rows: 6, color: 'white'},
   ];
+
+  email = 'contact@technobuz.in';
 
   selectedState: String = '';
   selectedCity: String = '';
@@ -80,7 +81,7 @@ export class MonitoringComponent implements OnInit {
     'Puducherry (UT)': ['Karaikal','Mahe','Pondicherry','Yanam'],
   };
 
-    constructor(private monitordbService : MonitordbService){
+    constructor(private monitordbService: MonitordbService){
     for (let i in this.statesData) {
       this.states.push({
         'name': i
@@ -99,7 +100,12 @@ export class MonitoringComponent implements OnInit {
    }
 
   ngOnInit() {
- 
+  }
+
+  sendMail() {
+    this.monitordbService.sendMail(this.email).subscribe((response) => {
+      console.log(response);
+    });
   }
 
   handleStateChange(selectedStateName) {
@@ -108,10 +114,9 @@ export class MonitoringComponent implements OnInit {
     this.selectedCity = '';
   }
 
-  submitted()
-  {
+  submitted() {
     this.monitordbService.submitted(this.selectedState, this.selectedCity).subscribe((response) => {
       console.log(response);
-    })
+    });
   }
 }

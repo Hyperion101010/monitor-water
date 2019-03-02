@@ -10,6 +10,7 @@ const app = express();
 openSessions = {}; // To hold open sessions
 
 const db = require('./db/db.js');
+const mail = require('./sendGmail.js');
 const creds = require('./db/creds.js');
 const collection = "noc";
 
@@ -133,6 +134,46 @@ app.delete('/:id', (req,res)=>{
 				res.json(result);
 		}
 	);
+});
+
+// sendMail Dummy service
+app.get('/sendMail',(req,res) => {
+	mail.sendMail(req.query.to);
+});
+
+// checkUsageDefaulters - groundwater.water.consumption / total_water_req
+app.get('/checkUsageDefaulters',(req,res) => {
+
+	var defaulters = [];
+
+	db.getDB().collection('usageConfig').find()
+	.toArray((err,docs)=>{
+		if(err)
+			console.log(err);
+		else {
+			var warningLimit = docs[0].warningLimit;
+			var alertLimit = docs[0].alertLimit;
+			console.log(warningLimit, alertLimit);
+			db.getDB().collection('telemetry').find({}).project(
+				{"_id": 0, "consumption": 1, "total_water_req": 1, "name_of_industry": 1, "state": 1, "city": 1, "email": 1, "mobile": 1})
+			.forEach((doc)=>{
+				var ratio = doc.consumption / doc.total_water_req;
+				// console.log(ratio);
+				if(ratio > warningLimit && ratio < alertLimit) {
+					// console.log(ratio, 'warning');
+					doc.status = 'warning';
+					defaulters.push(doc);
+				} else if (ratio > warningLimit && ratio < alertLimit) {
+					// console.log(ratio, 'alert');
+					doc.status = 'alert';
+					defaulters.push(doc);
+				}
+			}, function(err) {
+				// done or error
+				res.json(defaulters);
+			});
+		}
+	});
 });
 
 //GET UsageConfig - warningLimit, alertLimit

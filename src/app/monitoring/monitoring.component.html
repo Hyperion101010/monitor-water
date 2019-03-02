@@ -40,7 +40,10 @@
     </div>
 
      <div *ngIf="i==4">
-        <button mat-raised-button>Notify</button>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+          </mat-form-field>
+        <button mat-raised-button (click)="sendMail()">Notify</button>
      </div>
 
     <div *ngIf="i==5">

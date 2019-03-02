@@ -9,7 +9,10 @@ export class MonitordbService{
   constructor(private http: HttpClient) { }
 
   submitted(selectedState, selectedCity) {
-    let obs = this.http.get('http://localhost:8100/getData/'+selectedState +'/'+selectedCity)
-    return obs
+    return this.http.get('http://localhost:8100/getData/'+selectedState +'/'+selectedCity)
+    }
+
+    sendMail(email) {
+      return this.http.get('http://localhost:8100/sendMail?to=' + email);
     }
 }
