@@ -41,6 +41,9 @@ export class ComparisionComponent implements OnInit {
   colorScheme = {
     domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']
   };
+  colorScheme1 = {
+    domain: ['#5AA154', '#A10A28']
+  };
 
   constructor() { 
     Object.assign(this, { single, multi });
