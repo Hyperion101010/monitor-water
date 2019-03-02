@@ -169,7 +169,7 @@ app.get('/checkUsageDefaulters',(req,res) => {
 			var warningLimit = docs[0].warningLimit;
 			var alertLimit = docs[0].alertLimit;
 			console.log(warningLimit, alertLimit);
-			db.getDB().collection('telemetry').find(query).limit(100).project(
+			db.getDB().collection('telemetry').find(query).project(
 				{"_id": 0, "consumption": 1, "total_water_req": 1, "name_of_industry": 1, "state": 1, "city": 1, "email": 1, "mobile": 1})
 			.forEach((doc)=>{
 				var ratio = doc.consumption / doc.total_water_req;

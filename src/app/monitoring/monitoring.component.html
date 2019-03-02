@@ -12,7 +12,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select placeholder="Select District" [(value)]="selectedCity" [(ngModel)]="selectedCity" (ngModelChange)=' submitted();'
+        <mat-select placeholder="Select District" [(value)]="selectedCity" [(ngModel)]="selectedCity" (ngModelChange)='handleCityChange(selectedCity);'
           required>
           <mat-option>--</mat-option>
           <div *ngFor="let city of cities;">

@@ -112,12 +112,7 @@ export class MonitoringComponent implements OnInit {
     console.log(this.quantum);
     // Object.assign(this, { single, multi });
 
-    this.monitordbService.checkUsageDefaulters(this.selectedState, this.selectedCity).subscribe((response: WaterUsage[]) => {
-      console.log('checkUsageDefaulters', response);
-      this.waterUsage = response;
-      // this.waterUsage = [...this.waterUsage];
-    });
-
+    this.checkUsageDefaulters();
 
     this.monitordbService.nocValidity().subscribe((response) => {
       console.log(response);
@@ -140,5 +135,20 @@ export class MonitoringComponent implements OnInit {
     console.log(this.selectedCity);
     this.cities = this.statesData[selectedStateName];
     this.selectedCity = '';
+    this.checkUsageDefaulters();
   }
+
+  handleCityChange(selectedCity) {
+    console.log(this.selectedCity);
+    this.checkUsageDefaulters();
+  }
+
+  checkUsageDefaulters() {
+    this.monitordbService.checkUsageDefaulters(this.selectedState, this.selectedCity).subscribe((response: WaterUsage[]) => {
+      console.log('checkUsageDefaulters', response);
+      this.waterUsage = response;
+      // this.waterUsage = [...this.waterUsage];
+    });
+  }
+
 }
