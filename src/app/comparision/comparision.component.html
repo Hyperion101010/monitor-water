@@ -1,5 +1,5 @@
 <mat-grid-list cols="4" rowHeight="120px">
-  <mat-grid-tile *ngFor="let tile of tiles; let i=index" [colspan]="tile.cols" [rowspan]="tile.rows"[style.background-color]="tile.color">
+  <mat-grid-tile *ngFor="let tile of tiles; let i=index" [colspan]="tile.cols" [rowspan]="tile.rows">
     
     <div *ngIf="i===0" id="">
       <a id="updatebutton" mat-raised-button color="primary" target="_blank" href="http://cgwa-noc.gov.in/ExternalLogin.aspxReturnUrl=%2fExternalUser%2fApplicantHome.aspx">Update NOC</a>    
@@ -16,6 +16,10 @@
       <tr><td>H.P. of motor:</td><td>3</td></tr>
       <tr><td>Region: </td><td>Safe</td></tr>
       </table>
+    </div>
+
+    <div *ngIf="i==1">
+      <h2>Industry Information</h2>
     </div>
 
     <div *ngIf="i==2">
@@ -81,13 +85,6 @@
       </ngx-charts-pie-chart>
     </div>
     <div *ngIf="i===5">
-      <ngx-charts-pie-chart
-        [view]="view34"
-        [scheme]="colorScheme"
-        [results]="single"
-        [doughnut]=true>
-        test
-      </ngx-charts-pie-chart>
     </div>
   </mat-grid-tile>
 </mat-grid-list>

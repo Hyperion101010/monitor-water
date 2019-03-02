@@ -19,8 +19,7 @@ export class ComparisionComponent implements OnInit {
     {cols: 2, rows: 1, color: 'lightgreen'},
     {cols: 2, rows: 5, color: 'lightcoral'},
     {cols: 2, rows: 2, color: 'lavender'},
-    {cols: 1, rows: 3, color: 'purple'},
-    {cols: 1, rows: 3, color: 'orange'},
+    {cols: 2, rows: 3, color: 'purple'},
   ];
 
   single: any[];
