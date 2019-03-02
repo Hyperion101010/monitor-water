@@ -4,19 +4,23 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class MonitordbService{
+export class MonitordbService {
 
   constructor(private http: HttpClient) { }
 
   submitted(selectedState, selectedCity) {
-    return this.http.get('http://localhost:8100/getData/'+selectedState +'/'+selectedCity)
+    return this.http.get('http://localhost:8100/getData/' + selectedState + '/' + selectedCity)
   }
-  
+
   nocValidity() {
-  return this.http.get('http://localhost:8100/nocValidity')
+    return this.http.get('http://localhost:8100/nocValidity')
   }
-  
-    sendMail(email) {
-      return this.http.get('http://localhost:8100/sendMail?to=' + email);
-    }
+
+  sendMail(email) {
+    return this.http.get('http://localhost:8100/sendMail?to=' + email);
+  }
+
+  checkUsageDefaulters(state, city) {
+    return this.http.get('http://localhost:8100/checkUsageDefaulters?state=' + state + '&city=' + city);
+  }
 }
