@@ -134,6 +134,35 @@ app.delete('/:id', (req,res)=>{
 	);
 });
 
+//GET UsageConfig - warningLimit, alertLimit
+app.get('/getUsageConfig',(req,res) => {
+	db.getDB().collection('usageConfig').find()
+	.toArray((err,docs)=>{
+		if(err)
+			console.log(err);
+		else {
+			res.json(docs);
+		}
+	});
+});
+
+//SET UsageConfig - warningLimit, alertLimit
+app.get('/setUsageConfig',(req,res) => {
+	var warningLimit = req.query.warningLimit;
+	var alertLimit = req.query.alertLimit;
+	console.log('setUsageConfig', warningLimit, alertLimit);
+	db.getDB().collection('usageConfig').findOneAndUpdate(
+		{},
+		{$set : {'warningLimit' : warningLimit, 'alertLimit': alertLimit}},
+		(err,result)=>{
+			if(err)
+				console.log(err);
+			else
+				res.json(result);
+		}
+	);
+});
+
 //GET Percentage (total_treated_usage/total_usage)
 app.get('/getPercentage',(req,res)=>{
 	db.getDB().collection(collection).find()

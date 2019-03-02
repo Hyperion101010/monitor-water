@@ -11,4 +11,10 @@ export class WaterHarvestingService {
   harvesting() {
     return this.http.get('http://localhost:8100/getPercentage');
   }
+  getUsageConfig() {
+    return this.http.get('http://localhost:8100/getUsageConfig');
+  }
+  setUsageConfig(warningLimit, alertLimit) {
+    return this.http.get('http://localhost:8100/setUsageConfig?warningLimit=' + warningLimit + '&alertLimit=' + alertLimit);
+  }
 }

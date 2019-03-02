@@ -16,6 +16,7 @@ import { ComparisionComponent } from './comparision/comparision.component';
 import { MonitoringComponent } from './monitoring/monitoring.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { UsageConfigComponent } from './usage-config/usage-config.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     LoginComponent,
     HomeComponent,
     ComparisionComponent,
-    MonitoringComponent
+    MonitoringComponent,
+    UsageConfigComponent
   ],
   imports: [
     BrowserModule,
