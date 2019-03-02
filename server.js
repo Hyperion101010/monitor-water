@@ -62,6 +62,22 @@ app.post('/postData', (req, res) => {
 		});
 });
 
+// app.post('/postDataIndustry', (req,res)=>{
+// 	const userInput = req.body;
+// 	db.getDB().collection('industry')
+// 	.insertOne(userInput,(err,result)=>{
+// 		if(err)
+// 			console.log(err)
+
+// 		else{
+// 				res.json({
+// 					result,
+// 					document : result.ops[0]
+// 				});
+// 		}	
+// 	});
+// });
+
 //GET Data
 app.get('/getData', (req, res) => {
 	db.getDB().collection(collection).find({})
@@ -473,16 +489,28 @@ app.get('/getNOCIndustry/:uniq', (req, res) => {
 		.toArray((err, docs) => {
 			if (err)
 				console.log(err);
-			else {
-				var industryArr = [];
-				for (var i = docs.length - 1, counter = 0; counter < 7; i--) {
-					var temp = {
-						date: docs[i].start_day_number,
-						month: docs[i].month_counter,
-						year: docs[i].current_year,
-						value: docs[i].consumption
+			else{
+				var industryArr = [
+					{
+						"name" : "This Week",
+						"series" : []
+					},
+					{
+						"name" : "Previous Week",
+						"series" : []
 					}
-					industryArr.push(temp);
+				];
+				for(var i=docs.length-1, j=i-7,counter=0; counter<7; i--,j--){
+					var temp1 = {
+						name : `${docs[i].start_day_number}-0${docs[i].month_counter}`,
+						value : docs[i].consumption
+					};
+					var temp2 = {
+						name : `${docs[j].start_day_number}-0${docs[j].month_counter}`,
+						value : docs[j].consumption
+					};
+					industryArr[0].series.push(temp1);
+					industryArr[1].series.push(temp2);
 					counter++;
 				}
 				res.json(industryArr);
