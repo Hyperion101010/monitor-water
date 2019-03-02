@@ -216,19 +216,28 @@ app.get('/checkUsageDefaulters', (req, res) => {
 						var ratio = doc.consumption / doc.total_water_req;
 						// console.log(ratio);
 						if (ratio > warningLimit && ratio < alertLimit) {
-							// console.log(ratio, 'warning');
+							// console.log(ratio, doc, 'warning');
 							doc.status = 'warning';
 							defaulters.push(doc);
 							++totals[1].value;
+							if (creds.emailWhiteList.includes(doc.email)) {
+								mail.sendMail(doc.email);
+							}
 						} else if (ratio > warningLimit && ratio < alertLimit) {
 							// console.log(ratio, 'alert');
 							doc.status = 'alert';
 							defaulters.push(doc);
 							++totals[2].value;
+							if (creds.emailWhiteList.includes(doc.email)) {
+								mail.sendMail(doc.email);
+							}
 						} else {
 							doc.status = 'normal';
 							defaulters.push(doc);
 							++totals[0].value;
+							if (creds.emailWhiteList.includes(doc.email)) {
+								console.log(doc.email, 'ignored for normal');
+							}
 						}
 					}, function (err) {
 						// done or error
@@ -489,25 +498,24 @@ app.get('/getNOCIndustry/:uniq', (req, res) => {
 		.toArray((err, docs) => {
 			if (err)
 				console.log(err);
-			else{
-				var industryArr = [
-					{
-						"name" : "This Week",
-						"series" : []
+			else {
+				var industryArr = [{
+						"name": "This Week",
+						"series": []
 					},
 					{
-						"name" : "Previous Week",
-						"series" : []
+						"name": "Previous Week",
+						"series": []
 					}
 				];
-				for(var i=docs.length-1, j=i-7,counter=0; counter<7; i--,j--){
+				for (var i = docs.length - 1, j = i - 7, counter = 0; counter < 7; i--, j--) {
 					var temp1 = {
-						name : `${docs[i].start_day_number}-0${docs[i].month_counter}`,
-						value : docs[i].consumption
+						name: `${docs[i].start_day_number}-0${docs[i].month_counter}`,
+						value: docs[i].consumption
 					};
 					var temp2 = {
-						name : `${docs[j].start_day_number}-0${docs[j].month_counter}`,
-						value : docs[j].consumption
+						name: `${docs[j].start_day_number}-0${docs[j].month_counter}`,
+						value: docs[j].consumption
 					};
 					industryArr[0].series.push(temp1);
 					industryArr[1].series.push(temp2);
