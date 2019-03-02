@@ -11,7 +11,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select placeholder="Select District" [(value)]="selectedCity" [(ngModel)]="selectedCity" (ngModelChange)='submitted();' required>
+        <mat-select placeholder="Select District" [(value)]="selectedCity" [(ngModel)]="selectedCity" (ngModelChange)=' submitted();' required>
             <mat-option>--</mat-option>
           <div *ngFor="let city of cities;">
             <mat-option value="{{city}}">{{city}}</mat-option>
@@ -19,14 +19,6 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-select placeholder="Quantum of Extraction" [(value)]="selectedQuantum" required>
-            <mat-option>--</mat-option>
-          <div *ngFor="let quanta of quantumData">
-            <mat-option value="{{quanta}}">{{quanta}}</mat-option>
-          </div>
-        </mat-select>
-      </mat-form-field>
     </div>
 
     <div *ngIf="i==3">

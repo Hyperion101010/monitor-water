@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {  WaterHarvestingService } from '../water-harvesting.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor( private waterHarvestService : WaterHarvestingService){
+    this.waterHarvestService.harvesting().subscribe((response) => {
+      console.log(response);
+    })
+  }
 
   ngOnInit() {
   }

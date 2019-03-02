@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {FormControl, Validators} from '@angular/forms';
 import { MonitordbService } from '../monitordb.service';
 
+
 export interface Tile {
   color: string;
   cols: number;
@@ -32,6 +33,7 @@ export class MonitoringComponent implements OnInit {
   cities = [];
   quantum = [];
   response: any;
+  count: any = 0;
 
   quantumData = [
     'Critical',
