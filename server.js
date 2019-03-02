@@ -134,6 +134,52 @@ app.delete('/:id', (req,res)=>{
 	);
 });
 
+//GET Percentage (total_treated_usage/total_usage)
+app.get('/getPercentage',(req,res)=>{
+	db.getDB().collection(collection).find()
+		.toArray((err,docs)=>{
+			if(err)
+				console.log(err);
+			else{
+				var percentageJSON = {
+					'Maharashtra' : 0
+				};
+				var stateJSON = {
+					'Maharashtra' : {
+						totalTreatedUsage : 0,
+						totalUsage : 0						
+					}
+				};
+					
+				for(var i=0; i<docs.length; i++){
+					var currentState=docs[i].state;
+
+					if(stateJSON.hasOwnProperty(currentState)){
+						// console.log('yep');
+						// stateJSON.currentState.totalTreatedUsage+=docs[i].breakup_of_recycle.total_treated_used;
+						stateJSON[currentState].totalTreatedUsage+=docs[i].breakup_of_recycle.total_treated_used;
+						stateJSON[currentState].totalUsage+=docs[i].breakup_of_recycle.total_usage;
+					} else{
+						// console.log('nope');
+						stateJSON[currentState]={
+							totalTreatedUsage : docs[i].breakup_of_recycle.total_treated_used,
+							totalUsage : docs[i].breakup_of_recycle.total_usage
+						};
+					}
+
+					if(!percentageJSON.hasOwnProperty(currentState)){
+						percentageJSON[currentState] = 0;
+					}else{
+						percentageJSON[currentState] = 
+						(stateJSON[currentState].totalTreatedUsage/stateJSON[currentState].totalUsage)*100;
+					}
+				}
+				console.log(stateJSON);
+				res.json(percentageJSON);
+			}
+		});
+});
+
 //Establish Connection
 db.connect((err)=>{
 	if(err)
