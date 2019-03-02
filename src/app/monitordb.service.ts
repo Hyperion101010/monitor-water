@@ -23,4 +23,8 @@ export class MonitordbService {
   checkUsageDefaulters(state, city) {
     return this.http.get('http://localhost:8100/checkUsageDefaulters?state=' + state + '&city=' + city);
   }
+
+  nocIndustry(){
+    return this.http.get('http://localhost:8100/getNOCIndustry/8451651656');
+  }
 }

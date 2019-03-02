@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { single, multi } from '../data';
+import { MonitordbService } from '../monitordb.service';
 
 export interface Tile {
   color: string;
@@ -23,7 +24,7 @@ export class ComparisionComponent implements OnInit {
 
   single: any[];
   multi: any[];
-
+  reuse: any = [];
   view: any[] = [600, 400];
   view34: any[] = [300, 300];
 
@@ -44,8 +45,12 @@ export class ComparisionComponent implements OnInit {
     domain: ['#5AA154', '#A10A28']
   };
 
-  constructor() { 
+  constructor(private nocService: MonitordbService) { 
     Object.assign(this, { single, multi });
+    this.nocService.nocIndustry().subscribe((response) => {
+      console.log(response);
+      this.reuse = response;
+    });
   }
 
   ngOnInit() {

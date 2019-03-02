@@ -41,7 +41,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _comparision_comparision_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./comparision/comparision.component */ "./src/app/comparision/comparision.component.ts");
 /* harmony import */ var _monitoring_monitoring_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./monitoring/monitoring.component */ "./src/app/monitoring/monitoring.component.ts");
 /* harmony import */ var _usage_config_usage_config_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./usage-config/usage-config.component */ "./src/app/usage-config/usage-config.component.ts");
-/* harmony import */ var _auth_guard__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./auth.guard */ "./src/app/auth.guard.ts");
+/* harmony import */ var _map_map_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./map/map.component */ "./src/app/map/map.component.ts");
+/* harmony import */ var _auth_guard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./auth.guard */ "./src/app/auth.guard.ts");
+
 
 
 
@@ -54,10 +56,11 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [
     { path: '', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
-    { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
-    { path: 'comparision', component: _comparision_comparision_component__WEBPACK_IMPORTED_MODULE_5__["ComparisionComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
-    { path: 'monitoring', component: _monitoring_monitoring_component__WEBPACK_IMPORTED_MODULE_6__["MonitoringComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
-    { path: 'usageconfig', component: _usage_config_usage_config_component__WEBPACK_IMPORTED_MODULE_7__["UsageConfigComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_8__["AuthGuard"]] },
+    { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
+    { path: 'comparision', component: _comparision_comparision_component__WEBPACK_IMPORTED_MODULE_5__["ComparisionComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
+    { path: 'monitoring', component: _monitoring_monitoring_component__WEBPACK_IMPORTED_MODULE_6__["MonitoringComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
+    { path: 'usageconfig', component: _usage_config_usage_config_component__WEBPACK_IMPORTED_MODULE_7__["UsageConfigComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] },
+    { path: 'map', component: _map_map_component__WEBPACK_IMPORTED_MODULE_8__["MapComponent"], canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGuard"]] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -82,7 +85,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">\n        <button mat-button [matMenuTriggerFor]=\"menu\"><i class=\"material-icons\">\n                menu\n            </i></button>\n        <mat-menu #menu=\"matMenu\">\n            <button mat-menu-item routerLink=\"/login\">Login</button>\n            <button mat-menu-item routerLink=\"/usageconfig\">Configure</button>\n        </mat-menu>\n    \n    <span>Groundwater Monitoring</span>\n\n    <!-- <button mat-button routerLink=\"/login\">Login</button> -->\n    <button mat-button routerLink=\"/home\">Home</button>\n    <button mat-button routerLink=\"/monitoring\">Monitoring</button>\n    <button mat-button routerLink=\"/comparision\">Comparision</button>\n\n    <!-- This fills the remaining space of the current row -->\n    <span class=\"example-fill-remaining-space\"></span> \n</mat-toolbar>\n<router-outlet></router-outlet>\n<br>\n<mat-toolbar color=\"primary\">\n    <div id=\"Footer\" class=\"example-fill-remaining-space\">Content Provided and Updated by Central Ground Water Authority (CGWA)<br>\n  Designed and developed by Team hiddenforprivacy, PICT, Pune </div>\n</mat-toolbar>"
+module.exports = "<mat-toolbar color=\"primary\">\n    <button mat-button [matMenuTriggerFor]=\"menu\"><i class=\"material-icons\">menu</i></button>\n    <mat-menu #menu=\"matMenu\">\n        <button mat-menu-item routerLink=\"/login\">Login</button>\n        <button mat-menu-item routerLink=\"/usageconfig\">Configure</button>\n    </mat-menu>\n    <span>Groundwater Monitoring </span>\n\n    <button mat-flat-button color=\"primary\" routerLink=\"/home\">Home</button>\n    <button mat-flat-button color=\"primary\" routerLink=\"/map\">Map</button>\n    <button mat-flat-button color=\"primary\" routerLink=\"/monitoring\">Monitoring</button>\n    <button mat-flat-button color=\"primary\" routerLink=\"/comparision\">Analysis</button>\n\n    <!-- This fills the remaining space of the current row -->\n    <span class=\"example-fill-remaining-space\"></span>\n</mat-toolbar>\n\n<router-outlet></router-outlet>\n<br>\n\n<mat-toolbar color=\"primary\">\n    <div id=\"Footer\" class=\"example-fill-remaining-space\">Content Provided and Updated by Central Ground Water Authority (CGWA)<br> Designed and developed by Team hiddenforprivacy, PICT, Pune </div>\n</mat-toolbar>"
 
 /***/ }),
 
@@ -93,7 +96,7 @@ module.exports = "<mat-toolbar color=\"primary\">\n        <button mat-button [m
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".example-fill-remaining-space {\n  /* This fills the remaining space, by using flexbox. \n       Every toolbar row uses a flexbox row layout. */\n  flex: 1 1 auto; }\n\n#Footer {\n  text-align: center;\n  font-size: 12px;\n  padding-bottom: 0px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zaHJ1dGkvZ3JvdW5kd2F0ZXIvc3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJO3FEQ0NpRDtFRENqRCxjQUFjLEVBQUE7O0FBR2hCO0VBQ0Usa0JBQWtCO0VBQ2xCLGVBQWU7RUFDZixtQkFBbUIsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5leGFtcGxlLWZpbGwtcmVtYWluaW5nLXNwYWNlIHtcbiAgICAvKiBUaGlzIGZpbGxzIHRoZSByZW1haW5pbmcgc3BhY2UsIGJ5IHVzaW5nIGZsZXhib3guIFxuICAgICAgIEV2ZXJ5IHRvb2xiYXIgcm93IHVzZXMgYSBmbGV4Ym94IHJvdyBsYXlvdXQuICovXG4gICAgZmxleDogMSAxIGF1dG87XG4gIH1cbiAgXG4gICNGb290ZXIge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBmb250LXNpemU6IDEycHg7XG4gICAgcGFkZGluZy1ib3R0b206IDBweDtcbiAgfSIsIi5leGFtcGxlLWZpbGwtcmVtYWluaW5nLXNwYWNlIHtcbiAgLyogVGhpcyBmaWxscyB0aGUgcmVtYWluaW5nIHNwYWNlLCBieSB1c2luZyBmbGV4Ym94LiBcbiAgICAgICBFdmVyeSB0b29sYmFyIHJvdyB1c2VzIGEgZmxleGJveCByb3cgbGF5b3V0LiAqL1xuICBmbGV4OiAxIDEgYXV0bzsgfVxuXG4jRm9vdGVyIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBmb250LXNpemU6IDEycHg7XG4gIHBhZGRpbmctYm90dG9tOiAwcHg7IH1cbiJdfQ== */"
+module.exports = ".example-fill-remaining-space {\n  /* This fills the remaining space, by using flexbox. \n       Every toolbar row uses a flexbox row layout. */\n  flex: 1 1 auto; }\n\n#Footer {\n  text-align: center;\n  font-size: 12px;\n  padding-bottom: 0px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3N3YXBuaWwvSGFja2F0aG9uL2dyb3VuZHdhdGVyL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSTtxRENDaUQ7RURDakQsY0FBYyxFQUFBOztBQUdoQjtFQUNFLGtCQUFrQjtFQUNsQixlQUFlO0VBQ2YsbUJBQW1CLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZXhhbXBsZS1maWxsLXJlbWFpbmluZy1zcGFjZSB7XG4gICAgLyogVGhpcyBmaWxscyB0aGUgcmVtYWluaW5nIHNwYWNlLCBieSB1c2luZyBmbGV4Ym94LiBcbiAgICAgICBFdmVyeSB0b29sYmFyIHJvdyB1c2VzIGEgZmxleGJveCByb3cgbGF5b3V0LiAqL1xuICAgIGZsZXg6IDEgMSBhdXRvO1xuICB9XG4gIFxuICAjRm9vdGVyIHtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgZm9udC1zaXplOiAxMnB4O1xuICAgIHBhZGRpbmctYm90dG9tOiAwcHg7XG4gIH0iLCIuZXhhbXBsZS1maWxsLXJlbWFpbmluZy1zcGFjZSB7XG4gIC8qIFRoaXMgZmlsbHMgdGhlIHJlbWFpbmluZyBzcGFjZSwgYnkgdXNpbmcgZmxleGJveC4gXG4gICAgICAgRXZlcnkgdG9vbGJhciByb3cgdXNlcyBhIGZsZXhib3ggcm93IGxheW91dC4gKi9cbiAgZmxleDogMSAxIGF1dG87IH1cblxuI0Zvb3RlciB7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgZm9udC1zaXplOiAxMnB4O1xuICBwYWRkaW5nLWJvdHRvbTogMHB4OyB9XG4iXX0= */"
 
 /***/ }),
 
@@ -155,6 +158,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _monitoring_monitoring_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./monitoring/monitoring.component */ "./src/app/monitoring/monitoring.component.ts");
 /* harmony import */ var _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @swimlane/ngx-charts */ "./node_modules/@swimlane/ngx-charts/release/esm.js");
 /* harmony import */ var _usage_config_usage_config_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./usage-config/usage-config.component */ "./src/app/usage-config/usage-config.component.ts");
+/* harmony import */ var _map_map_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./map/map.component */ "./src/app/map/map.component.ts");
+
 
 
 
@@ -182,7 +187,8 @@ var AppModule = /** @class */ (function () {
                 _home_home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"],
                 _comparision_comparision_component__WEBPACK_IMPORTED_MODULE_12__["ComparisionComponent"],
                 _monitoring_monitoring_component__WEBPACK_IMPORTED_MODULE_13__["MonitoringComponent"],
-                _usage_config_usage_config_component__WEBPACK_IMPORTED_MODULE_15__["UsageConfigComponent"]
+                _usage_config_usage_config_component__WEBPACK_IMPORTED_MODULE_15__["UsageConfigComponent"],
+                _map_map_component__WEBPACK_IMPORTED_MODULE_16__["MapComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -263,7 +269,7 @@ var AuthGuard = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"120px\">\n  <mat-grid-tile *ngFor=\"let tile of tiles; let i=index\" [colspan]=\"tile.cols\" [rowspan]=\"tile.rows\">\n    \n    <div *ngIf=\"i===0\" id=\"\">\n      <a id=\"updatebutton\" mat-raised-button color=\"primary\" target=\"_blank\" href=\"http://cgwa-noc.gov.in/ExternalLogin.aspxReturnUrl=%2fExternalUser%2fApplicantHome.aspx\">Update NOC</a>    \n      <mat-form-field class=\"Input\">\n        <input matInput placeholder=\"Enter NOC ID\" [(ngModel)]=\"NOCid\">\n      </mat-form-field>\n    </div>\n\n    <div *ngIf=\"i==3\">\n      <table>\n      <tr><td>Type of Industry:</td><td>Private</td></tr>\n      <tr><td>Type of Structure:</td><td>Bore Well</td></tr>\n      <tr><td>Average discharge/day:</td><td>238 cubic m</td></tr>\n      <tr><td>H.P. of motor:</td><td>3</td></tr>\n      <tr><td>Region: </td><td>Safe</td></tr>\n      </table>\n    </div>\n\n    <div *ngIf=\"i==1\">\n      <h2>Industry Information</h2>\n    </div>\n\n    <div *ngIf=\"i==2\">\n      <mat-tab-group>\n        <mat-tab label=\"Weekly\">  \n          <ngx-charts-bar-vertical  class=\"graph2\"\n            [view]=\"view\" \n            [scheme]=\"colorScheme\" \n            [results]=\"single\" \n            [gradient]=\"gradient\" \n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\" \n            [legend]=\"showLegend\" \n            [showXAxisLabel]=\"showXAxisLabel\" \n            [showYAxisLabel]=\"showYAxisLabel\" \n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\" \n            (select)=\"onSelect($event)\">\n          </ngx-charts-bar-vertical>\n        </mat-tab>\n         <mat-tab label=\"Monthly\">\n          <ngx-charts-bar-vertical  class=\"graph2\"\n            [view]=\"view\" \n            [scheme]=\"colorScheme\" \n            [results]=\"single\" \n            [gradient]=\"gradient\" \n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\" \n            [legend]=\"showLegend\" \n            [showXAxisLabel]=\"showXAxisLabel\" \n            [showYAxisLabel]=\"showYAxisLabel\" \n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\" \n            (select)=\"onSelect($event)\">\n          </ngx-charts-bar-vertical>\n        </mat-tab>\n         <mat-tab label=\"Yearly\">\n          <ngx-charts-bar-vertical \n            [view]=\"view\" \n            [scheme]=\"colorScheme\" \n            [results]=\"single\" \n            [gradient]=\"gradient\" \n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\" \n            [legend]=\"showLegend\" \n            [showXAxisLabel]=\"showXAxisLabel\" \n            [showYAxisLabel]=\"showYAxisLabel\" \n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\" \n            (select)=\"onSelect($event)\">\n          </ngx-charts-bar-vertical>\n        </mat-tab>\n      </mat-tab-group>\n      \n    </div>\n    <div *ngIf=\"i===4\">\n      <ngx-charts-pie-chart\n        [view]=\"view34\"\n        [scheme]=\"colorScheme\"\n        [results]=\"single\"\n        [doughnut]=true>\n        test\n      </ngx-charts-pie-chart>\n    </div>\n    <div *ngIf=\"i===5\">\n    </div>\n  </mat-grid-tile>\n</mat-grid-list>"
+module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"120px\">\n  <mat-grid-tile *ngFor=\"let tile of tiles; let i=index\" [colspan]=\"tile.cols\" [rowspan]=\"tile.rows\" [style.background-color]=\"tile.color\">\n    \n    <div *ngIf=\"i===0\" id=\"\">\n      <a id=\"updatebutton\" mat-raised-button color=\"primary\" target=\"_blank\" href=\"http://cgwa-noc.gov.in/ExternalLogin.aspxReturnUrl=%2fExternalUser%2fApplicantHome.aspx\">Update NOC</a>    \n      <mat-form-field class=\"Input\">\n        <input matInput placeholder=\"Enter NOC ID\" [(ngModel)]=\"NOCid\">\n      </mat-form-field>\n    </div>\n\n    <div *ngIf=\"i==1\">\n      <h2>Industry Information</h2>\n      <table>\n      <tr><td>Type of Industry:</td><td>Private</td></tr>\n      <tr><td>Type of Structure:</td><td>Bore Well</td></tr>\n      <tr><td>Average discharge/day:</td><td>100 cubic m</td></tr>\n      <tr><td>H.P. of motor:</td><td>3</td></tr>\n      <tr><td>Region: </td><td>Safe</td></tr>\n      </table>\n    </div>\n\n    <div *ngIf=\"i==2\">\n      <h2> Industry Wise Consumption Data </h2>\n      <mat-tab-group>\n        <mat-tab label=\"Weekly\">  \n          <ngx-charts-line-chart [view]=\"view\" [scheme]=\"colorScheme\" [results]=\"reuse\" [gradient]=\"gradient\" [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\" [legend]=\"showLegend\" [showXAxisLabel]=\"showXAxisLabel\" [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\" [yAxisLabel]=\"yAxisLabel\" [autoScale]=\"autoScale\" (select)=\"onSelect($event)\">\n          </ngx-charts-line-chart>\n          <!--<ngx-charts-bar-vertical  class=\"graph2\"\n            [view]=\"view\" \n            [scheme]=\"colorScheme\" \n            [results]=\"single\" \n            [gradient]=\"gradient\" \n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\" \n            [legend]=\"showLegend\" \n            [showXAxisLabel]=\"showXAxisLabel\" \n            [showYAxisLabel]=\"showYAxisLabel\" \n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\" \n            (select)=\"onSelect($event)\">\n          </ngx-charts-bar-vertical>-->\n        </mat-tab>\n         <mat-tab label=\"Monthly\">\n           <ngx-charts-line-chart [view]=\"view\" [scheme]=\"colorScheme\" [results]=\"multi\" [gradient]=\"gradient\" [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\" [legend]=\"showLegend\" [showXAxisLabel]=\"showXAxisLabel\" [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\" [yAxisLabel]=\"yAxisLabel\" [autoScale]=\"autoScale\" (select)=\"onSelect($event)\">\n          </ngx-charts-line-chart>\n          <!--<ngx-charts-bar-vertical  class=\"graph2\"\n            [view]=\"view\" \n            [scheme]=\"colorScheme\" \n            [results]=\"single\" \n            [gradient]=\"gradient\" \n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\" \n            [legend]=\"showLegend\" \n            [showXAxisLabel]=\"showXAxisLabel\" \n            [showYAxisLabel]=\"showYAxisLabel\" \n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\" \n            (select)=\"onSelect($event)\">\n          </ngx-charts-bar-vertical>-->\n        </mat-tab>\n         <mat-tab label=\"Yearly\">\n           <ngx-charts-line-chart [view]=\"view\" [scheme]=\"colorScheme\" [results]=\"multi\" [gradient]=\"gradient\" [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\" [legend]=\"showLegend\" [showXAxisLabel]=\"showXAxisLabel\" [showYAxisLabel]=\"showYAxisLabel\"\n            [xAxisLabel]=\"xAxisLabel\" [yAxisLabel]=\"yAxisLabel\" [autoScale]=\"autoScale\" (select)=\"onSelect($event)\">\n          </ngx-charts-line-chart>\n          <!--<ngx-charts-bar-vertical \n            [view]=\"view\" \n            [scheme]=\"colorScheme\" \n            [results]=\"single\" \n            [gradient]=\"gradient\" \n            [xAxis]=\"showXAxis\"\n            [yAxis]=\"showYAxis\" \n            [legend]=\"showLegend\" \n            [showXAxisLabel]=\"showXAxisLabel\" \n            [showYAxisLabel]=\"showYAxisLabel\" \n            [xAxisLabel]=\"xAxisLabel\"\n            [yAxisLabel]=\"yAxisLabel\" \n            (select)=\"onSelect($event)\">\n          </ngx-charts-bar-vertical>-->\n        </mat-tab>\n      </mat-tab-group>\n    </div>\n\n    <div *ngIf=\"i===3\"><br><br><br><br>\n    <h2 id=\"piechart\"> Weekly Water Usage(cubic cms)</h2>\n      <ngx-charts-advanced-pie-chart [view]=\"view\" [scheme]=\"colorScheme\" [results]=\"single\" [gradient]=\"gradient\"\n        (select)=\"onSelect($event)\">\n      </ngx-charts-advanced-pie-chart>\n    </div>\n\n  </mat-grid-tile>\n</mat-grid-list>"
 
 /***/ }),
 
@@ -274,7 +280,7 @@ module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"120px\">\n  <mat-grid-ti
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".Input {\n  margin: auto;\n  float: right; }\n\n#updatebutton {\n  margin-left: -70%;\n  margin-top: 12px; }\n\n.graph1 {\n  margin: auto;\n  padding: 10px; }\n\n.graph2 {\n  margin: auto;\n  padding: 1px; }\n\ntd, th {\n  border: 1px solid #dddddd;\n  text-align: left;\n  padding: 8px;\n  font-size: 20px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zaHJ1dGkvZ3JvdW5kd2F0ZXIvc3JjL2FwcC9jb21wYXJpc2lvbi9jb21wYXJpc2lvbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFlBQVk7RUFDWixZQUFZLEVBQUE7O0FBR2hCO0VBQ0ksaUJBQWlCO0VBQ2pCLGdCQUFnQixFQUFBOztBQUdwQjtFQUNJLFlBQVk7RUFDWixhQUFhLEVBQUE7O0FBRWpCO0VBQ0ksWUFBWTtFQUNaLFlBQVksRUFBQTs7QUFFaEI7RUFDRSx5QkFBeUI7RUFDekIsZ0JBQWdCO0VBQ2hCLFlBQVk7RUFDWixlQUFlLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jb21wYXJpc2lvbi9jb21wYXJpc2lvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5JbnB1dHtcbiAgICBtYXJnaW46IGF1dG87XG4gICAgZmxvYXQ6IHJpZ2h0O1xufVxuXG4jdXBkYXRlYnV0dG9uIHtcbiAgICBtYXJnaW4tbGVmdDogLTcwJTtcbiAgICBtYXJnaW4tdG9wOiAxMnB4O1xufVxuXG4uZ3JhcGgxe1xuICAgIG1hcmdpbjogYXV0bztcbiAgICBwYWRkaW5nOiAxMHB4O1xufVxuLmdyYXBoMntcbiAgICBtYXJnaW46IGF1dG87XG4gICAgcGFkZGluZzogMXB4O1xufVxudGQsIHRoIHtcbiAgYm9yZGVyOiAxcHggc29saWQgI2RkZGRkZDtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgcGFkZGluZzogOHB4O1xuICBmb250LXNpemU6IDIwcHg7XG59Il19 */"
+module.exports = ".Input {\n  margin: auto;\n  float: right; }\n\n#updatebutton {\n  margin-left: -70%;\n  margin-top: 12px; }\n\n.graph1 {\n  margin: auto;\n  padding: 10px; }\n\n.graph2 {\n  margin: auto;\n  padding: 1px; }\n\ntd, th {\n  border: 1px solid #000000;\n  text-align: left;\n  padding: 8px;\n  font-size: 20px;\n  background-color: #fdfdfd; }\n\nh2 {\n  margin-left: 40px; }\n\n#piechart {\n  margin-bottom: -50px;\n  margin-left: 30px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3N3YXBuaWwvSGFja2F0aG9uL2dyb3VuZHdhdGVyL3NyYy9hcHAvY29tcGFyaXNpb24vY29tcGFyaXNpb24uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFZO0VBQ1osWUFBWSxFQUFBOztBQUdoQjtFQUNJLGlCQUFpQjtFQUNqQixnQkFBZ0IsRUFBQTs7QUFHcEI7RUFDSSxZQUFZO0VBQ1osYUFBYSxFQUFBOztBQUVqQjtFQUNJLFlBQVk7RUFDWixZQUFZLEVBQUE7O0FBRWhCO0VBQ0UseUJBQXlCO0VBQ3pCLGdCQUFnQjtFQUNoQixZQUFZO0VBQ1osZUFBZTtFQUNmLHlCQUNGLEVBQUE7O0FBRUE7RUFDSSxpQkFBaUIsRUFBQTs7QUFFckI7RUFDSSxvQkFBb0I7RUFDcEIsaUJBQWlCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jb21wYXJpc2lvbi9jb21wYXJpc2lvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5JbnB1dHtcbiAgICBtYXJnaW46IGF1dG87XG4gICAgZmxvYXQ6IHJpZ2h0O1xufVxuXG4jdXBkYXRlYnV0dG9uIHtcbiAgICBtYXJnaW4tbGVmdDogLTcwJTtcbiAgICBtYXJnaW4tdG9wOiAxMnB4O1xufVxuXG4uZ3JhcGgxe1xuICAgIG1hcmdpbjogYXV0bztcbiAgICBwYWRkaW5nOiAxMHB4O1xufVxuLmdyYXBoMntcbiAgICBtYXJnaW46IGF1dG87XG4gICAgcGFkZGluZzogMXB4O1xufVxudGQsIHRoIHtcbiAgYm9yZGVyOiAxcHggc29saWQgIzAwMDAwMDtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgcGFkZGluZzogOHB4O1xuICBmb250LXNpemU6IDIwcHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICNmZGZkZmRcbn1cblxuaDIge1xuICAgIG1hcmdpbi1sZWZ0OiA0MHB4O1xufVxuI3BpZWNoYXJ0e1xuICAgIG1hcmdpbi1ib3R0b206IC01MHB4O1xuICAgIG1hcmdpbi1sZWZ0OiAzMHB4O1xufSJdfQ== */"
 
 /***/ }),
 
@@ -291,18 +297,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data */ "./src/app/data.ts");
+/* harmony import */ var _monitordb_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../monitordb.service */ "./src/app/monitordb.service.ts");
+
 
 
 
 var ComparisionComponent = /** @class */ (function () {
-    function ComparisionComponent() {
+    function ComparisionComponent(nocService) {
+        var _this = this;
+        this.nocService = nocService;
         this.tiles = [
-            { cols: 2, rows: 1, color: 'lightgreen' },
-            { cols: 2, rows: 1, color: 'lightgreen' },
-            { cols: 2, rows: 5, color: 'lightcoral' },
-            { cols: 2, rows: 2, color: 'lavender' },
-            { cols: 2, rows: 3, color: 'purple' },
+            { cols: 2, rows: 1, color: '#fdfdfd' },
+            { cols: 2, rows: 3, color: 'white' },
+            { cols: 2, rows: 5, color: 'white' },
+            { cols: 2, rows: 3, color: 'white' },
         ];
+        this.reuse = [];
         this.view = [600, 400];
         this.view34 = [300, 300];
         // options
@@ -311,15 +321,33 @@ var ComparisionComponent = /** @class */ (function () {
         this.gradient = false;
         this.showLegend = true;
         this.showXAxisLabel = true;
-        this.xAxisLabel = 'Country';
+        this.xAxisLabel = 'Duration';
         this.showYAxisLabel = true;
-        this.yAxisLabel = 'Population';
+        this.yAxisLabel = 'Consumption';
         this.colorScheme = {
             domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']
         };
+        this.colorScheme1 = {
+            domain: ['#5AA154', '#A10A28']
+        };
         Object.assign(this, { single: _data__WEBPACK_IMPORTED_MODULE_2__["single"], multi: _data__WEBPACK_IMPORTED_MODULE_2__["multi"] });
+        this.nocService.nocIndustry().subscribe(function (response) {
+            console.log(response);
+            _this.reuse = response;
+        });
     }
     ComparisionComponent.prototype.ngOnInit = function () {
+    };
+    ComparisionComponent.prototype.nocIndustry = function () {
+        // for (let state in response) {
+        //   console.log(state, response[state]);
+        //   this.reuse.push({
+        //     name: state,
+        //     value: response[state]
+        //   });
+        // }
+        // console.log(this.reuse);
+        // this.reuse = [...this.reuse];
     };
     ComparisionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -327,7 +355,7 @@ var ComparisionComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./comparision.component.html */ "./src/app/comparision/comparision.component.html"),
             styles: [__webpack_require__(/*! ./comparision.component.scss */ "./src/app/comparision/comparision.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_monitordb_service__WEBPACK_IMPORTED_MODULE_3__["MonitordbService"]])
     ], ComparisionComponent);
     return ComparisionComponent;
 }());
@@ -377,68 +405,185 @@ var DataService = /** @class */ (function () {
 /*!*************************!*\
   !*** ./src/app/data.ts ***!
   \*************************/
-/*! exports provided: single, multi, reuse */
+/*! exports provided: single, month, month2, multi, reuse */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "single", function() { return single; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "month", function() { return month; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "month2", function() { return month2; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "multi", function() { return multi; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reuse", function() { return reuse; });
 var single = [
     {
-        "name": "Germany",
-        "value": 8940000
+        "name": "Week1",
+        "value": 89400
     },
     {
-        "name": "USA",
-        "value": 5000000
+        "name": "Week2",
+        "value": 50000
     },
     {
-        "name": "France",
-        "value": 7200000
+        "name": "Week3",
+        "value": 72000
+    }
+];
+var month = [
+    {
+        "name": "January",
+        "value": 10
+    },
+    {
+        "name": "February",
+        "value": 20
+    },
+    {
+        "name": "March",
+        "value": 34
+    },
+    {
+        "name": "April",
+        "value": 56,
+    },
+    {
+        "name": "May",
+        "value": 34
+    },
+    {
+        "name": "June",
+        "value": 23
+    },
+    {
+        "name": "July",
+        "value": 23
+    },
+    {
+        "name": "August",
+        "value": 22
+    },
+    {
+        "name": "Spetember",
+        "value": 11
+    },
+    {
+        "name": "November",
+        "value": 22
+    },
+    {
+        "name": "December",
+        "value": 22
+    }
+];
+var month2 = [
+    {
+        "name": "January",
+        "value": 10
+    },
+    {
+        "name": "February",
+        "value": 20
+    },
+    {
+        "name": "March",
+        "value": 34
+    },
+    {
+        "name": "April",
+        "value": 56,
+    },
+    {
+        "name": "May",
+        "value": 34
+    },
+    {
+        "name": "June",
+        "value": 23
+    },
+    {
+        "name": "July",
+        "value": 23
+    },
+    {
+        "name": "August",
+        "value": 22
+    },
+    {
+        "name": "Spetember",
+        "value": 11
+    },
+    {
+        "name": "November",
+        "value": 22
+    },
+    {
+        "name": "December",
+        "value": 22
     }
 ];
 var multi = [
     {
-        "name": "Germany",
+        "name": "Week1",
         "series": [
             {
-                "name": "2010",
-                "value": 7300000
+                "name": "Monday",
+                "value": 3700
             },
             {
-                "name": "2011",
-                "value": 8940000
-            }
+                "name": "Tuesday",
+                "value": 3500
+            },
+            {
+                "name": "Wednesday",
+                "value": 4800
+            },
+            {
+                "name": "Thursday",
+                "value": 2100
+            },
+            {
+                "name": "Friday",
+                "value": 3200
+            }, {
+                "name": "Saturday",
+                "value": 4500
+            }, {
+                "name": "Sunday",
+                "value": 5200
+            },
         ]
     },
     {
-        "name": "USA",
+        "name": "Week2",
         "series": [
             {
-                "name": "2010",
-                "value": 7870000
+                "name": "Monday",
+                "value": 5300
             },
             {
-                "name": "2011",
-                "value": 8270000
-            }
+                "name": "Tuesday",
+                "value": 3800
+            },
+            {
+                "name": "Wednesday",
+                "value": 2300
+            },
+            {
+                "name": "Thursday",
+                "value": 4200
+            },
+            {
+                "name": "Friday",
+                "value": 2300
+            }, {
+                "name": "Saturday",
+                "value": 5600
+            }, {
+                "name": "Sunday",
+                "value": 6200
+            },
         ]
     },
-    {
-        "name": "France",
-        "series": [
-            {
-                "name": "2010",
-                "value": 5000002
-            },
-            {
-                "name": "2011",
-                "value": 5800000
-            }
-        ]
-    }
 ];
 var reuse = [
     {
@@ -466,6 +611,26 @@ var reuse = [
         "value": 48.24324324324324
     }
 ];
+/*
+export var ref = [
+  {
+    'name' : "Safe",
+    'value' : 1000
+  },
+  {
+    'name' : "Semi-Critical",
+    'value' : 2000
+  },
+  {
+    'name' : "Critical",
+    'value' : 3000
+  },
+  {
+    'name' : "Exploited",
+    'value' : 5000
+  }
+]
+*/ 
 
 
 /***/ }),
@@ -477,7 +642,7 @@ var reuse = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"example-card\">\n  <mat-card-header>\n    <mat-card-title>MAP</mat-card-title>\n  </mat-card-header>\n  <img mat-card-image src=\"http://cgwb.gov.in/MAP/MAJOR%20AQUIFERS.JPG\" alt=\"Major Aquifiers\">\n</mat-card>\n\n<mat-card class=\"example-card-2\">\n  <mat-card-header>\n    <mat-card-title>ABOUT</mat-card-title>\n  </mat-card-header>\n  <mat-card-content>\n    <p>\n      Lorem ipsum dolor si amet.  Lorem  ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet.\n      Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet.\n      Lorem ips  um dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dol or si amet. Lore m ipsum dolor si amet.\n      Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si  amet. Lorem ipsum dolor si amet.\n      Lorem ips um dolor si amet. Lorem ipsum d olor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet.\n      Lorem ipsum dolor si amet. Lorem ipsum dolor si  a met. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet.\n      Loremum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet.\n      Lorem  ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem i psum dolor si amet.\n      Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet.\n      Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet.\n      Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet.\n    </p>\n    <ngx-charts-bar-vertical class=\"graph1\"\n    [view]=\"view\" \n    [scheme]=\"colorScheme\" \n    [results]=\"reuse\" \n    [gradient]=\"gradient\" \n    [xAxis]=\"showXAxis\"\n    [yAxis]=\"showYAxis\" \n    [legend]=\"showLegend\" \n    [showXAxisLabel]=\"showXAxisLabel\" \n    [showYAxisLabel]=\"showYAxisLabel\" \n    [xAxisLabel]=\"xAxisLabel\"\n    [yAxisLabel]=\"yAxisLabel\" \n    (select)=\"onSelect($event)\">\n  </ngx-charts-bar-vertical>\n\n  </mat-card-content>\n</mat-card>"
+module.exports = "<mat-card class=\"example-card\">\n  <mat-card-header>\n    <!--<mat-card-title>MAP</mat-card-title>-->\n  </mat-card-header>\n  <img mat-card-image src=\"http://cgwb.gov.in/MAP/MAJOR%20AQUIFERS.JPG\" alt=\"Major Aquifiers\">\n</mat-card>\n\n<mat-card class=\"example-card-2\">\n  <mat-card-header>\n    <mat-card-title>ABOUT</mat-card-title>\n  </mat-card-header>\n  <mat-card-content>\n    <p> <br>Central Ground Water Authority has been constituted under Section 3 (3) of the Environment (Protection) Act, 1986 to regulate and control development and management of ground water resources in the country.\n      Regulatory measures : <br> 1. The Central Ground Water Authority is regulating withdrawal of ground water by industries/ projects in 802 Over-exploited and 169 Critical Assessment Units. List of these critical areas has been circulated to the State Pollution Control Boards and Ministry of Environment & Forests which refer the new industries/ projects to CGWA for obtaining permission.<br> 2. CGWA has notified 162 critical/ overexploited areas in parts of NCT Delhi, Haryana, Punjab, Andhra Pradesh, Rajasthan, MP, Gujarat, West Bengal, Uttar Pradesh, Karnataka, Tamil Nadu, UT of Puducherry and UT of Diu for control and regulation of development of ground water resources. For enforcement of the regulatory measures in these areas, concerned Deputy Commissioners/ District Magistrates have been directed under Section 5 of Environment (Protection) Act, 1986 to regulate ground water development in these notified areas.<br> 3. Construction of new ground water structures is prohibited in the notified areas. Permission of drilling tubewells is being granted only to the Govt. agencies responsible for drinking water supply.\n    </p>\n  </mat-card-content>\n</mat-card>\n<br>\n<h3> STATE-WISE GROUNDWATER CONSUMPTION </h3>\n<ngx-charts-bar-vertical class=\"graph1\"\n  [view]=\"view\" \n  [scheme]=\"colorScheme\" \n  [results]=\"reuse\" \n  [gradient]=\"gradient\" \n  [xAxis]=\"showXAxis\"\n  [yAxis]=\"showYAxis\" \n  [showXAxisLabel]=\"showXAxisLabel\" \n  [showYAxisLabel]=\"showYAxisLabel\" \n  [yAxisLabel]=\"yAxisLabel\" \n  [xAxisLabel]=\"xAxisLabel\"\n  (select)=\"onSelect($event)\">\n</ngx-charts-bar-vertical>\n"
 
 /***/ }),
 
@@ -488,7 +653,7 @@ module.exports = "<mat-card class=\"example-card\">\n  <mat-card-header>\n    <m
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".example-card {\n  float: right;\n  width: 48%; }\n\n.example-card-2 {\n  width: 46%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zaHJ1dGkvZ3JvdW5kd2F0ZXIvc3JjL2FwcC9ob21lL2hvbWUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFZO0VBQ1osVUFBVSxFQUFBOztBQUVkO0VBQ0ksVUFBVSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmV4YW1wbGUtY2FyZCB7XG4gICAgZmxvYXQ6IHJpZ2h0O1xuICAgIHdpZHRoOiA0OCU7XG4gfVxuLmV4YW1wbGUtY2FyZC0yIHtcbiAgICB3aWR0aDogNDYlOyBcbn1cbiJdfQ== */"
+module.exports = ".example-card {\n  float: right;\n  width: 48%; }\n\n.example-card-2 {\n  width: 46%; }\n\nh3 {\n  margin-left: 120px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3N3YXBuaWwvSGFja2F0aG9uL2dyb3VuZHdhdGVyL3NyYy9hcHAvaG9tZS9ob21lLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBWTtFQUNaLFVBQVUsRUFBQTs7QUFFZDtFQUNJLFVBQVUsRUFBQTs7QUFFZDtFQUNJLGtCQUFrQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmV4YW1wbGUtY2FyZCB7XG4gICAgZmxvYXQ6IHJpZ2h0O1xuICAgIHdpZHRoOiA0OCU7XG4gfVxuLmV4YW1wbGUtY2FyZC0yIHtcbiAgICB3aWR0aDogNDYlOyBcbn1cbmgze1xuICAgIG1hcmdpbi1sZWZ0OiAxMjBweDtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -522,9 +687,9 @@ var HomeComponent = /** @class */ (function () {
         this.showXAxisLabel = true;
         this.xAxisLabel = 'State';
         this.showYAxisLabel = true;
-        this.yAxisLabel = 'Reuse %';
+        this.yAxisLabel = 'Consumption %';
         this.colorScheme = {
-            domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']
+            domain: ['#0D88E3', '#17159C', '#4948C2', '#0F0E6A']
         };
         this.waterHarvestService.harvesting().subscribe(function (response) {
             // console.log(response);
@@ -574,7 +739,7 @@ module.exports = "<mat-card class=\"example-card\">\n  <mat-card-header>\n    <m
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".example-card {\n  margin-left: 30%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zaHJ1dGkvZ3JvdW5kd2F0ZXIvc3JjL2FwcC9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFlLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5leGFtcGxlLWNhcmR7XG4gICAgbWFyZ2luLWxlZnQ6MzAlO1xufSJdfQ== */"
+module.exports = ".example-card {\n  margin-left: 30%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3N3YXBuaWwvSGFja2F0aG9uL2dyb3VuZHdhdGVyL3NyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxnQkFBZSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvbG9naW4vbG9naW4uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZXhhbXBsZS1jYXJke1xuICAgIG1hcmdpbi1sZWZ0OjMwJTtcbn0iXX0= */"
 
 /***/ }),
 
@@ -632,6 +797,62 @@ var LoginComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSnackBar"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], LoginComponent);
     return LoginComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/map/map.component.html":
+/*!****************************************!*\
+  !*** ./src/app/map/map.component.html ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"mapframe\">\n  <h1> Spatial Assessment: Groundwater Extraction </h1>\n  <iframe width=\"1000\" height=\"550\" frameBorder=\"0\" scrolling=\"no\" style=\"overflow:hidden;\" src='../../assets/map.html'></iframe>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/map/map.component.scss":
+/*!****************************************!*\
+  !*** ./src/app/map/map.component.scss ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "#mapframe {\n  margin-left: 30%;\n  margin-top: 4%; }\n\nh1 {\n  margin-left: -7%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3N3YXBuaWwvSGFja2F0aG9uL2dyb3VuZHdhdGVyL3NyYy9hcHAvbWFwL21hcC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGdCQUFnQjtFQUNoQixjQUFjLEVBQUE7O0FBRWxCO0VBQ0ksZ0JBQWdCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9tYXAvbWFwLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI21hcGZyYW1le1xuICAgIG1hcmdpbi1sZWZ0OiAzMCU7XG4gICAgbWFyZ2luLXRvcDogNCU7XG59XG5oMSB7XG4gICAgbWFyZ2luLWxlZnQ6IC03JTtcbn0iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/map/map.component.ts":
+/*!**************************************!*\
+  !*** ./src/app/map/map.component.ts ***!
+  \**************************************/
+/*! exports provided: MapComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MapComponent", function() { return MapComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var MapComponent = /** @class */ (function () {
+    function MapComponent() {
+    }
+    MapComponent.prototype.ngOnInit = function () {
+    };
+    MapComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-map',
+            template: __webpack_require__(/*! ./map.component.html */ "./src/app/map/map.component.html"),
+            styles: [__webpack_require__(/*! ./map.component.scss */ "./src/app/map/map.component.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], MapComponent);
+    return MapComponent;
 }());
 
 
@@ -744,8 +965,19 @@ var MonitordbService = /** @class */ (function () {
         this.http = http;
     }
     MonitordbService.prototype.submitted = function (selectedState, selectedCity) {
-        var obs = this.http.get('http://localhost:8100/getData/' + selectedState + '/' + selectedCity);
-        return obs;
+        return this.http.get('http://localhost:8100/getData/' + selectedState + '/' + selectedCity);
+    };
+    MonitordbService.prototype.nocValidity = function () {
+        return this.http.get('http://localhost:8100/nocValidity');
+    };
+    MonitordbService.prototype.sendMail = function (email) {
+        return this.http.get('http://localhost:8100/sendMail?to=' + email);
+    };
+    MonitordbService.prototype.checkUsageDefaulters = function (state, city) {
+        return this.http.get('http://localhost:8100/checkUsageDefaulters?state=' + state + '&city=' + city);
+    };
+    MonitordbService.prototype.nocIndustry = function () {
+        return this.http.get('http://localhost:8100/getNOCIndustry/8451651656');
     };
     MonitordbService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -767,7 +999,7 @@ var MonitordbService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-grid-list cols=\"5\" rowHeight=\"100px\">\n  <mat-grid-tile *ngFor=\"let tile of tiles;let i=index\" [colspan]=\"tile.cols\" [rowspan]=\"tile.rows\" [style.background-color]=\"tile.color\">\n    <div *ngIf=\"i===0\">\n      <mat-form-field>\n        <mat-select placeholder=\"Select State\" [(value)]=\"selectedState\" [(ngModel)]=\"selectedState\" (ngModelChange)='handleStateChange(selectedState);' required>\n            <mat-option>--</mat-option>\n          <div *ngFor=\"let state of states;\">\n            <mat-option value=\"{{state.name}}\">{{state.name}}</mat-option>\n          </div>\n        </mat-select>\n      </mat-form-field>\n\n      <mat-form-field>\n        <mat-select placeholder=\"Select District\" [(value)]=\"selectedCity\" [(ngModel)]=\"selectedCity\" (ngModelChange)=' submitted();' required>\n            <mat-option>--</mat-option>\n          <div *ngFor=\"let city of cities;\">\n            <mat-option value=\"{{city}}\">{{city}}</mat-option>\n          </div>\n        </mat-select>\n      </mat-form-field>\n\n    </div>\n\n    <div *ngIf=\"i==3\">\n      <mat-card class=\"Chart waterlevelMap\">\n        <mat-card-header>\n          <mat-card-title>Spatial Assessment: Groundwater Extraction</mat-card-title>\n        </mat-card-header>\n        <iframe width=\"500\" height=\"500\" frameBorder=\"0\" scrolling=\"no\" style=\"overflow:hidden;\" src='../../assets/waterlevel.html'></iframe>\n      </mat-card>\n    </div>\n\n    <div *ngIf=\"i==2\">\n      <h2 id=\"WandA\">Warnings and Alarms</h2>\n    </div>\n\n    <div *ngIf=\"i==1\">\n        <h2>Water Level Condition</h2>\n    </div>\n\n     <div *ngIf=\"i==4\">\n     </div>\n\n    <div *ngIf=\"i==5\">\n      <mat-list role=\"list\">\n          <mat-list-item role=\"listitem\">\n            <h2>NOC Validity</h2>\n            <br>\n          </mat-list-item>\n          <mat-list role=\"sublist\">\n            <mat-list-item role=\"sublistitem\">\n              <mat-icon matListIcon>arrow_right_alt</mat-icon>\n              <span>Safe:</span>\n            </mat-list-item>\n            <mat-list-item role=\"sublistitem\">\n              <mat-icon matListIcon>arrow_right_alt</mat-icon>\n              <span>Renew:</span>\n            </mat-list-item>\n            <mat-list-item role=\"sublistitem\">\n              <mat-icon matListIcon>arrow_right_alt</mat-icon>\n              <span>Expired: </span>\n            </mat-list-item>\n          </mat-list>\n          <br><br><br>\n      </mat-list>\n    </div>\n\n  </mat-grid-tile>\n</mat-grid-list>"
+module.exports = "<mat-grid-list cols=\"4\" rowHeight=\"100px\">\n  <mat-grid-tile *ngFor=\"let tile of tiles;let i=index\" [colspan]=\"tile.cols\" [rowspan]=\"tile.rows\" [style.background-color]=\"tile.color\">\n    <div *ngIf=\"i===0\">\n      <mat-form-field>\n        <mat-select placeholder=\"Select State\" [(value)]=\"selectedState\" [(ngModel)]=\"selectedState\" (ngModelChange)='handleStateChange(selectedState);'\n          required>\n          <mat-option>--</mat-option>\n          <div *ngFor=\"let state of states;\">\n            <mat-option value=\"{{state.name}}\">{{state.name}}</mat-option>\n          </div>\n        </mat-select>\n      </mat-form-field>\n\n      <mat-form-field>\n        <mat-select placeholder=\"Select District\" [(value)]=\"selectedCity\" [(ngModel)]=\"selectedCity\" (ngModelChange)='handleCityChange(selectedCity);'\n          required>\n          <mat-option>--</mat-option>\n          <div *ngFor=\"let city of cities;\">\n            <mat-option value=\"{{city}}\">{{city}}</mat-option>\n          </div>\n        </mat-select>\n      </mat-form-field>\n    </div>\n\n    <div *ngIf=\"i==1\">\n      <h2 id=\"WandA\">Warnings and Alarms</h2>\n      <h3 id=\"noc\">NOC Validity</h3>\n      <table>\n          <tr><th>Safe NOCs:</th><td>{{safecount}}</td></tr>\n          <tr><th>Renewal alert:</th><td>{{renewcount}}</td></tr>\n          <tr><th>Expired NOCs:</th><td>{{expcount}}</td></tr>\n      </table>\n    </div>\n\n    <div *ngIf=\"i==2\">\n        <table mat-table [dataSource]=\"waterUsage\" class=\"mat-elevation-z8\" style='border: 1px solid black; '>\n\n            <!--- Note that these columns can be defined in any order.\n                  The actual rendered columns are set as a property on the row definition\" -->\n          \n            <!-- Industry Name Column -->\n            <ng-container matColumnDef=\"name_of_industry\">\n              <th mat-header-cell *matHeaderCellDef> Industry </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.name_of_industry}} </td>\n            </ng-container>\n          \n            <!-- Email Column -->\n            <ng-container matColumnDef=\"email\">\n              <th mat-header-cell *matHeaderCellDef> Email </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.email}} </td>\n            </ng-container>\n          \n            <!-- State Column -->\n            <ng-container matColumnDef=\"state\">\n              <th mat-header-cell *matHeaderCellDef> State </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.state}} </td>\n            </ng-container>\n          \n            <!-- City Column -->\n            <ng-container matColumnDef=\"city\">\n              <th mat-header-cell *matHeaderCellDef> City </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.city}} </td>\n            </ng-container>\n          \n            <!-- Status Column -->\n            <ng-container matColumnDef=\"status\">\n              <th mat-header-cell *matHeaderCellDef> Status </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.status}} </td>\n            </ng-container>\n          \n            <!-- NOC Specified Column -->\n            <ng-container matColumnDef=\"total_water_req\">\n              <th mat-header-cell *matHeaderCellDef> NOC Specified </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.total_water_req}} </td>\n            </ng-container>\n          \n            <!-- Consumption Column -->\n            <ng-container matColumnDef=\"consumption\">\n              <th mat-header-cell *matHeaderCellDef> Consumption </th>\n              <td mat-cell *matCellDef=\"let element\"> {{element.consumption}} </td>\n            </ng-container>\n          \n            <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\n            <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n          </table>\n      <!-- <mat-form-field class=\"example-full-width\">\n        <input matInput placeholder=\"email\" [(ngModel)]=\"email\" name=\"email\" required>\n      </mat-form-field>\n      <button mat-raised-button (click)=\"sendEmail()\">Notify</button> -->\n    </div>\n\n    <div *ngIf=\"i==3\">\n      <h3 id=\"predict\"> PREDICTION </h3>\n      <br>\n      <img width=\"290\" height=\"270\" src=\"../assets/test.jpg\">\n      <img width=\"290\" height=\"270\" src=\"../assets/training.jpg\">\n      <br>\n    </div>    \n  </mat-grid-tile>\n</mat-grid-list>\n\n\n<ngx-charts-bar-vertical class=\"graph1\"\n  [view]=\"view\" \n  [scheme]=\"colorScheme\" \n  [results]=\"totals\" \n  [gradient]=\"gradient\" \n  [xAxis]=\"showXAxis\"\n  [yAxis]=\"showYAxis\" \n  [showXAxisLabel]=\"showXAxisLabel\" \n  [showYAxisLabel]=\"showYAxisLabel\" \n  [yAxisLabel]=\"yAxisLabel\" \n  [xAxisLabel]=\"xAxisLabel\"\n  (select)=\"onSelect($event)\">\n</ngx-charts-bar-vertical>\n"
 
 /***/ }),
 
@@ -778,7 +1010,7 @@ module.exports = "<mat-grid-list cols=\"5\" rowHeight=\"100px\">\n  <mat-grid-ti
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-form-field {\n  padding: 10px; }\n\nwaterlevelMap {\n  width: 500px;\n  height: 700px; }\n\n#WandA {\n  color: red; }\n\n.Alarm {\n  margin-top: 100px;\n  float: right;\n  width: 90%; }\n\nmat-list {\n  padding: 0px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zaHJ1dGkvZ3JvdW5kd2F0ZXIvc3JjL2FwcC9tb25pdG9yaW5nL21vbml0b3JpbmcuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFhLEVBQUE7O0FBR2pCO0VBQ0ksWUFBWTtFQUNaLGFBQWEsRUFBQTs7QUFHakI7RUFDSSxVQUFVLEVBQUE7O0FBR2Q7RUFDSSxpQkFBaUI7RUFDakIsWUFBVztFQUNYLFVBQVUsRUFBQTs7QUFHZDtFQUNJLFlBQVksRUFBQSIsImZpbGUiOiJzcmMvYXBwL21vbml0b3JpbmcvbW9uaXRvcmluZy5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIm1hdC1mb3JtLWZpZWxkIHtcbiAgICBwYWRkaW5nOiAxMHB4O1xufVxuXG53YXRlcmxldmVsTWFwIHtcbiAgICB3aWR0aDogNTAwcHg7XG4gICAgaGVpZ2h0OiA3MDBweDtcbn1cblxuI1dhbmRBIHtcbiAgICBjb2xvcjogcmVkO1xufVxuXG4uQWxhcm17XG4gICAgbWFyZ2luLXRvcDogMTAwcHg7XG4gICAgZmxvYXQ6cmlnaHQ7XG4gICAgd2lkdGg6IDkwJTtcbn1cblxubWF0LWxpc3R7XG4gICAgcGFkZGluZzogMHB4O1xufSJdfQ== */"
+module.exports = "mat-form-field {\n  padding: 10px; }\n\nwaterlevelMap {\n  width: 500px;\n  height: 700px; }\n\n#WandA {\n  color: red; }\n\n.Alarm {\n  margin-top: 100px;\n  float: right;\n  width: 90%; }\n\nmat-list {\n  padding: 0px; }\n\ntable {\n  width: 100%; }\n\n.table {\n  margin-right: -100px;\n  width: 100%; }\n\n#predict {\n  margin-left: 200px; }\n\n#noc {\n  margin-left: 40px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3N3YXBuaWwvSGFja2F0aG9uL2dyb3VuZHdhdGVyL3NyYy9hcHAvbW9uaXRvcmluZy9tb25pdG9yaW5nLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBYSxFQUFBOztBQUdqQjtFQUNJLFlBQVk7RUFDWixhQUFhLEVBQUE7O0FBR2pCO0VBQ0ksVUFBVSxFQUFBOztBQUdkO0VBQ0ksaUJBQWlCO0VBQ2pCLFlBQVc7RUFDWCxVQUFVLEVBQUE7O0FBR2Q7RUFDSSxZQUFZLEVBQUE7O0FBR2hCO0VBQ0ksV0FBVyxFQUFBOztBQVdmO0VBQ0ksb0JBQW9CO0VBQ3BCLFdBQVcsRUFBQTs7QUFHZjtFQUNJLGtCQUFrQixFQUFBOztBQUV0QjtFQUNJLGlCQUFpQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvbW9uaXRvcmluZy9tb25pdG9yaW5nLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LWZvcm0tZmllbGQge1xuICAgIHBhZGRpbmc6IDEwcHg7XG59XG5cbndhdGVybGV2ZWxNYXAge1xuICAgIHdpZHRoOiA1MDBweDtcbiAgICBoZWlnaHQ6IDcwMHB4O1xufVxuXG4jV2FuZEEge1xuICAgIGNvbG9yOiByZWQ7XG59XG5cbi5BbGFybXtcbiAgICBtYXJnaW4tdG9wOiAxMDBweDtcbiAgICBmbG9hdDpyaWdodDtcbiAgICB3aWR0aDogOTAlO1xufVxuXG5tYXQtbGlzdHtcbiAgICBwYWRkaW5nOiAwcHg7XG59XG5cbnRhYmxlIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgfVxuXG4vLyB0aCwgdGR7XG4vLyBib3JkZXI6IDFweCBzb2xpZCAjMDAwMDAwO1xuLy8gICB0ZXh0LWFsaWduOiBsZWZ0O1xuLy8gICBwYWRkaW5nOiA4cHg7XG4vLyAgIGZvbnQtc2l6ZTogMjBweDtcbi8vICAgYmFja2dyb3VuZC1jb2xvcjogI2ZkZmRmZFxuLy8gfVxuXG4udGFibGV7XG4gICAgbWFyZ2luLXJpZ2h0OiAtMTAwcHg7XG4gICAgd2lkdGg6IDEwMCU7XG59XG5cbiNwcmVkaWN0e1xuICAgIG1hcmdpbi1sZWZ0OiAyMDBweDtcbn1cbiNub2N7XG4gICAgbWFyZ2luLWxlZnQ6IDQwcHg7XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -800,15 +1032,30 @@ __webpack_require__.r(__webpack_exports__);
 
 var MonitoringComponent = /** @class */ (function () {
     function MonitoringComponent(monitordbService) {
+        var _this = this;
         this.monitordbService = monitordbService;
         this.tiles = [
             { cols: 2, rows: 1, color: 'white' },
-            { cols: 2, rows: 1, color: 'white' },
-            { cols: 1, rows: 1, color: 'white' },
-            { cols: 2, rows: 6, color: 'white' },
-            { cols: 2, rows: 6, color: 'lightyellow' },
-            { cols: 1, rows: 6, color: 'white' },
+            { cols: 2, rows: 4, color: 'white' },
+            { cols: 2, rows: 7, color: '#FDFDFD' },
+            { cols: 2, rows: 5, color: '#ECECEC' },
         ];
+        // options
+        this.showXAxis = true;
+        this.showYAxis = true;
+        this.gradient = false;
+        this.showLegend = true;
+        this.showXAxisLabel = true;
+        this.xAxisLabel = 'Quantum of Extraction';
+        this.showYAxisLabel = true;
+        this.yAxisLabel = 'Number of Industries';
+        this.colorScheme = {
+            domain: ['#0D88E3', '#17159C', '#4948C2', '#0F0E6A']
+        };
+        this.email = 'contact@technobuz.in';
+        this.waterUsage = [];
+        this.totals = [];
+        this.displayedColumns = ['name_of_industry', 'email', 'state', 'city', 'status', 'total_water_req', 'consumption'];
         this.selectedState = '';
         this.selectedCity = '';
         this.selectedQuantum = '';
@@ -816,6 +1063,10 @@ var MonitoringComponent = /** @class */ (function () {
         this.cities = [];
         this.quantum = [];
         this.count = 0;
+        this.reuse = [];
+        this.expcount = 0;
+        this.renewcount = 0;
+        this.safecount = 0;
         this.quantumData = [
             'Critical',
             'Semi-Critical',
@@ -871,18 +1122,38 @@ var MonitoringComponent = /** @class */ (function () {
             });
         }
         console.log(this.quantum);
-        // Object.assign(this, { single, multi }); 
+        // Object.assign(this, { single, multi });
+        this.checkUsageDefaulters();
+        this.monitordbService.nocValidity().subscribe(function (response) {
+            console.log(response);
+            _this.expcount = response[0].value;
+            _this.renewcount = response[1].value;
+            _this.safecount = response[2].value;
+        });
     }
     MonitoringComponent.prototype.ngOnInit = function () {
+    };
+    MonitoringComponent.prototype.sendMail = function () {
+        this.monitordbService.sendMail(this.email).subscribe(function (response) {
+            console.log(response);
+        });
     };
     MonitoringComponent.prototype.handleStateChange = function (selectedStateName) {
         console.log(this.selectedCity);
         this.cities = this.statesData[selectedStateName];
         this.selectedCity = '';
+        this.checkUsageDefaulters();
     };
-    MonitoringComponent.prototype.submitted = function () {
-        this.monitordbService.submitted(this.selectedState, this.selectedCity).subscribe(function (response) {
-            console.log(response);
+    MonitoringComponent.prototype.handleCityChange = function (selectedCity) {
+        console.log(this.selectedCity);
+        this.checkUsageDefaulters();
+    };
+    MonitoringComponent.prototype.checkUsageDefaulters = function () {
+        var _this = this;
+        this.monitordbService.checkUsageDefaulters(this.selectedState, this.selectedCity).subscribe(function (response) {
+            console.log('checkUsageDefaulters', response);
+            _this.waterUsage = response['defaulters'];
+            _this.totals = response['totals'];
         });
     };
     MonitoringComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -907,7 +1178,7 @@ var MonitoringComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"example-card\">\n  <mat-card-header>\n    <mat-card-title>Usage Configuration</mat-card-title>\n  </mat-card-header>\n  <mat-card-content>\n    <form class=\"example-form\">\n      <table class=\"example-full-width\" cellspacing=\"0\">\n        <tr>\n          <td>\n            <mat-form-field class=\"example-full-width\">\n              <input matInput placeholder=\"warningLimit\" [(ngModel)]=\"usageConfig.warningLimit\" name=\"warningLimit\" required>\n            </mat-form-field>\n          </td>\n        </tr>\n        <tr>\n          <td>\n            <mat-form-field class=\"example-full-width\">\n              <input matInput placeholder=\"alertLimit\" [(ngModel)]=\"usageConfig.alertLimit\" name=\"alertLimit\" required>\n            </mat-form-field>\n          </td>\n        </tr>\n      </table>\n    </form>\n    <!-- <mat-spinner [style.display]=\"showSpinner ? 'block' : 'none'\"></mat-spinner> -->\n  </mat-card-content>\n  <mat-card-actions>\n    <button mat-raised-button (click)=\"saveLimits()\" color=\"primary\">Save</button>\n  </mat-card-actions>\n</mat-card>"
+module.exports = "<mat-card class=\"example-card\">\n  <mat-card-header>\n    <mat-card-title>Usage Configuration</mat-card-title>\n  </mat-card-header>\n  <mat-card-content>\n    <form class=\"example-form\">\n      <table class=\"example-full-width\" cellspacing=\"0\">\n        <tr>\n          <td>\n            <mat-form-field class=\"example-full-width\">\n              <input matInput placeholder=\"warningLimit\" [(ngModel)]=\"usageConfig.warningLimit\" name=\"warningLimit\" required>times water limit\n            </mat-form-field>\n          </td>\n        </tr>\n        <tr>\n          <td>\n            <mat-form-field class=\"example-full-width\">\n              <input matInput placeholder=\"alertLimit\" [(ngModel)]=\"usageConfig.alertLimit\" name=\"alertLimit\" required>times water limit\n            </mat-form-field>\n          </td>\n        </tr>\n      </table>\n    </form>\n    <!-- <mat-spinner [style.display]=\"showSpinner ? 'block' : 'none'\"></mat-spinner> -->\n  </mat-card-content>\n  <mat-card-actions>\n    <button mat-raised-button (click)=\"saveLimits()\" color=\"primary\">Save</button>\n  </mat-card-actions>\n</mat-card>"
 
 /***/ }),
 
@@ -1082,7 +1353,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/shruti/groundwater/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/swapnil/Hackathon/groundwater/src/main.ts */"./src/main.ts");
 
 
 /***/ })
