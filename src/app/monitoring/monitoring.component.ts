@@ -102,7 +102,6 @@ export class MonitoringComponent implements OnInit {
  
   }
 
-
   handleStateChange(selectedStateName) {
     console.log(this.selectedCity)
     this.cities = this.statesData[selectedStateName];

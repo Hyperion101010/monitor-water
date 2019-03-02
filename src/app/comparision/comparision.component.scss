@@ -1,7 +1,11 @@
 .Input{
     margin: auto;
-    text-align: left;
     float: right;
+}
+
+#updatebutton {
+    margin-left: -70%;
+    margin-top: 12px;
 }
 
 .graph1{
@@ -11,4 +15,9 @@
 .graph2{
     margin: auto;
     padding: 1px;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
 }

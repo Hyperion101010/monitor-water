@@ -35,24 +35,10 @@
     </div>
 
     <div *ngIf="i==1">
-        <h2>Rain Water Harvesting</h2>
+        <h2>Water Level Condition</h2>
     </div>
 
      <div *ngIf="i==4">
-       <ngx-charts-bar-vertical class="graph1"
-            [view]="view" 
-            [scheme]="colorScheme" 
-            [results]="single" 
-            [gradient]="gradient" 
-            [xAxis]="showXAxis"
-            [yAxis]="showYAxis" 
-            [legend]="showLegend" 
-            [showXAxisLabel]="showXAxisLabel" 
-            [showYAxisLabel]="showYAxisLabel" 
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel" 
-            (select)="onSelect($event)">
-          </ngx-charts-bar-vertical>
      </div>
 
     <div *ngIf="i==5">
@@ -76,22 +62,6 @@
             </mat-list-item>
           </mat-list>
           <br><br><br>
-      </mat-list>
-      <mat-list role="list">
-       <mat-list-item role="listitem">
-        <h2>Water Usage</h2>
-        <br>
-       </mat-list-item>
-          <mat-list role="sublist">
-            <mat-list-item role="sublistitem">
-              <mat-icon matListIcon>arrow_right_alt</mat-icon>
-              <span>Safe: 27305</span>
-            </mat-list-item>
-            <mat-list-item role="sublistitem">
-              <mat-icon matListIcon>arrow_right_alt</mat-icon>
-              <span>Critical: 25830</span>
-            </mat-list-item>
-          </mat-list>
       </mat-list>
     </div>
 
