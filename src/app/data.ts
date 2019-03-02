@@ -172,38 +172,6 @@ export var month2 = [
         },
       ]
     },
-
-    {
-      "name": "Week3",
-      "series": [
-       {
-          "name": "Monday",
-          "value": 6500
-        },
-        {
-          "name": "Tuesday",
-          "value": 2900
-        },
-        {
-          "name": "Wednesday",
-          "value": 3400
-        },
-        {
-          "name": "Thursday",
-          "value": 5200
-        },
-        {
-          "name": "Friday",
-          "value": 7300
-        },{
-          "name": "Saturday",
-          "value": 3200
-        },{
-          "name": "Sunday",
-          "value": 5300
-        },
-      ]
-    }
   ];
 
   export var reuse = [
