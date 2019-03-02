@@ -26,9 +26,9 @@
       <h2 id="WandA">Warnings and Alarms</h2>
       <h3 id="noc">NOC Validity</h3>
       <table>
-          <tr><th>Safe NOCs:</th><td>{{safecount}}</td></tr>
-          <tr><th>Renewal alert:</th><td>{{renewcount}}</td></tr>
-          <tr><th>Expired NOCs:</th><td>{{expcount}}</td></tr>
+          <tr id="customTable"><th id="customTable">Safe NOCs:</th><td id="customTable" >{{safecount}}</td></tr>
+          <tr id="customTable"><th id="customTable">Renewal alert:</th><td id="customTable">{{renewcount}}</td></tr>
+          <tr id="customTable"><th id="customTable">Expired NOCs:</th><td id="customTable">{{expcount}}</td></tr>
       </table>
     </div>
 
@@ -90,11 +90,6 @@
     </div>
 
     <div *ngIf="i==3">
-      <h3 id="predict"> PREDICTION </h3>
-      <br>
-      <img width="290" height="270" src="../assets/test.jpg">
-      <img width="290" height="270" src="../assets/training.jpg">
-      <br>
     </div>    
   </mat-grid-tile>
 </mat-grid-list>

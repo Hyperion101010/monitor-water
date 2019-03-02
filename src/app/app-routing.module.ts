@@ -6,6 +6,7 @@ import { ComparisionComponent } from './comparision/comparision.component';
 import { MonitoringComponent } from './monitoring/monitoring.component';
 import { UsageConfigComponent } from './usage-config/usage-config.component';
 import { MapComponent } from './map/map.component';
+import { PredictionComponent } from './prediction/prediction.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'comparision', component: ComparisionComponent, canActivate: [AuthGuard] },
   {path: 'monitoring', component: MonitoringComponent, canActivate: [AuthGuard] },
   {path: 'usageconfig', component: UsageConfigComponent, canActivate: [AuthGuard] },
+  {path: 'prediction', component: PredictionComponent, canActivate: [AuthGuard]},
   {path: 'map', component: MapComponent, canActivate: [AuthGuard]}
 ];
 
