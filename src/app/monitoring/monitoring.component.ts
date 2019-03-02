@@ -18,12 +18,12 @@ export interface Tile {
 export class MonitoringComponent implements OnInit {
  
   tiles: Tile[] = [
-    {cols: 2, rows: 1, color: 'lightblue'},
-    {cols: 1, rows: 8, color: 'lightgreen'},
-    {cols: 1, rows: 4, color: 'lightpink'},
-    {cols: 2, rows: 7, color: 'lightcoral'},
-    {cols: 1, rows: 4, color: 'lightyellow'}
-
+    {cols: 2, rows: 1, color: 'white'},
+    {cols: 2, rows: 1, color: 'white'},
+    {cols: 1, rows: 1, color: 'white'},
+    {cols: 2, rows: 6, color: 'white'},
+    {cols: 2, rows: 6, color: 'lightyellow'},
+    {cols: 1, rows: 6, color: 'white'},
   ];
 
   selectedState: String = '';
@@ -95,6 +95,8 @@ export class MonitoringComponent implements OnInit {
       });
     }
     console.log(this.quantum);
+
+    Object.assign(this, { single, multi });      
    }
 
   ngOnInit() {

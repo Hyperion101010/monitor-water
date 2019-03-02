@@ -1,5 +1,5 @@
-<mat-grid-list cols="4" rowHeight="100px">
-  <mat-grid-tile *ngFor="let tile of tiles;let i=index" [colspan]="tile.cols" [rowspan]="tile.rows">
+<mat-grid-list cols="5" rowHeight="100px">
+  <mat-grid-tile *ngFor="let tile of tiles;let i=index" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background-color]="tile.color">
     <div *ngIf="i===0">
       <mat-form-field>
         <mat-select placeholder="Select State" [(value)]="selectedState" [(ngModel)]="selectedState" (ngModelChange)='handleStateChange(selectedState);' required>
@@ -22,63 +22,78 @@
     </div>
 
     <div *ngIf="i==3">
-      <mat-card class="Chart">
+      <mat-card class="Chart waterlevelMap">
         <mat-card-header>
-          <mat-card-title>Chart</mat-card-title>
+          <mat-card-title>Spatial Assessment: Groundwater Extraction</mat-card-title>
         </mat-card-header>
-          <img mat-card-image src="http://cgwb.gov.in/MAP/MAJOR%20AQUIFERS.JPG" alt="Major Aquifiers">
+        <iframe width="500" height="500" frameBorder="0" scrolling="no" style="overflow:hidden;" src='../../assets/waterlevel.html'></iframe>
       </mat-card>
     </div>
 
-    <div *ngIf="i==1">
-      <mat-card class="Alarm">
-        <mat-card-header>
-          <mat-card-title>Warnings and Alarms</mat-card-title>
-        </mat-card-header>
+    <div *ngIf="i==2">
+      <h2 id="WandA">Warnings and Alarms</h2>
+    </div>
 
-        <mat-list role="list">
+    <div *ngIf="i==1">
+        <h2>Rain Water Harvesting</h2>
+    </div>
+
+     <div *ngIf="i==4">
+       <ngx-charts-bar-vertical class="graph1"
+            [view]="view" 
+            [scheme]="colorScheme" 
+            [results]="single" 
+            [gradient]="gradient" 
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis" 
+            [legend]="showLegend" 
+            [showXAxisLabel]="showXAxisLabel" 
+            [showYAxisLabel]="showYAxisLabel" 
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel" 
+            (select)="onSelect($event)">
+          </ngx-charts-bar-vertical>
+     </div>
+
+    <div *ngIf="i==5">
+      <mat-list role="list">
           <mat-list-item role="listitem">
-            <h4>NOC Validity</h4>
+            <h2>NOC Validity</h2>
+            <br>
           </mat-list-item>
           <mat-list role="sublist">
             <mat-list-item role="sublistitem">
               <mat-icon matListIcon>arrow_right_alt</mat-icon>
               <span>Safe:297350</span>
             </mat-list-item>
-
             <mat-list-item role="sublistitem">
               <mat-icon matListIcon>arrow_right_alt</mat-icon>
               <span>Renew:523952</span>
             </mat-list-item>
-
             <mat-list-item role="sublistitem">
               <mat-icon matListIcon>arrow_right_alt</mat-icon>
               <span>Expired: 248 </span>
             </mat-list-item>
           </mat-list>
-
-          <mat-list-item role="listitem">
-            <h4>Water Usage</h4>
-          </mat-list-item>
+          <br><br><br>
+      </mat-list>
+      <mat-list role="list">
+       <mat-list-item role="listitem">
+        <h2>Water Usage</h2>
+        <br>
+       </mat-list-item>
           <mat-list role="sublist">
-
             <mat-list-item role="sublistitem">
               <mat-icon matListIcon>arrow_right_alt</mat-icon>
               <span>Safe: 27305</span>
             </mat-list-item>
-
             <mat-list-item role="sublistitem">
               <mat-icon matListIcon>arrow_right_alt</mat-icon>
               <span>Critical: 25830</span>
             </mat-list-item>
-
           </mat-list>
-        </mat-list>
-      </mat-card>
+      </mat-list>
     </div>
 
-    <div *ngIf="i==2">
-      <!---Donut Graph here-->
-    </div>
   </mat-grid-tile>
 </mat-grid-list>
