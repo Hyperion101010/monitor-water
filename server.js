@@ -22,8 +22,8 @@ app.set('views', __dirname + '/dist/Hackathon'); // Set views (index.html) to ro
 app.engine('html', ejs.renderFile); // Default for express is Jade as the rendering engine. Change that to EJS for HTML over JADE
 app.use(bodyParser.json()); // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
-    extended: true,
-    limit: '1000mb'
+	extended: true,
+	limit: '1000mb'
 }));
 
 // Receive and process Login request - GET
@@ -41,46 +41,47 @@ app.get('/login', (req, res) => {
 		result.status = 'Error';
 	}
 	res.write(JSON.stringify(result));
-    res.end();	
+	res.end();
 });
 
 //CRUD Operations
 //POST Data
-app.post('/postData', (req,res)=>{
+app.post('/postData', (req, res) => {
 	const userInput = req.body;
 	db.getDB().collection(collection)
-	.insertOne(userInput,(err,result)=>{
-		if(err)
-			console.log(err)
+		.insertOne(userInput, (err, result) => {
+			if (err)
+				console.log(err)
 
-		else{
+			else {
 				res.json({
 					result,
-					document : result.ops[0]
+					document: result.ops[0]
 				});
-		}	
-	});
+			}
+		});
 });
 
 //GET Data
-app.get('/getData',(req,res)=>{
+app.get('/getData', (req, res) => {
 	db.getDB().collection(collection).find({})
-		.toArray((err,docs)=>{
-			if(err)
+		.toArray((err, docs) => {
+			if (err)
 				console.log(err);
 			else
 				res.json(docs);
-			
+
 		});
 });
 
 //GET request for State
-app.get('/getData/:state',(req,res)=>{
+app.get('/getData/:state', (req, res) => {
 	var State = req.params.state;
-	db.getDB().collection(collection).find(
-		{state : State})
-		.toArray((err,docs)=>{
-			if(err)
+	db.getDB().collection(collection).find({
+			state: State
+		})
+		.toArray((err, docs) => {
+			if (err)
 				console.log(err);
 			else
 				res.json(docs);
@@ -88,14 +89,15 @@ app.get('/getData/:state',(req,res)=>{
 });
 
 //GET request for City
-app.get('/getData/:state/:city',(req,res)=>{
+app.get('/getData/:state/:city', (req, res) => {
 	var State = req.params.state;
 	var City = req.params.city;
-	db.getDB().collection(collection).find(
-		{state : State,
-		 city : City})
-		.toArray((err,docs)=>{
-			if(err)
+	db.getDB().collection(collection).find({
+			state: State,
+			city: City
+		})
+		.toArray((err, docs) => {
+			if (err)
 				console.log(err);
 			else
 				res.json(docs);
@@ -103,15 +105,19 @@ app.get('/getData/:state/:city',(req,res)=>{
 });
 
 //UPDATE Data
-app.put('/:id', (req,res)=>{
+app.put('/:id', (req, res) => {
 	const ID = req.params.id;
 	const userInput = req.body;
 
-	db.getDB().collection(collection).findOneAndUpdate(
-		{_id : db.getPrimaryKey(ID)},
-		{$set : {cost_for_water_usage : userInput.cost_for_water_usage}},
-		(err,result)=>{
-			if(err)
+	db.getDB().collection(collection).findOneAndUpdate({
+			_id: db.getPrimaryKey(ID)
+		}, {
+			$set: {
+				cost_for_water_usage: userInput.cost_for_water_usage
+			}
+		},
+		(err, result) => {
+			if (err)
 				console.log(err);
 
 			else
@@ -121,13 +127,14 @@ app.put('/:id', (req,res)=>{
 });
 
 //DELETE Data
-app.delete('/:id', (req,res)=>{
+app.delete('/:id', (req, res) => {
 	const ID = req.params.id;
 
-	db.getDB().collection(collection).findOneAndDelete(
-		{_id : db.getPrimaryKey(ID)},
-		(err,result)=>{
-			if(err)
+	db.getDB().collection(collection).findOneAndDelete({
+			_id: db.getPrimaryKey(ID)
+		},
+		(err, result) => {
+			if (err)
 				console.log(err);
 
 			else
@@ -137,23 +144,23 @@ app.delete('/:id', (req,res)=>{
 });
 
 // sendMail Dummy service
-app.get('/sendMail',(req,res) => {
+app.get('/sendMail', (req, res) => {
 	mail.sendMail(req.query.to);
 });
 
 // checkUsageDefaulters - groundwater.water.consumption / total_water_req
-app.get('/checkUsageDefaulters',(req,res) => {
+app.get('/checkUsageDefaulters', (req, res) => {
 	var state = req.query.state;
 	var city = req.query.city;
 
 	var query = {};
 
-	if(state) {
+	if (state) {
 		if (state !== '') {
 			query.state = state;
 		}
 	}
-	if(city) {
+	if (city) {
 		if (city !== '') {
 			query.city = city;
 		}
@@ -162,57 +169,87 @@ app.get('/checkUsageDefaulters',(req,res) => {
 	var defaulters = [];
 
 	db.getDB().collection('usageConfig').find()
-	.toArray((err,docs)=>{
-		if(err)
-			console.log(err);
-		else {
-			var warningLimit = docs[0].warningLimit;
-			var alertLimit = docs[0].alertLimit;
-			console.log(warningLimit, alertLimit);
-			db.getDB().collection('telemetry').find(query).project(
-				{"_id": 0, "consumption": 1, "total_water_req": 1, "name_of_industry": 1, "state": 1, "city": 1, "email": 1, "mobile": 1})
-			.forEach((doc)=>{
-				var ratio = doc.consumption / doc.total_water_req;
-				// console.log(ratio);
-				if(ratio > warningLimit && ratio < alertLimit) {
-					// console.log(ratio, 'warning');
-					doc.status = 'warning';
-					defaulters.push(doc);
-				} else if (ratio > warningLimit && ratio < alertLimit) {
-					// console.log(ratio, 'alert');
-					doc.status = 'alert';
-					defaulters.push(doc);
-				}
-			}, function(err) {
-				// done or error
-				res.json(defaulters);
-			});
-		}
-	});
+		.toArray((err, docs) => {
+			if (err)
+				console.log(err);
+			else {
+				var warningLimit = docs[0].warningLimit;
+				var alertLimit = docs[0].alertLimit;
+				var totals = [{
+					'name': 'Critical',
+					'value': 0
+				}, {
+					'name': 'Semi Critical',
+					'value': 0
+				}, {
+					'name': 'Safe',
+					'value': 0
+				}];
+				// console.log(warningLimit, alertLimit);
+				db.getDB().collection('telemetry').find(query).project({
+						"_id": 0,
+						"consumption": 1,
+						"total_water_req": 1,
+						"name_of_industry": 1,
+						"state": 1,
+						"city": 1,
+						"email": 1,
+						"mobile": 1
+					})
+					.forEach((doc) => {
+						var ratio = doc.consumption / doc.total_water_req;
+						// console.log(ratio);
+						if (ratio > warningLimit && ratio < alertLimit) {
+							// console.log(ratio, 'warning');
+							doc.status = 'warning';
+							defaulters.push(doc);
+							++totals[1].value;
+						} else if (ratio > warningLimit && ratio < alertLimit) {
+							// console.log(ratio, 'alert');
+							doc.status = 'alert';
+							defaulters.push(doc);
+							++totals[2].value;
+						} else {
+							doc.status = 'normal';
+							defaulters.push(doc);
+							++totals[0].value;
+						}
+					}, function (err) {
+						// done or error
+						res.json({
+							'defaulters': defaulters,
+							'totals': totals
+						});
+					});
+			}
+		});
 });
 
 //GET UsageConfig - warningLimit, alertLimit
-app.get('/getUsageConfig',(req,res) => {
+app.get('/getUsageConfig', (req, res) => {
 	db.getDB().collection('usageConfig').find()
-	.toArray((err,docs)=>{
-		if(err)
-			console.log(err);
-		else {
-			res.json(docs);
-		}
-	});
+		.toArray((err, docs) => {
+			if (err)
+				console.log(err);
+			else {
+				res.json(docs);
+			}
+		});
 });
 
 //SET UsageConfig - warningLimit, alertLimit
-app.get('/setUsageConfig',(req,res) => {
+app.get('/setUsageConfig', (req, res) => {
 	var warningLimit = req.query.warningLimit;
 	var alertLimit = req.query.alertLimit;
-	console.log('setUsageConfig', warningLimit, alertLimit);
-	db.getDB().collection('usageConfig').findOneAndUpdate(
-		{},
-		{$set : {'warningLimit' : warningLimit, 'alertLimit': alertLimit}},
-		(err,result)=>{
-			if(err)
+	// console.log('setUsageConfig', warningLimit, alertLimit);
+	db.getDB().collection('usageConfig').findOneAndUpdate({}, {
+			$set: {
+				'warningLimit': warningLimit,
+				'alertLimit': alertLimit
+			}
+		},
+		(err, result) => {
+			if (err)
 				console.log(err);
 			else
 				res.json(result);
@@ -221,40 +258,40 @@ app.get('/setUsageConfig',(req,res) => {
 });
 
 //GET Percentage (total_treated_usage/total_usage)
-app.get('/getPercentage',(req,res)=>{
+app.get('/getPercentage', (req, res) => {
 	db.getDB().collection(collection).find()
-		.toArray((err,docs)=>{
-			if(err)
+		.toArray((err, docs) => {
+			if (err)
 				console.log(err);
-			else{
+			else {
 				var percentageJSON = {
-					'Maharashtra' : 0
+					'Maharashtra': 0
 				};
 				var stateJSON = {
-					'Maharashtra' : {
-						totalTreatedUsage : 0,
-						totalUsage : 0						
+					'Maharashtra': {
+						totalTreatedUsage: 0,
+						totalUsage: 0
 					}
 				};
-					
-				for(var i=0; i<docs.length; i++){
-					var currentState=docs[i].state;
 
-					if(stateJSON.hasOwnProperty(currentState)){
-						stateJSON[currentState].totalTreatedUsage+=docs[i].breakup_of_recycle.total_treated_used;
-						stateJSON[currentState].totalUsage+=docs[i].breakup_of_recycle.total_usage;
-					} else{
-						stateJSON[currentState]={
-							totalTreatedUsage : docs[i].breakup_of_recycle.total_treated_used,
-							totalUsage : docs[i].breakup_of_recycle.total_usage
+				for (var i = 0; i < docs.length; i++) {
+					var currentState = docs[i].state;
+
+					if (stateJSON.hasOwnProperty(currentState)) {
+						stateJSON[currentState].totalTreatedUsage += docs[i].breakup_of_recycle.total_treated_used;
+						stateJSON[currentState].totalUsage += docs[i].breakup_of_recycle.total_usage;
+					} else {
+						stateJSON[currentState] = {
+							totalTreatedUsage: docs[i].breakup_of_recycle.total_treated_used,
+							totalUsage: docs[i].breakup_of_recycle.total_usage
 						};
 					}
 
-					if(!percentageJSON.hasOwnProperty(currentState)){
+					if (!percentageJSON.hasOwnProperty(currentState)) {
 						percentageJSON[currentState] = 0;
-					}else{
-						percentageJSON[currentState] = 
-						(stateJSON[currentState].totalTreatedUsage/stateJSON[currentState].totalUsage)*100;
+					} else {
+						percentageJSON[currentState] =
+							(stateJSON[currentState].totalTreatedUsage / stateJSON[currentState].totalUsage) * 100;
 					}
 				}
 				res.json(percentageJSON);
@@ -263,140 +300,146 @@ app.get('/getPercentage',(req,res)=>{
 });
 
 //GET NOC Validity
-app.get('/nocValidity', (req,res)=>{
+app.get('/nocValidity', (req, res) => {
 	db.getDB().collection(collection).find({})
-	.toArray((err,docs)=>{
-		if(err)
-			console.log(err);
-		else{
-			var expiredCount=0, safeCount=0, renewCount=0;
-			for(var i=0; i<docs.length; i++){
-				var d1 = moment(`${docs[i].date.year}-${docs[i].date.month}-${docs[i].date.day}`);
-				var d2 = moment();
-				var days = d2.diff(d1, 'days');
-				if(days>=915 && days<1095){
-					renewCount++;
-				} else if(days>=1095){
-					expiredCount++;
-				} else{
-					safeCount++;
+		.toArray((err, docs) => {
+			if (err)
+				console.log(err);
+			else {
+				var expiredCount = 0,
+					safeCount = 0,
+					renewCount = 0;
+				for (var i = 0; i < docs.length; i++) {
+					var d1 = moment(`${docs[i].date.year}-${docs[i].date.month}-${docs[i].date.day}`);
+					var d2 = moment();
+					var days = d2.diff(d1, 'days');
+					if (days >= 915 && days < 1095) {
+						renewCount++;
+					} else if (days >= 1095) {
+						expiredCount++;
+					} else {
+						safeCount++;
+					}
 				}
+
+				var nocValidityArr = [{
+						property: 'expiredCount',
+						value: expiredCount
+					},
+					{
+						property: 'renewCount',
+						value: renewCount
+					},
+					{
+						property: 'safeCount',
+						value: safeCount
+					}
+				];
+				res.json(nocValidityArr);
 			}
 
-			var nocValidityArr = [
-				{
-					property : 'expiredCount',
-					value : expiredCount
-				},
-				{
-					property : 'renewCount',
-					value : renewCount
-				},
-				{
-					property : 'safeCount',
-					value : safeCount
-				}
-			];
-			res.json(nocValidityArr);
-		}
-		
-	});
+		});
 
 });
 
-app.get('/getQuantum', (req,res)=>{
+app.get('/getQuantum', (req, res) => {
 	db.getDB().collection(collection).find({})
-		.toArray((err,docs)=>{
-			if(err)
+		.toArray((err, docs) => {
+			if (err)
 				console.log(err);
-			else{
-				var criticalCount=0, semiCriticalCount=0, safeCount=0;
+			else {
+				var criticalCount = 0,
+					semiCriticalCount = 0,
+					safeCount = 0;
 
-				for(var i=0; i<docs.length; i++){
-					var quanta=(docs[i].breakup_of_recycle.total_treated_used/docs[i].breakup_of_recycle.total_usage)*100; 
-					if(quanta>=40 && quanta<=50){
+				for (var i = 0; i < docs.length; i++) {
+					var quanta = (docs[i].breakup_of_recycle.total_treated_used / docs[i].breakup_of_recycle.total_usage) * 100;
+					if (quanta >= 40 && quanta <= 50) {
 						safeCount++;
-					} else if(quanta>50 &&quanta<=60){
-						semiCriticalCount++;						
+					} else if (quanta > 50 && quanta <= 60) {
+						semiCriticalCount++;
+					} else {
+						criticalCount++;
 					}
-					else{
-						criticalCount++;	
-					} 
 				}
 				var nocValidityArr = [{
-						property : 'criticalCount',
-						value : criticalCount
+						property: 'criticalCount',
+						value: criticalCount
 					},
 					{
-						property : 'semiCriticalCount',
-						value : semiCriticalCount
+						property: 'semiCriticalCount',
+						value: semiCriticalCount
 					},
 					{
-						property : 'safeCount',
-						value : safeCount
-				}];
+						property: 'safeCount',
+						value: safeCount
+					}
+				];
 				res.json(nocValidityArr);
 			}
 		});
 });
 
-app.get('/getQuantum/:state', (req,res)=>{
+app.get('/getQuantum/:state', (req, res) => {
 	var State = req.params.state;
-	db.getDB().collection(collection).find(
-		{state : State}
-		)
-		.toArray((err,docs)=>{
-			if(err)
+	db.getDB().collection(collection).find({
+			state: State
+		})
+		.toArray((err, docs) => {
+			if (err)
 				console.log(err);
-			else{
-				var criticalCount=0, semiCriticalCount=0, safeCount=0;
+			else {
+				var criticalCount = 0,
+					semiCriticalCount = 0,
+					safeCount = 0;
 
-				for(var i=0; i<docs.length; i++){
-					var quanta=(docs[i].breakup_of_recycle.total_treated_used/docs[i].breakup_of_recycle.total_usage)*100; 
-					if(quanta>=40 && quanta<=50){
+				for (var i = 0; i < docs.length; i++) {
+					var quanta = (docs[i].breakup_of_recycle.total_treated_used / docs[i].breakup_of_recycle.total_usage) * 100;
+					if (quanta >= 40 && quanta <= 50) {
 						safeCount++;
-					} else if(quanta>50 &&quanta<=70){
-						semiCriticalCount++;						
+					} else if (quanta > 50 && quanta <= 70) {
+						semiCriticalCount++;
+					} else {
+						criticalCount++;
 					}
-					else{
-						criticalCount++;	
-					} 
 				}
 				var nocValidityArr = [{
-						property : 'criticalCount',
-						value : criticalCount
+						property: 'criticalCount',
+						value: criticalCount
 					},
 					{
-						property : 'semiCriticalCount',
-						value : semiCriticalCount
+						property: 'semiCriticalCount',
+						value: semiCriticalCount
 					},
 					{
-						property : 'safeCount',
-						value : safeCount
-				}];
+						property: 'safeCount',
+						value: safeCount
+					}
+				];
 				res.json(nocValidityArr);
 			}
 		});
 });
 
-app.get('/getNOC/:name', (req,res)=>{
+app.get('/getNOC/:name', (req, res) => {
 	var Name = req.params.name;
-	db.getDB().collection('telemetry').find(
-		{name_of_industry : Name})
-		.toArray((err,docs)=>{
-			if(err)
+	db.getDB().collection('telemetry').find({
+			name_of_industry: Name
+		})
+		.toArray((err, docs) => {
+			if (err)
 				console.log(err);
-			else{
-				var Day,Month,Year, timeGraphArray=[];
-				for(var i=0; i<docs.length; i++){
-					Day=docs[i].start_day_number;
-					Month=docs[i].month_counter;
-					Year=docs[i].current_year;
+			else {
+				var Day, Month, Year, timeGraphArray = [];
+				for (var i = 0; i < docs.length; i++) {
+					Day = docs[i].start_day_number;
+					Month = docs[i].month_counter;
+					Year = docs[i].current_year;
 					var tempDate = {
-						day : Day,
-						month : Month,
-						year : Year,
-						value : docs[i].consumption
+						day: Day,
+						month: Month,
+						year: Year,
+						value: docs[i].consumption
 					}
 					timeGraphArray.push(tempDate);
 					// console.log(tempDate);
@@ -404,7 +447,7 @@ app.get('/getNOC/:name', (req,res)=>{
 				// console.log(timeGraphArray);
 				res.json(timeGraphArray);
 			}
-		});	
+		});
 });
 
 // app.get('/getNOC/weekly/:name', (req,res)=>{
@@ -422,38 +465,39 @@ app.get('/getNOC/:name', (req,res)=>{
 // 	});
 // });
 
-app.get('/getNOCIndustry/:uniq', (req,res)=>{
+app.get('/getNOCIndustry/:uniq', (req, res) => {
 	var Uniq = req.params.uniq;
-	db.getDB().collection('industry').find(
-		{uniq : Uniq})
-		.toArray((err,docs)=>{
-			if(err)
+	db.getDB().collection('industry').find({
+			uniq: Uniq
+		})
+		.toArray((err, docs) => {
+			if (err)
 				console.log(err);
-			else{
+			else {
 				var industryArr = [];
-				for(var i=docs.length-1,counter=0; counter<7; i--){
+				for (var i = docs.length - 1, counter = 0; counter < 7; i--) {
 					var temp = {
-						date : docs[i].start_day_number,
-						month : docs[i].month_counter,
-						year : docs[i].current_year,
-						value : docs[i].consumption
+						date: docs[i].start_day_number,
+						month: docs[i].month_counter,
+						year: docs[i].current_year,
+						value: docs[i].consumption
 					}
 					industryArr.push(temp);
 					counter++;
 				}
 				res.json(industryArr);
 			}
-	});
+		});
 });
 
 
 //Establish Connection
-db.connect((err)=>{
-	if(err)
+db.connect((err) => {
+	if (err)
 		console.log('Unable to Connect to Database');
 
-	else{
-		app.listen(port, ()=>{
+	else {
+		app.listen(port, () => {
 			console.log(`Server up and Running on ${port}`);
 		});
 	}
