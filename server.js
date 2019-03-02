@@ -304,6 +304,149 @@ app.get('/nocValidity', (req,res)=>{
 
 });
 
+app.get('/getQuantum', (req,res)=>{
+	db.getDB().collection(collection).find({})
+		.toArray((err,docs)=>{
+			if(err)
+				console.log(err);
+			else{
+				var criticalCount=0, semiCriticalCount=0, safeCount=0;
+
+				for(var i=0; i<docs.length; i++){
+					var quanta=(docs[i].breakup_of_recycle.total_treated_used/docs[i].breakup_of_recycle.total_usage)*100; 
+					if(quanta>=40 && quanta<=50){
+						safeCount++;
+					} else if(quanta>50 &&quanta<=60){
+						semiCriticalCount++;						
+					}
+					else{
+						criticalCount++;	
+					} 
+				}
+				var nocValidityArr = [{
+						property : 'criticalCount',
+						value : criticalCount
+					},
+					{
+						property : 'semiCriticalCount',
+						value : semiCriticalCount
+					},
+					{
+						property : 'safeCount',
+						value : safeCount
+				}];
+				res.json(nocValidityArr);
+			}
+		});
+});
+
+app.get('/getQuantum/:state', (req,res)=>{
+	var State = req.params.state;
+	db.getDB().collection(collection).find(
+		{state : State}
+		)
+		.toArray((err,docs)=>{
+			if(err)
+				console.log(err);
+			else{
+				var criticalCount=0, semiCriticalCount=0, safeCount=0;
+
+				for(var i=0; i<docs.length; i++){
+					var quanta=(docs[i].breakup_of_recycle.total_treated_used/docs[i].breakup_of_recycle.total_usage)*100; 
+					if(quanta>=40 && quanta<=50){
+						safeCount++;
+					} else if(quanta>50 &&quanta<=70){
+						semiCriticalCount++;						
+					}
+					else{
+						criticalCount++;	
+					} 
+				}
+				var nocValidityArr = [{
+						property : 'criticalCount',
+						value : criticalCount
+					},
+					{
+						property : 'semiCriticalCount',
+						value : semiCriticalCount
+					},
+					{
+						property : 'safeCount',
+						value : safeCount
+				}];
+				res.json(nocValidityArr);
+			}
+		});
+});
+
+app.get('/getNOC/:name', (req,res)=>{
+	var Name = req.params.name;
+	db.getDB().collection('telemetry').find(
+		{name_of_industry : Name})
+		.toArray((err,docs)=>{
+			if(err)
+				console.log(err);
+			else{
+				var Day,Month,Year, timeGraphArray=[];
+				for(var i=0; i<docs.length; i++){
+					Day=docs[i].start_day_number;
+					Month=docs[i].month_counter;
+					Year=docs[i].current_year;
+					var tempDate = {
+						day : Day,
+						month : Month,
+						year : Year,
+						value : docs[i].consumption
+					}
+					timeGraphArray.push(tempDate);
+					// console.log(tempDate);
+				}
+				// console.log(timeGraphArray);
+				res.json(timeGraphArray);
+			}
+		});	
+});
+
+// app.get('/getNOC/weekly/:name', (req,res)=>{
+// 	var Name = req.params.name;
+// 	db.getDB().collection('telemetry').find(
+// 		{name_of_industry : Name})
+// 		.toArray((err,docs)=>{
+// 			if(err)
+// 				console.log(err);
+// 			else{
+
+
+
+// 			}
+// 	});
+// });
+
+app.get('/getNOCIndustry/:uniq', (req,res)=>{
+	var Uniq = req.params.uniq;
+	db.getDB().collection('industry').find(
+		{uniq : Uniq})
+		.toArray((err,docs)=>{
+			if(err)
+				console.log(err);
+			else{
+				var industryArr = [];
+				for(var i=docs.length-1,counter=0; counter<7; i--){
+					var temp = {
+						date : docs[i].start_day_number,
+						month : docs[i].month_counter,
+						year : docs[i].current_year,
+						value : docs[i].consumption
+					}
+					industryArr.push(temp);
+					counter++;
+				}
+				res.json(industryArr);
+			}
+	});
+});
+
+
 //Establish Connection
 db.connect((err)=>{
 	if(err)
