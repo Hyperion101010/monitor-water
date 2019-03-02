@@ -27,10 +27,10 @@ export interface WaterUsage {
 export class MonitoringComponent implements OnInit {
 
   tiles: Tile[] = [
-    { cols: 3, rows: 1, color: 'white' },
-    { cols: 1, rows: 1, color: 'white' },
-    { cols: 3, rows: 6, color: '#FDFDFD' },
-    { cols: 1, rows: 6, color: 'white' },
+    {cols: 2, rows: 1, color: 'white'},
+    {cols: 2, rows: 4, color: 'white'},
+    {cols: 2, rows: 7, color: '#FDFDFD'},
+    {cols: 2, rows: 5, color: '#ECECEC'},
   ];
 
   email = 'contact@technobuz.in';
