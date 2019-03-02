@@ -4,13 +4,14 @@ const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const express = require('express');
 const uuidv4 = require('uuid/v4');
-openSessions = {}; // To hold open sessions
-
+const moment = require('moment');
 const app = express();
+
+openSessions = {}; // To hold open sessions
 
 const db = require('./db/db.js');
 const creds = require('./db/creds.js');
-const collection = "water";
+const collection = "noc";
 
 // CORS Handler
 app.use(creds.handleCORS);
@@ -184,12 +185,9 @@ app.get('/getPercentage',(req,res)=>{
 					var currentState=docs[i].state;
 
 					if(stateJSON.hasOwnProperty(currentState)){
-						// console.log('yep');
-						// stateJSON.currentState.totalTreatedUsage+=docs[i].breakup_of_recycle.total_treated_used;
 						stateJSON[currentState].totalTreatedUsage+=docs[i].breakup_of_recycle.total_treated_used;
 						stateJSON[currentState].totalUsage+=docs[i].breakup_of_recycle.total_usage;
 					} else{
-						// console.log('nope');
 						stateJSON[currentState]={
 							totalTreatedUsage : docs[i].breakup_of_recycle.total_treated_used,
 							totalUsage : docs[i].breakup_of_recycle.total_usage
@@ -203,10 +201,52 @@ app.get('/getPercentage',(req,res)=>{
 						(stateJSON[currentState].totalTreatedUsage/stateJSON[currentState].totalUsage)*100;
 					}
 				}
-				console.log(stateJSON);
 				res.json(percentageJSON);
 			}
 		});
+});
+
+//GET NOC Validity
+app.get('/nocValidity', (req,res)=>{
+	db.getDB().collection(collection).find({})
+	.toArray((err,docs)=>{
+		if(err)
+			console.log(err);
+		else{
+			var expiredCount=0, safeCount=0, renewCount=0;
+			for(var i=0; i<docs.length; i++){
+				var d1 = moment(`${docs[i].date.year}-${docs[i].date.month}-${docs[i].date.day}`);
+				var d2 = moment();
+				var days = d2.diff(d1, 'days');
+				console.log(`Difference in days: ${days}`);
+				if(days>=915 && days<1095){
+					renewCount++;
+				} else if(days>=1095){
+					expiredCount++;
+				} else{
+					safeCount++;
+				}
+			}
+
+			var nocValidityArr = [
+				{
+					property : 'expiredCount',
+					value : expiredCount
+				},
+				{
+					property : 'renewCount',
+					value : renewCount
+				},
+				{
+					property : 'safeCount',
+					value : safeCount
+				}
+			];
+			res.json(nocValidityArr);
+		}
+		
+	});
+
 });
 
 //Establish Connection
