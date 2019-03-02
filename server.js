@@ -62,21 +62,21 @@ app.post('/postData', (req, res) => {
 		});
 });
 
-// app.post('/postDataIndustry', (req,res)=>{
-// 	const userInput = req.body;
-// 	db.getDB().collection('industry')
-// 	.insertOne(userInput,(err,result)=>{
-// 		if(err)
-// 			console.log(err)
+app.post('/postDataIndustry', (req,res)=>{
+	const userInput = req.body;
+	db.getDB().collection('industry')
+	.insertOne(userInput,(err,result)=>{
+		if(err)
+			console.log(err)
 
-// 		else{
-// 				res.json({
-// 					result,
-// 					document : result.ops[0]
-// 				});
-// 		}	
-// 	});
-// });
+		else{
+				res.json({
+					result,
+					document : result.ops[0]
+				});
+		}	
+	});
+});
 
 //GET Data
 app.get('/getData', (req, res) => {
@@ -506,7 +506,7 @@ app.get('/getNOCIndustry/:uniq', (req, res) => {
 						value : docs[i].consumption
 					};
 					var temp2 = {
-						name : `${docs[j].start_day_number}-0${docs[j].month_counter}`,
+						name : `${docs[i].start_day_number}-0${docs[i].month_counter}`,
 						value : docs[j].consumption
 					};
 					industryArr[0].series.push(temp1);
