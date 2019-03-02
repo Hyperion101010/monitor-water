@@ -51,4 +51,8 @@ export class ComparisionComponent implements OnInit {
   ngOnInit() {
   }
 
+  handleNOCinput(event){
+    console.log(this.NOCid);
+  }
+
 }

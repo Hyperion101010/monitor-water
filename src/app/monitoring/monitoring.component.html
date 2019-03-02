@@ -26,85 +26,80 @@
       <h2 id="WandA">Warnings and Alarms</h2>
       <h3 id="noc">NOC Validity</h3>
       <table>
-          <tr id="customTable"><th id="customTable">Safe NOCs:</th><td id="customTable" >{{safecount}}</td></tr>
-          <tr id="customTable"><th id="customTable">Renewal alert:</th><td id="customTable">{{renewcount}}</td></tr>
-          <tr id="customTable"><th id="customTable">Expired NOCs:</th><td id="customTable">{{expcount}}</td></tr>
+        <tr id="customTable">
+          <th id="customTable">Safe NOCs:</th>
+          <td id="customTable">{{safecount}}</td>
+        </tr>
+        <tr id="customTable">
+          <th id="customTable">Renewal alert:</th>
+          <td id="customTable">{{renewcount}}</td>
+        </tr>
+        <tr id="customTable">
+          <th id="customTable">Expired NOCs:</th>
+          <td id="customTable">{{expcount}}</td>
+        </tr>
       </table>
     </div>
 
     <div *ngIf="i==2">
-        <table mat-table [dataSource]="waterUsage" class="mat-elevation-z8" style='border: 1px solid black; '>
+      <table mat-table [dataSource]="waterUsage" class="mat-elevation-z8" style='border: 1px solid black; '>
 
-            <!--- Note that these columns can be defined in any order.
+        <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->
-          
-            <!-- Industry Name Column -->
-            <ng-container matColumnDef="name_of_industry">
-              <th mat-header-cell *matHeaderCellDef> Industry </th>
-              <td mat-cell *matCellDef="let element"> {{element.name_of_industry}} </td>
-            </ng-container>
-          
-            <!-- Email Column -->
-            <ng-container matColumnDef="email">
-              <th mat-header-cell *matHeaderCellDef> Email </th>
-              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-            </ng-container>
-          
-            <!-- State Column -->
-            <ng-container matColumnDef="state">
-              <th mat-header-cell *matHeaderCellDef> State </th>
-              <td mat-cell *matCellDef="let element"> {{element.state}} </td>
-            </ng-container>
-          
-            <!-- City Column -->
-            <ng-container matColumnDef="city">
-              <th mat-header-cell *matHeaderCellDef> City </th>
-              <td mat-cell *matCellDef="let element"> {{element.city}} </td>
-            </ng-container>
-          
-            <!-- Status Column -->
-            <ng-container matColumnDef="status">
-              <th mat-header-cell *matHeaderCellDef> Status </th>
-              <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-            </ng-container>
-          
-            <!-- NOC Specified Column -->
-            <ng-container matColumnDef="total_water_req">
-              <th mat-header-cell *matHeaderCellDef> NOC Specified </th>
-              <td mat-cell *matCellDef="let element"> {{element.total_water_req}} </td>
-            </ng-container>
-          
-            <!-- Consumption Column -->
-            <ng-container matColumnDef="consumption">
-              <th mat-header-cell *matHeaderCellDef> Consumption </th>
-              <td mat-cell *matCellDef="let element"> {{element.consumption}} </td>
-            </ng-container>
-          
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-      <!-- <mat-form-field class="example-full-width">
-        <input matInput placeholder="email" [(ngModel)]="email" name="email" required>
-      </mat-form-field>
-      <button mat-raised-button (click)="sendEmail()">Notify</button> -->
+
+        <!-- Industry Name Column -->
+        <ng-container matColumnDef="name_of_industry">
+          <th mat-header-cell *matHeaderCellDef> Industry </th>
+          <td mat-cell *matCellDef="let element"> {{element.name_of_industry}} </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+
+        <!-- State Column -->
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef> State </th>
+          <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+        </ng-container>
+
+        <!-- City Column -->
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef> City </th>
+          <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+
+        <!-- NOC Specified Column -->
+        <ng-container matColumnDef="total_water_req">
+          <th mat-header-cell *matHeaderCellDef> NOC Specified </th>
+          <td mat-cell *matCellDef="let element"> {{element.total_water_req}} </td>
+        </ng-container>
+
+        <!-- Consumption Column -->
+        <ng-container matColumnDef="consumption">
+          <th mat-header-cell *matHeaderCellDef> Consumption </th>
+          <td mat-cell *matCellDef="let element"> {{element.consumption}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </div>
 
     <div *ngIf="i==3">
-    </div>    
+      <ngx-charts-bar-vertical class="graph1" [view]="view" [scheme]="colorScheme" [results]="totals" [gradient]="gradient" [xAxis]="showXAxis"
+        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [yAxisLabel]="yAxisLabel" [xAxisLabel]="xAxisLabel"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+    </div>
+    
   </mat-grid-tile>
 </mat-grid-list>
-
-
-<ngx-charts-bar-vertical class="graph1"
-  [view]="view" 
-  [scheme]="colorScheme" 
-  [results]="totals" 
-  [gradient]="gradient" 
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis" 
-  [showXAxisLabel]="showXAxisLabel" 
-  [showYAxisLabel]="showYAxisLabel" 
-  [yAxisLabel]="yAxisLabel" 
-  [xAxisLabel]="xAxisLabel"
-  (select)="onSelect($event)">
-</ngx-charts-bar-vertical>

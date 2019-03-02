@@ -28,7 +28,7 @@ export class MonitoringComponent implements OnInit {
 
   tiles: Tile[] = [
     {cols: 2, rows: 1, color: 'white'},
-    {cols: 2, rows: 4, color: 'white'},
+    {cols: 2, rows: 3, color: 'white'},
     {cols: 2, rows: 7, color: '#FDFDFD'},
     {cols: 2, rows: 5, color: '#ECECEC'},
   ];
@@ -65,6 +65,7 @@ export class MonitoringComponent implements OnInit {
   expcount: any = 0;
   renewcount: any = 0;
   safecount: any = 0;
+    view: any[] = [600, 400];
   quantumData = [
     'Critical',
     'Semi-Critical',

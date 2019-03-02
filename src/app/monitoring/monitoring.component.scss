@@ -8,7 +8,7 @@ waterlevelMap {
 }
 
 #WandA {
-    color: red;
+    color: blue;
 }
 
 .Alarm{
@@ -21,11 +21,11 @@ mat-list{
     padding: 0px;
 }
 
-table {
-    width: 100%;
-  }
+// table {
+//     width: 100%;
+//   }
 
-.customTable {   
+#customTable {   
   border: 1px solid #000000;
   text-align: left;
   padding: 8px;
@@ -33,10 +33,10 @@ table {
   background-color: #fdfdfd
 }
 
-.table{
-    margin-right: -100px;
-    width: 100%;
-}
+// .table{
+//     margin-right: -100px;
+//     width: 100%;
+// }
 
 #predict{
     margin-left: 200px;
