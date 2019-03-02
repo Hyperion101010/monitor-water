@@ -1,43 +1,71 @@
-<ngx-charts-bar-vertical
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="single"
-  [gradient]="gradient"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  (select)="onSelect($event)">
-</ngx-charts-bar-vertical>
-
-<ngx-charts-pie-chart
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="single"
-  [doughnut]=true
-  >
-</ngx-charts-pie-chart>
-
-<ngx-charts-pie-chart
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="single"
-  [doughnut]=false
-  >
-</ngx-charts-pie-chart>
-
-<ngx-charts-heat-map
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="multi"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  >
-</ngx-charts-heat-map>
+<mat-grid-list cols="4" rowHeight="120px">
+  <mat-grid-tile *ngFor="let tile of tiles; let i=index" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background-color]="tile.color">
+    <div *ngIf="i===0">
+      <a mat-raised-button class="textfield"color="primary" target="_blank" href="http://cgwa-noc.gov.in/ExternalLogin.aspxReturnUrl=%2fExternalUser%2fApplicantHome.aspx">Update NOC</a>    
+    </div>
+    <div *ngIf="i==1">
+      <mat-form-field class="Input">
+        <input matInput placeholder="Enter NOC ID" [(ngModel)]="NOCid">
+      </mat-form-field>
+    </div>
+    <div *ngIf="i==2">
+    </div>
+    <div *ngIf="i==3">
+      <mat-tab-group>
+        <mat-tab label="Weekly">  
+        </mat-tab>
+         <mat-tab label="Monthly">
+          <ngx-charts-bar-vertical  class="graph2"
+            [view]="view" 
+            [scheme]="colorScheme" 
+            [results]="single" 
+            [gradient]="gradient" 
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis" 
+            [legend]="showLegend" 
+            [showXAxisLabel]="showXAxisLabel" 
+            [showYAxisLabel]="showYAxisLabel" 
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel" 
+            (select)="onSelect($event)">
+          </ngx-charts-bar-vertical>
+        </mat-tab>
+         <mat-tab label="Yearly">
+          <ngx-charts-bar-vertical 
+            [view]="view" 
+            [scheme]="colorScheme" 
+            [results]="single" 
+            [gradient]="gradient" 
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis" 
+            [legend]="showLegend" 
+            [showXAxisLabel]="showXAxisLabel" 
+            [showYAxisLabel]="showYAxisLabel" 
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel" 
+            (select)="onSelect($event)">
+          </ngx-charts-bar-vertical>
+        </mat-tab>
+      </mat-tab-group>
+      
+    </div>
+    <div *ngIf="i===4">
+      <ngx-charts-pie-chart
+        [view]="view34"
+        [scheme]="colorScheme"
+        [results]="single"
+        [doughnut]=true>
+        test
+      </ngx-charts-pie-chart>
+    </div>
+    <div *ngIf="i===5">
+      <ngx-charts-pie-chart
+        [view]="view34"
+        [scheme]="colorScheme"
+        [results]="single"
+        [doughnut]=true>
+        test
+      </ngx-charts-pie-chart>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

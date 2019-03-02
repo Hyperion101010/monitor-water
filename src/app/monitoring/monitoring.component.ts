@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {FormControl, Validators} from '@angular/forms';
+import { single, multi } from '../data';
 
 export interface Tile {
   color: string;
@@ -16,15 +17,35 @@ export interface Tile {
 export class MonitoringComponent implements OnInit {
  
   tiles: Tile[] = [
-    {cols: 2, rows: 1, color: 'lightblue'},
-    {cols: 1, rows: 8, color: 'lightgreen'},
-    {cols: 1, rows: 4, color: 'lightpink'},
-    {cols: 2, rows: 7, color: 'lightcoral'},
-    {cols: 1, rows: 4, color: 'lightyellow'}
-
+    {cols: 2, rows: 1, color: 'white'},
+    {cols: 2, rows: 1, color: 'white'},
+    {cols: 1, rows: 1, color: 'white'},
+    {cols: 2, rows: 6, color: 'white'},
+    {cols: 2, rows: 6, color: 'lightyellow'},
+    {cols: 1, rows: 6, color: 'white'},
   ];
 
-  selectedState: String = 'Mizoram';
+  single: any[];
+  multi: any[];
+
+  view: any[] = [600, 400];
+  view34: any[] = [300, 300];
+
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Country';
+  showYAxisLabel = true;
+  yAxisLabel = 'Population';
+
+  colorScheme = {
+    domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+
+  selectedState: String = '';
   selectedCity: String = 'Aizawl';
   selectedQuantum: String = '';
   states = [];
@@ -91,6 +112,8 @@ export class MonitoringComponent implements OnInit {
       });
     }
     console.log(this.quantum);
+
+    Object.assign(this, { single, multi });      
    }
 
   ngOnInit() {

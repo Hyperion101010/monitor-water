@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      margin: 0;
+    }
+    </style>
+  </head>
+  <body>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.20/topojson.min.js"></script>
+    <script>
+    var width = 500, height = 500;
+
+    var projection = d3.geoMercator();
+
+    var path = d3.geoPath()
+        .projection(projection)
+        .pointRadius(2);
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("fill","steelblue")
+        .attr("transform","translate(200,50)");
+
+    var g = svg.append("g");
+
+    d3.json("india.json", function(data){
+
+      var boundary = centerZoom(data);
+      var subunits = drawSubUnits(data);
+      drawOuterBoundary(data, boundary);
+
+    });
+
+    function centerZoom(data){
+
+      var o = topojson.mesh(data, data.objects.polygons, function(a, b) { return a === b; });
+
+      projection
+          .scale(1)
+          .translate([0, 0]);
+
+      var b = path.bounds(o),
+          s = 1 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+          t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+
+      var p = projection
+          .scale(s)
+          .translate(t);
+
+      return o;
+
+    }
+
+    function drawOuterBoundary(data, boundary){
+
+      g.append("path")
+          .datum(boundary)
+          .attr("d", path)
+          .attr("class", "subunit-boundary")
+          .attr("fill", "none")
+          .attr("stroke", "#3a403d");
+
+    }
+
+    function drawPlaces(data){
+
+      g.append("path")
+          .datum(topojson.feature(data, data.objects.places))
+          .attr("d", path)
+          .attr("class", "place");
+        }
+
+
+    function drawSubUnits(data){
+
+      var subunits = g.selectAll(".subunit")
+          .data(topojson.feature(data, data.objects.polygons).features)
+        .enter().append("path")
+          .attr("class", "subunit")
+          .attr("d", path)
+          .style("stroke", "#fff")
+          .style("stroke-width", "1px");
+
+      return subunits;
+
+    }
+
+    </script>
+
+  </body>
+</html>
