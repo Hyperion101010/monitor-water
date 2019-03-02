@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { single, multi } from '../data';
 
 export interface Tile {
@@ -15,10 +15,10 @@ export interface Tile {
 export class ComparisionComponent implements OnInit {
   NOCid: number;
   tiles: Tile[] = [
-    {cols: 1, rows: 1, color: 'lightgreen'},
-    {cols: 1, rows: 1, color: 'lightgreen'},    
-    {cols: 2, rows: 3, color: 'lavender'},
+    {cols: 2, rows: 1, color: 'lightgreen'},
+    {cols: 2, rows: 1, color: 'lightgreen'},
     {cols: 2, rows: 5, color: 'lightcoral'},
+    {cols: 2, rows: 2, color: 'lavender'},
     {cols: 1, rows: 3, color: 'purple'},
     {cols: 1, rows: 3, color: 'orange'},
   ];

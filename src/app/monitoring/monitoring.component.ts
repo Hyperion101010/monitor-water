@@ -93,14 +93,11 @@ export class MonitoringComponent implements OnInit {
       });
     }
     console.log(this.quantum);
-
-    Object.assign(this, { single, multi });      
    }
 
   ngOnInit() {
  
   }
-
 
   handleStateChange(selectedStateName) {
     console.log(this.selectedCity)
