@@ -28,8 +28,7 @@
                   maxResolution: 156543.0339,
                   displayProjection: new OpenLayers.Projection("EPSG:4326"),
                   units: 'm',
-                  projection: new OpenLayers.Projection("EPSG:4326"),
-                  restrictedExtent : [6144368.4360405, 2724576.0254419, 9236093.3556889, 4446549.3984107]
+                  projection: new OpenLayers.Projection("EPSG:4326")
                 });
                 
                var mapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik", {
@@ -39,10 +38,12 @@
                 map.addLayer(mapnik);
                 map.setBaseLayer(mapnik);
 
+
                 var bounds = OpenLayers.Bounds.fromArray([70.4,15.2,136.2,53.7])
                         .transform(map.displayProjection, map.getProjectionObject());
                 map.zoomToExtent(bounds);
-                map.setCenter(new OpenLayers.LonLat(-20,0).transform(map.displayProjection, map.getProjectionObject()), 2);
+                map.setCenter(new OpenLayers.LonLat(77.724312,22.715169).transform(map.displayProjection, map.getProjectionObject()), 2);
+                map.zoomTo(4); 
 
                 var size = map.getSize();
                 if (size.h > 320) {

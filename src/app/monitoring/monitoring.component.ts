@@ -17,12 +17,10 @@ export interface Tile {
 export class MonitoringComponent implements OnInit {
 
   tiles: Tile[] = [
-    {cols: 2, rows: 1, color: 'white'},
-    {cols: 2, rows: 1, color: 'white'},
-    {cols: 1, rows: 1, color: 'white'},
-    {cols: 2, rows: 6, color: 'white'},
-    {cols: 2, rows: 6, color: 'lightyellow'},
-    {cols: 1, rows: 6, color: 'white'},
+    {cols: 3, rows: 1, color: 'white'},
+    {cols: 2, rows: 1, color: 'lightblue'},
+    {cols: 3, rows: 6, color: 'white'},
+    {cols: 2, rows: 6, color: 'lightblue'},
   ];
 
   email = 'contact@technobuz.in';
@@ -87,7 +85,6 @@ export class MonitoringComponent implements OnInit {
         'name': i
       }
       );
-
     }
     console.log(this.states);
     for (let i in this.quantumData) {
@@ -96,7 +93,7 @@ export class MonitoringComponent implements OnInit {
       });
     }
     console.log(this.quantum);
-        // Object.assign(this, { single, multi }); 
+    // Object.assign(this, { single, multi }); 
    }
 
   ngOnInit() {

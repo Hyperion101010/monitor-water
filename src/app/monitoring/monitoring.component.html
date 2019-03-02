@@ -2,8 +2,9 @@
   <mat-grid-tile *ngFor="let tile of tiles;let i=index" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background-color]="tile.color">
     <div *ngIf="i===0">
       <mat-form-field>
-        <mat-select placeholder="Select State" [(value)]="selectedState" [(ngModel)]="selectedState" (ngModelChange)='handleStateChange(selectedState);' required>
-            <mat-option>--</mat-option>
+        <mat-select placeholder="Select State" [(value)]="selectedState" [(ngModel)]="selectedState" (ngModelChange)='handleStateChange(selectedState);'
+          required>
+          <mat-option>--</mat-option>
           <div *ngFor="let state of states;">
             <mat-option value="{{state.name}}">{{state.name}}</mat-option>
           </div>
@@ -11,62 +12,57 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select placeholder="Select District" [(value)]="selectedCity" [(ngModel)]="selectedCity" (ngModelChange)=' submitted();' required>
-            <mat-option>--</mat-option>
+        <mat-select placeholder="Select District" [(value)]="selectedCity" [(ngModel)]="selectedCity" (ngModelChange)=' submitted();'
+          required>
+          <mat-option>--</mat-option>
           <div *ngFor="let city of cities;">
             <mat-option value="{{city}}">{{city}}</mat-option>
           </div>
         </mat-select>
       </mat-form-field>
-
-    </div>
-
-    <div *ngIf="i==3">
-      <mat-card class="Chart waterlevelMap">
-        <mat-card-header>
-          <mat-card-title>Spatial Assessment: Groundwater Extraction</mat-card-title>
-        </mat-card-header>
-        <iframe width="500" height="500" frameBorder="0" scrolling="no" style="overflow:hidden;" src='../../assets/map.html'></iframe>
-        <!--<iframe width="500" height="500" frameBorder="0" scrolling="no" style="overflow:hidden;" src='../../assets/waterlevel.html'></iframe>-->
-      </mat-card>
-    </div>
-
-    <div *ngIf="i==2">
-      <h2 id="WandA">Warnings and Alarms</h2>
     </div>
 
     <div *ngIf="i==1">
-        <h2>Water Level Condition</h2>
+      <h2 id="WandA">Warnings and Alarms</h2>
     </div>
 
-     <div *ngIf="i==4">
-        <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
-          </mat-form-field>
-        <button mat-raised-button (click)="sendMail()">Notify</button>
-     </div>
+    <div *ngIf="i==2">
+    </div>
 
-    <div *ngIf="i==5">
+    <div *ngIf="i==3">
       <mat-list role="list">
-          <mat-list-item role="listitem">
-            <h2>NOC Validity</h2>
-            <br>
+        <mat-list-item role="listitem">
+          <h2>NOC Validity</h2>
+          <br>
+        </mat-list-item>
+        <mat-list role="sublist">
+          <mat-list-item role="sublistitem">
+            <mat-icon matListIcon>arrow_right_alt</mat-icon>
+            <span>Safe NOCs : 399/1429 </span>
           </mat-list-item>
-          <mat-list role="sublist">
-            <mat-list-item role="sublistitem">
-              <mat-icon matListIcon>arrow_right_alt</mat-icon>
-              <span>Safe NOCs : 399/1429 </span>
-            </mat-list-item>
-            <mat-list-item role="sublistitem">
-              <mat-icon matListIcon>arrow_right_alt</mat-icon>
-              <span>Renewal alert: 133/1429 </span>
-            </mat-list-item>
-            <mat-list-item role="sublistitem">
-              <mat-icon matListIcon>arrow_right_alt</mat-icon>
-              <span> Expired NOCs: 900/1429</span>
-            </mat-list-item>
-          </mat-list>
-          <br><br><br>
+          <mat-list-item role="sublistitem">
+            <mat-icon matListIcon>arrow_right_alt</mat-icon>
+            <span>Renewal alert: 133/1429 </span>
+          </mat-list-item>
+          <mat-list-item role="sublistitem">
+            <mat-icon matListIcon>arrow_right_alt</mat-icon>
+            <span> Expired NOCs: 900/1429</span>
+          </mat-list-item>
+        </mat-list>
+        <br><br><br>
+      </mat-list>
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <h2>Water Usage</h2>
+          <br>
+        </mat-list-item>
+        <mat-list role="sublist">
+          <mat-list-item role="sublistitem">
+            <mat-icon matListIcon>arrow_right_alt</mat-icon>
+            <span></span>
+          </mat-list-item>
+        </mat-list>
+        <br><br><br>
       </mat-list>
     </div>
 

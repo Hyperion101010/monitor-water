@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     showXAxisLabel = true;
     xAxisLabel = 'State';
     showYAxisLabel = true;
-    yAxisLabel = 'Reuse %';
+    yAxisLabel = 'Consumption %';
 
     colorScheme = {
       domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']
