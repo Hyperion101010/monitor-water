@@ -724,12 +724,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _monitordb_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../monitordb.service */ "./src/app/monitordb.service.ts");
+/* harmony import */ var _water_harvesting_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../water-harvesting.service */ "./src/app/water-harvesting.service.ts");
+
 
 
 
 var MonitoringComponent = /** @class */ (function () {
-    function MonitoringComponent(monitordbService) {
+    function MonitoringComponent(monitordbService, waterHarvestService) {
         this.monitordbService = monitordbService;
+        this.waterHarvestService = waterHarvestService;
         this.tiles = [
             { cols: 2, rows: 1, color: 'lightblue' },
             { cols: 1, rows: 8, color: 'lightgreen' },
@@ -811,15 +814,57 @@ var MonitoringComponent = /** @class */ (function () {
             console.log(response);
         });
     };
+    MonitoringComponent.prototype.harvesting = function () {
+        this.waterHarvestService.harvesting().subscribe(function (response) {
+            console.log(response);
+        });
+    };
     MonitoringComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-monitoring',
             template: __webpack_require__(/*! ./monitoring.component.html */ "./src/app/monitoring/monitoring.component.html"),
             styles: [__webpack_require__(/*! ./monitoring.component.scss */ "./src/app/monitoring/monitoring.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_monitordb_service__WEBPACK_IMPORTED_MODULE_2__["MonitordbService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_monitordb_service__WEBPACK_IMPORTED_MODULE_2__["MonitordbService"], _water_harvesting_service__WEBPACK_IMPORTED_MODULE_3__["WaterHarvestingService"]])
     ], MonitoringComponent);
     return MonitoringComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/water-harvesting.service.ts":
+/*!*********************************************!*\
+  !*** ./src/app/water-harvesting.service.ts ***!
+  \*********************************************/
+/*! exports provided: WaterHarvestingService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WaterHarvestingService", function() { return WaterHarvestingService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+var WaterHarvestingService = /** @class */ (function () {
+    function WaterHarvestingService(http) {
+        this.http = http;
+    }
+    WaterHarvestingService.prototype.harvesting = function () {
+        var obs = this.http.get('http://localhost:8100/getData');
+        return obs;
+    };
+    WaterHarvestingService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    ], WaterHarvestingService);
+    return WaterHarvestingService;
 }());
 
 

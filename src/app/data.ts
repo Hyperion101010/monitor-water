@@ -56,4 +56,31 @@ export var single = [
       ]
     }
   ];
+
+  export var reuse = [
+    {
+      "name": "Maharashtra",
+      "value": 60
+    },
+    {
+      "name": "Tripura",
+      "value": 41.4162806088683
+    },
+    {
+      "name": "Lakshadweep (UT)",
+      "value": 40.57553956834533
+    },
+    {
+      "name": "Daman and Diu (UT)",
+      "value": 37.12
+    },
+    {
+      "name": "Mizoram",
+      "value": 40.374581939799334
+    },
+    {
+      "name": "Kerala",
+      "value": 48.24324324324324
+    }
+  ];
   

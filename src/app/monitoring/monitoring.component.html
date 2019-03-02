@@ -11,7 +11,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select placeholder="Select District" [(value)]="selectedCity" [(ngModel)]="selectedCity" (ngModelChange)='submitted();' required>
+        <mat-select placeholder="Select District" [(value)]="selectedCity" [(ngModel)]="selectedCity" (ngModelChange)=' submitted();' required>
             <mat-option>--</mat-option>
           <div *ngFor="let city of cities;">
             <mat-option value="{{city}}">{{city}}</mat-option>
