@@ -16,6 +16,9 @@
 <br> 2. CGWA has notified 162 critical/ overexploited areas in parts of NCT Delhi, Haryana, Punjab, Andhra Pradesh, Rajasthan, MP, Gujarat, West Bengal, Uttar Pradesh, Karnataka, Tamil Nadu, UT of Puducherry and UT of Diu for control and regulation of development of ground water resources. For enforcement of the regulatory measures in these areas, concerned Deputy Commissioners/ District Magistrates have been directed under Section 5 of Environment (Protection) Act, 1986 to regulate ground water development in these notified areas.
 <br> 3. Construction of new ground water structures is prohibited in the notified areas. Permission of drilling tubewells is being granted only to the Govt. agencies responsible for drinking water supply.
     </p>
+      </mat-card-content>
+      </mat-card>
+      <br>
     <ngx-charts-bar-vertical class="graph1"
     [view]="view" 
     [scheme]="colorScheme" 
@@ -23,13 +26,9 @@
     [gradient]="gradient" 
     [xAxis]="showXAxis"
     [yAxis]="showYAxis" 
-    [legend]="showLegend" 
     [showXAxisLabel]="showXAxisLabel" 
     [showYAxisLabel]="showYAxisLabel" 
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel" 
     (select)="onSelect($event)">
   </ngx-charts-bar-vertical>
-
-  </mat-card-content>
-</mat-card>
