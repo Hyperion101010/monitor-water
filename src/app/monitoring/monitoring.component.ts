@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {FormControl, Validators} from '@angular/forms';
-import { single, multi } from '../data';
+import { MonitordbService } from '../monitordb.service';
 
 export interface Tile {
   color: string;
@@ -25,32 +25,13 @@ export class MonitoringComponent implements OnInit {
     {cols: 1, rows: 6, color: 'white'},
   ];
 
-  single: any[];
-  multi: any[];
-
-  view: any[] = [600, 400];
-  view34: any[] = [300, 300];
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Country';
-  showYAxisLabel = true;
-  yAxisLabel = 'Population';
-
-  colorScheme = {
-    domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-
   selectedState: String = '';
-  selectedCity: String = 'Aizawl';
+  selectedCity: String = '';
   selectedQuantum: String = '';
   states = [];
   cities = [];
   quantum = [];
+  response: any;
 
   quantumData = [
     'Critical',
@@ -97,7 +78,7 @@ export class MonitoringComponent implements OnInit {
     'Puducherry (UT)': ['Karaikal','Mahe','Pondicherry','Yanam'],
   };
 
-  constructor(private http: HttpClient) {
+    constructor(private monitordbService : MonitordbService){
     for (let i in this.statesData) {
       this.states.push({
         'name': i
@@ -117,13 +98,20 @@ export class MonitoringComponent implements OnInit {
    }
 
   ngOnInit() {
-    let obs = this.http.get('http://localhost:8100/getData/'+this.selectedState +'/'+this.selectedCity)
-    obs.subscribe((response) => console.log(response));
+ 
   }
 
 
   handleStateChange(selectedStateName) {
+    console.log(this.selectedCity)
     this.cities = this.statesData[selectedStateName];
     this.selectedCity = '';
+  }
+
+  submitted()
+  {
+    this.monitordbService.submitted(this.selectedState, this.selectedCity).subscribe((response) => {
+      console.log(response);
+    })
   }
 }
