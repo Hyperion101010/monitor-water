@@ -33,8 +33,24 @@ export class MonitoringComponent implements OnInit {
     {cols: 2, rows: 5, color: '#ECECEC'},
   ];
 
+
+      // options
+      showXAxis = true;
+      showYAxis = true;
+      gradient = false;
+      showLegend = true;
+      showXAxisLabel = true;
+      xAxisLabel = 'Quantum of Extraction';
+      showYAxisLabel = true;
+      yAxisLabel = 'Number of Industries';
+  
+      colorScheme = {
+        domain: ['#0D88E3', '#17159C', '#4948C2', '#0F0E6A']
+      };
+  
   email = 'contact@technobuz.in';
   waterUsage: WaterUsage[] = [];
+  totals = [];
   displayedColumns: string[] = ['name_of_industry', 'email', 'state', 'city', 'status', 'total_water_req', 'consumption'];
 
   selectedState: String = '';
@@ -144,10 +160,10 @@ export class MonitoringComponent implements OnInit {
   }
 
   checkUsageDefaulters() {
-    this.monitordbService.checkUsageDefaulters(this.selectedState, this.selectedCity).subscribe((response: WaterUsage[]) => {
+    this.monitordbService.checkUsageDefaulters(this.selectedState, this.selectedCity).subscribe((response) => {
       console.log('checkUsageDefaulters', response);
-      this.waterUsage = response;
-      // this.waterUsage = [...this.waterUsage];
+      this.waterUsage = response['defaulters'];
+      this.totals = response['totals'];
     });
   }
 
