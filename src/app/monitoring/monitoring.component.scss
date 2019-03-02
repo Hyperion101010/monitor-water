@@ -20,3 +20,22 @@ waterlevelMap {
 mat-list{
     padding: 0px;
 }
+
+th, td{
+border: 1px solid #000000;
+  text-align: left;
+  padding: 8px;
+  font-size: 20px;
+  background-color: #fdfdfd
+}
+
+.table{
+    margin-right: -100px;
+}
+
+#predict{
+    margin-left: 200px;
+}
+#noc{
+    margin-left: 40px;
+}

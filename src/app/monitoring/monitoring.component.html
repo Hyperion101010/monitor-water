@@ -24,6 +24,12 @@
 
     <div *ngIf="i==1">
       <h2 id="WandA">Warnings and Alarms</h2>
+      <h3 id="noc">NOC Validity</h3>
+      <table>
+          <tr><th>Safe NOCs:</th><td>{{safecount}}</td></tr>
+          <tr><th>Renewal alert:</th><td>{{renewcount}}</td></tr>
+          <tr><th>Expired NOCs:</th><td>{{expcount}}</td></tr>
+      </table>
     </div>
 
     <div *ngIf="i==2">
@@ -34,41 +40,11 @@
     </div>
 
     <div *ngIf="i==3">
-      <mat-list role="list">
-        <mat-list-item role="listitem">
-          <h2>NOC Validity</h2>
-          <br>
-        </mat-list-item>
-        <mat-list role="sublist">
-          <mat-list-item role="sublistitem">
-            <mat-icon matListIcon>arrow_right_alt</mat-icon>
-            <span>Safe NOCs : {{safecount}} </span>
-          </mat-list-item>
-          <mat-list-item role="sublistitem">
-            <mat-icon matListIcon>arrow_right_alt</mat-icon>
-            <span>Renewal alert: {{renewcount}} </span>
-          </mat-list-item>
-          <mat-list-item role="sublistitem">
-            <mat-icon matListIcon>arrow_right_alt</mat-icon>
-            <span> Expired NOCs: {{expcount}}</span>
-          </mat-list-item>
-        </mat-list>
-        <br><br><br>
-      </mat-list>
-      <mat-list role="list">
-        <mat-list-item role="listitem">
-          <h2>Water Usage</h2>
-          <br>
-        </mat-list-item>
-        <mat-list role="sublist">
-          <mat-list-item role="sublistitem">
-            <mat-icon matListIcon>arrow_right_alt</mat-icon>
-            <span></span>
-          </mat-list-item>
-        </mat-list>
-        <br><br><br>
-      </mat-list>
-    </div>
-
+      <h3 id="predict"> PREDICTION </h3>
+      <br>
+      <img width="290" height="270" src="../assets/test.jpg">
+      <img width="290" height="270" src="../assets/training.jpg">
+      <br>
+    </div>    
   </mat-grid-tile>
 </mat-grid-list>
