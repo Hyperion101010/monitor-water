@@ -15,11 +15,10 @@ export interface Tile {
 export class ComparisionComponent implements OnInit {
   NOCid: number;
   tiles: Tile[] = [
-    {cols: 2, rows: 1, color: 'lightgreen'},
-    {cols: 2, rows: 1, color: 'lightgreen'},
-    {cols: 2, rows: 5, color: 'lightcoral'},
-    {cols: 2, rows: 2, color: 'lavender'},
-    {cols: 2, rows: 3, color: 'purple'},
+    {cols: 2, rows: 1, color: '#fdfdfd'},
+    {cols: 2, rows: 3, color: 'white'},
+    {cols: 2, rows: 5, color: 'white'},
+    {cols: 2, rows: 3, color: 'white'},
   ];
 
   single: any[];
@@ -34,9 +33,9 @@ export class ComparisionComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Duration';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Consumption';
 
   colorScheme = {
     domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']

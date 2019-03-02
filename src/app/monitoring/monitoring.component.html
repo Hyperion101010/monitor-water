@@ -1,4 +1,4 @@
-<mat-grid-list cols="5" rowHeight="100px">
+<mat-grid-list cols="4" rowHeight="100px">
   <mat-grid-tile *ngFor="let tile of tiles;let i=index" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background-color]="tile.color">
     <div *ngIf="i===0">
       <mat-form-field>
@@ -27,6 +27,10 @@
     </div>
 
     <div *ngIf="i==2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="email" [(ngModel)]="email" name="email" required>
+      </mat-form-field>
+      <button mat-raised-button (click)="sendEmail()">Notify</button>
     </div>
 
     <div *ngIf="i==3">
@@ -38,15 +42,15 @@
         <mat-list role="sublist">
           <mat-list-item role="sublistitem">
             <mat-icon matListIcon>arrow_right_alt</mat-icon>
-            <span>Safe NOCs : 399/1429 </span>
+            <span>Safe NOCs : {{safecount}} </span>
           </mat-list-item>
           <mat-list-item role="sublistitem">
             <mat-icon matListIcon>arrow_right_alt</mat-icon>
-            <span>Renewal alert: 133/1429 </span>
+            <span>Renewal alert: {{renewcount}} </span>
           </mat-list-item>
           <mat-list-item role="sublistitem">
             <mat-icon matListIcon>arrow_right_alt</mat-icon>
-            <span> Expired NOCs: 900/1429</span>
+            <span> Expired NOCs: {{expcount}}</span>
           </mat-list-item>
         </mat-list>
         <br><br><br>

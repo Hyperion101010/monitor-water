@@ -10,8 +10,12 @@ export class MonitordbService{
 
   submitted(selectedState, selectedCity) {
     return this.http.get('http://localhost:8100/getData/'+selectedState +'/'+selectedCity)
-    }
-
+  }
+  
+  nocValidity() {
+  return this.http.get('http://localhost:8100/nocValidity')
+  }
+  
     sendMail(email) {
       return this.http.get('http://localhost:8100/sendMail?to=' + email);
     }

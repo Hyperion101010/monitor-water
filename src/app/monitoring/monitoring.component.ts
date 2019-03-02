@@ -18,9 +18,9 @@ export class MonitoringComponent implements OnInit {
 
   tiles: Tile[] = [
     {cols: 3, rows: 1, color: 'white'},
-    {cols: 2, rows: 1, color: 'lightblue'},
-    {cols: 3, rows: 6, color: 'white'},
-    {cols: 2, rows: 6, color: 'lightblue'},
+    {cols: 1, rows: 1, color: 'white'},
+    {cols: 3, rows: 6, color: '#FDFDFD'},
+    {cols: 1, rows: 6, color: 'white'},
   ];
 
   email = 'contact@technobuz.in';
@@ -33,7 +33,10 @@ export class MonitoringComponent implements OnInit {
   quantum = [];
   response: any;
   count: any = 0;
-
+  reuse: any[] = [];
+  expcount: any = 0;
+  renewcount: any = 0;
+  safecount: any = 0;
   quantumData = [
     'Critical',
     'Semi-Critical',
@@ -85,6 +88,7 @@ export class MonitoringComponent implements OnInit {
         'name': i
       }
       );
+
     }
     console.log(this.states);
     for (let i in this.quantumData) {
@@ -93,7 +97,16 @@ export class MonitoringComponent implements OnInit {
       });
     }
     console.log(this.quantum);
-    // Object.assign(this, { single, multi }); 
+        // Object.assign(this, { single, multi });
+        
+        
+      this.monitordbService.nocValidity().subscribe((response) => {
+        console.log(response);
+        this.expcount = response[0].value
+        this.renewcount = response[1].value
+        this.safecount = response[2].value
+        
+      });
    }
 
   ngOnInit() {
@@ -109,11 +122,5 @@ export class MonitoringComponent implements OnInit {
     console.log(this.selectedCity)
     this.cities = this.statesData[selectedStateName];
     this.selectedCity = '';
-  }
-
-  submitted() {
-    this.monitordbService.submitted(this.selectedState, this.selectedCity).subscribe((response) => {
-      console.log(response);
-    });
   }
 }

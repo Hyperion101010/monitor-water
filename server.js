@@ -259,7 +259,6 @@ app.get('/nocValidity', (req,res)=>{
 				var d1 = moment(`${docs[i].date.year}-${docs[i].date.month}-${docs[i].date.day}`);
 				var d2 = moment();
 				var days = d2.diff(d1, 'days');
-				console.log(`Difference in days: ${days}`);
 				if(days>=915 && days<1095){
 					renewCount++;
 				} else if(days>=1095){

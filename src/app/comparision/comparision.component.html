@@ -1,5 +1,5 @@
 <mat-grid-list cols="4" rowHeight="120px">
-  <mat-grid-tile *ngFor="let tile of tiles; let i=index" [colspan]="tile.cols" [rowspan]="tile.rows" >
+  <mat-grid-tile *ngFor="let tile of tiles; let i=index" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background-color]="tile.color">
     
     <div *ngIf="i===0" id="">
       <a id="updatebutton" mat-raised-button color="primary" target="_blank" href="http://cgwa-noc.gov.in/ExternalLogin.aspxReturnUrl=%2fExternalUser%2fApplicantHome.aspx">Update NOC</a>    
@@ -8,7 +8,8 @@
       </mat-form-field>
     </div>
 
-    <div *ngIf="i==3">
+    <div *ngIf="i==1">
+      <h2>Industry Information</h2>
       <table>
       <tr><td>Type of Industry:</td><td>Private</td></tr>
       <tr><td>Type of Structure:</td><td>Bore Well</td></tr>
@@ -18,13 +19,14 @@
       </table>
     </div>
 
-    <div *ngIf="i==1">
-      <h2>Industry Information</h2>
-    </div>
-
     <div *ngIf="i==2">
+      <h2> Industry Wise Consumption Data </h2>
       <mat-tab-group>
         <mat-tab label="Weekly">  
+          <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [results]="multi" [gradient]="gradient" [xAxis]="showXAxis"
+            [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale" (select)="onSelect($event)">
+          </ngx-charts-line-chart>
           <!--<ngx-charts-bar-vertical  class="graph2"
             [view]="view" 
             [scheme]="colorScheme" 
@@ -41,6 +43,10 @@
           </ngx-charts-bar-vertical>-->
         </mat-tab>
          <mat-tab label="Monthly">
+           <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [results]="multi" [gradient]="gradient" [xAxis]="showXAxis"
+            [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale" (select)="onSelect($event)">
+          </ngx-charts-line-chart>
           <!--<ngx-charts-bar-vertical  class="graph2"
             [view]="view" 
             [scheme]="colorScheme" 
@@ -57,6 +63,10 @@
           </ngx-charts-bar-vertical>-->
         </mat-tab>
          <mat-tab label="Yearly">
+           <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [results]="multi" [gradient]="gradient" [xAxis]="showXAxis"
+            [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale" (select)="onSelect($event)">
+          </ngx-charts-line-chart>
           <!--<ngx-charts-bar-vertical 
             [view]="view" 
             [scheme]="colorScheme" 
@@ -73,18 +83,14 @@
           </ngx-charts-bar-vertical>-->
         </mat-tab>
       </mat-tab-group>
-      
     </div>
-    <div *ngIf="i===4">
-      <ngx-charts-pie-chart
-        [view]="view34"
-        [scheme]="colorScheme1"
-        [results]="single"
-        [doughnut]=true>
-        test
-      </ngx-charts-pie-chart>
+
+    <div *ngIf="i===3"><br><br><br><br>
+    <h2 id="piechart"> Weekly Water Usage(cubic cms)</h2>
+      <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+        (select)="onSelect($event)">
+      </ngx-charts-advanced-pie-chart>
     </div>
-    <div *ngIf="i===5">
-    </div>
+
   </mat-grid-tile>
 </mat-grid-list>

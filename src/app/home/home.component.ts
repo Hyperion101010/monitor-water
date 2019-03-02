@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     yAxisLabel = 'Consumption %';
 
     colorScheme = {
-      domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']
+      domain: ['#0D88E3', '#17159C', '#4948C2', '#0F0E6A']
     };
 
   constructor( private waterHarvestService: WaterHarvestingService) {

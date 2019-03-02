@@ -17,8 +17,17 @@
     padding: 1px;
 }
 td, th {
-  border: 1px solid #dddddd;
+  border: 1px solid #000000;
   text-align: left;
   padding: 8px;
   font-size: 20px;
+  background-color: #fdfdfd
+}
+
+h2 {
+    margin-left: 40px;
+}
+#piechart{
+    margin-bottom: -50px;
+    margin-left: 30px;
 }
