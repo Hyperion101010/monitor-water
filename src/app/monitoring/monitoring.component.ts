@@ -94,7 +94,7 @@ export class MonitoringComponent implements OnInit {
     }
     console.log(this.quantum);
 
-    Object.assign(this, { single, multi });      
+    // Object.assign(this, { single, multi });      
    }
 
   ngOnInit() {

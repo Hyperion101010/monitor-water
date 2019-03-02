@@ -23,5 +23,20 @@
       Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet.
       Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet. Lorem ipsum dolor si amet.
     </p>
+    <ngx-charts-bar-vertical class="graph1"
+    [view]="view" 
+    [scheme]="colorScheme" 
+    [results]="reuse" 
+    [gradient]="gradient" 
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis" 
+    [legend]="showLegend" 
+    [showXAxisLabel]="showXAxisLabel" 
+    [showYAxisLabel]="showYAxisLabel" 
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel" 
+    (select)="onSelect($event)">
+  </ngx-charts-bar-vertical>
+
   </mat-card-content>
 </mat-card>
