@@ -50,7 +50,7 @@ export class ComparisionComponent implements OnInit {
     domain: ['#8A2BE2', '#20B2AA', '#ADFF2F', '#9370DB']
   };
 
-  constructor(private nocService: MonitordbService) { 
+  constructor(private nocService: MonitordbService) {
     Object.assign(this, { single, multi });
   }
 

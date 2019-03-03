@@ -170,6 +170,7 @@ app.get('/checkUsageDefaulters', (req, res) => {
 	var city = req.query.city;
 
 	var query = {};
+	var emailSent = false;
 
 	if (state) {
 		if (state !== '') {
@@ -237,6 +238,7 @@ app.get('/checkUsageDefaulters', (req, res) => {
 						if (sendEmail) {
 							if (creds.emailWhiteList.includes(doc.email)) {
 								mail.sendMail(doc.email);
+								emailSent = true;
 							}
 						}
 
@@ -257,7 +259,8 @@ app.get('/checkUsageDefaulters', (req, res) => {
 						}];
 						res.json({
 							'defaulters': defaulters,
-							'totals': totals
+							'totals': totals,
+							'emailSent': emailSent
 						});
 					});
 			}

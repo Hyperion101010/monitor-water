@@ -169,6 +169,9 @@ export class MonitoringComponent implements OnInit {
       console.log(this.waterUsage);
       this.waterUsagePage = this.waterUsage.slice(0, 10);
       this.totals = response['totals'];
+      if (response['emailSent']) {
+        alert('Email sent');
+      }
     });
   }
 
