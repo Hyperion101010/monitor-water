@@ -25,6 +25,8 @@ export class ComparisionComponent implements OnInit {
   single: any[];
   multi: any[];
   reuse: any = [];
+  reuse2: any = [];
+  reuse3: any = [];
   view: any[] = [600, 400];
   view34: any[] = [300, 300];
 
@@ -37,8 +39,14 @@ export class ComparisionComponent implements OnInit {
   xAxisLabel = 'Duration';
   showYAxisLabel = true;
   yAxisLabel = 'Consumption';
+<<<<<<< HEAD
 
 
+=======
+  // trimYAxisTicks = true;
+  // yScaleMin = 150;
+  autoScale = true;
+>>>>>>> 69282ee0bd898b34ced9ae8a75348046e515d8b7
   colorScheme = {
     domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']
   };
@@ -48,17 +56,28 @@ export class ComparisionComponent implements OnInit {
 
   constructor(private nocService: MonitordbService) { 
     Object.assign(this, { single, multi });
-    this.nocService.nocIndustry().subscribe((response) => {
-      console.log(response);
-      this.reuse = response;
-    });
   }
 
   ngOnInit() {
   }
 
   handleNOCinput(event){
-    console.log(this.NOCid);
+    this.nocService.nocIndustry(this.NOCid).subscribe((response) => {
+      console.log(response);
+      this.reuse = response;
+    });
+
+    this.nocService.nocIndustryMonthly(this.NOCid).subscribe((response2) => {
+      console.log(response2);
+      this.reuse2 = response2;
+    });
+
+    this.nocService.industryDetail(this.NOCid).subscribe((response2) => {
+      console.log(response2);
+      this.reuse3 = response2;
+    });
+
+
   }
 
 }

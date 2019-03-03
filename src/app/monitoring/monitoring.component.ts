@@ -43,6 +43,7 @@ export class MonitoringComponent implements OnInit {
       xAxisLabel = 'Quantum of Extraction';
       showYAxisLabel = true;
       yAxisLabel = 'Number of Industries';
+    
   
       colorScheme = {
         domain: ['#0D88E3', '#17159C', '#4948C2', '#0F0E6A']

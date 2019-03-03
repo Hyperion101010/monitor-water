@@ -24,7 +24,15 @@ export class MonitordbService {
     return this.http.get('http://localhost:8100/checkUsageDefaulters?state=' + state + '&city=' + city);
   }
 
-  nocIndustry(){
-    return this.http.get('http://localhost:8100/getNOCIndustry/8451651656');
+  nocIndustry(nocid){
+    return this.http.get('http://localhost:8100/getNOCIndustry/'+nocid);
+  }
+
+  nocIndustryMonthly(nocid){
+    return this.http.get('http://localhost:8100/getNOCIndustry/monthly/'+nocid);
+  }
+
+  industryDetail(nocid) {
+    return this.http.get('http://localhost:8100/getIndustryInfo/'+nocid);
   }
 }
