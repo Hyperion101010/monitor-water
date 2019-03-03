@@ -191,16 +191,10 @@ app.get('/checkUsageDefaulters', (req, res) => {
 			else {
 				var warningLimit = docs[0].warningLimit;
 				var alertLimit = docs[0].alertLimit;
-				var totals = [{
-					'name': 'Critical',
-					'value': 0
-				}, {
-					'name': 'Semi Critical',
-					'value': 0
-				}, {
-					'name': 'Safe',
-					'value': 0
-				}];
+				var alertTotals = 0;
+				var warningTotals = 0;
+				var safeTotals = 0;
+				
 				// console.log(warningLimit, alertLimit);
 				db.getDB().collection('telemetry').find(query).project({
 						"_id": 0,
@@ -219,28 +213,38 @@ app.get('/checkUsageDefaulters', (req, res) => {
 							// console.log(ratio, doc, 'warning');
 							doc.status = 'warning';
 							defaulters.push(doc);
-							++totals[1].value;
+							++warningTotals;
 							if (creds.emailWhiteList.includes(doc.email)) {
 								mail.sendMail(doc.email);
 							}
-						} else if (ratio > warningLimit && ratio < alertLimit) {
+						} else if (ratio > alertLimit) {
 							// console.log(ratio, 'alert');
 							doc.status = 'alert';
 							defaulters.push(doc);
-							++totals[2].value;
+							++alertTotals;
 							if (creds.emailWhiteList.includes(doc.email)) {
 								mail.sendMail(doc.email);
 							}
 						} else {
 							doc.status = 'normal';
 							defaulters.push(doc);
-							++totals[0].value;
+							++safeTotals;
 							if (creds.emailWhiteList.includes(doc.email)) {
 								console.log(doc.email, 'ignored for normal');
 							}
 						}
 					}, function (err) {
 						// done or error
+						var totals = [{
+							'name': 'Critical',
+							'value': alertTotals
+						}, {
+							'name': 'Semi Critical',
+							'value': warningTotals
+						}, {
+							'name': 'Safe',
+							'value': safeTotals
+						}];
 						res.json({
 							'defaulters': defaulters,
 							'totals': totals

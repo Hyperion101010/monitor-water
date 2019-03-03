@@ -27,30 +27,30 @@ export interface WaterUsage {
 export class MonitoringComponent implements OnInit {
 
   tiles: Tile[] = [
-    {cols: 2, rows: 1, color: 'white'},
-    {cols: 2, rows: 3, color: 'white'},
-    {cols: 2, rows: 7, color: '#FDFDFD'},
-    {cols: 2, rows: 5, color: '#ECECEC'},
+    { cols: 2, rows: 1, color: 'white' },
+    { cols: 2, rows: 3, color: 'white' },
+    { cols: 2, rows: 7, color: '#FDFDFD' },
+    { cols: 2, rows: 5, color: '#ECECEC' },
   ];
 
 
-      // options
-      showXAxis = true;
-      showYAxis = true;
-      gradient = false;
-      showLegend = true;
-      showXAxisLabel = true;
-      xAxisLabel = 'Quantum of Extraction';
-      showYAxisLabel = true;
-      yAxisLabel = 'Number of Industries';
-    
-  
-      colorScheme = {
-        domain: ['#0D88E3', '#17159C', '#4948C2', '#0F0E6A']
-      };
-  
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Quantum of Extraction';
+  showYAxisLabel = true;
+  yAxisLabel = 'Number of Industries';
+
+  colorScheme = {
+    domain: ['#0D88E3', '#17159C', '#4948C2', '#0F0E6A']
+  };
+
   email = 'contact@technobuz.in';
   waterUsage: WaterUsage[] = [];
+  waterUsagePage: WaterUsage[] = [];
   totals = [];
   displayedColumns: string[] = ['name_of_industry', 'email', 'state', 'city', 'status', 'total_water_req', 'consumption'];
 
@@ -66,7 +66,7 @@ export class MonitoringComponent implements OnInit {
   expcount: any = 0;
   renewcount: any = 0;
   safecount: any = 0;
-    view: any[] = [600, 400];
+  view: any[] = [600, 400];
   quantumData = [
     'Critical',
     'Semi-Critical',
@@ -163,10 +163,15 @@ export class MonitoringComponent implements OnInit {
 
   checkUsageDefaulters() {
     this.monitordbService.checkUsageDefaulters(this.selectedState, this.selectedCity).subscribe((response) => {
-      console.log('checkUsageDefaulters', response);
       this.waterUsage = response['defaulters'];
+      this.waterUsagePage = this.waterUsage.slice(0, 10);
       this.totals = response['totals'];
     });
+  }
+
+  handlePageChange(e) {
+    console.log(e, (e.pageIndex * e.pageSize) + 1, e.pageSize * (e.pageIndex + 1));
+    this.waterUsagePage = this.waterUsage.slice((e.pageIndex * e.pageSize) + 1, e.pageSize * (e.pageIndex + 1));
   }
 
 }
