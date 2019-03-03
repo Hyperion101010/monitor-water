@@ -47,10 +47,7 @@ export class ComparisionComponent implements OnInit {
   // yScaleMin = 150;
   autoScale = true;
   colorScheme = {
-    domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-  colorScheme1 = {
-    domain: ['#5AA154', '#A10A28']
+    domain: ['#8A2BE2', '#20B2AA', '#ADFF2F', '#9370DB']
   };
 
   constructor(private nocService: MonitordbService) { 

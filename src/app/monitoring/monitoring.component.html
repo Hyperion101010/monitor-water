@@ -96,6 +96,12 @@
           <td mat-cell *matCellDef="let element"> {{element.consumption}} </td>
         </ng-container>
 
+        <!-- ground_water_depth Column -->
+        <ng-container matColumnDef="ground_water_depth">
+          <th mat-header-cell *matHeaderCellDef>Ground water depth </th>
+          <td mat-cell *matCellDef="let element"> {{element.ground_water_depth}} </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
