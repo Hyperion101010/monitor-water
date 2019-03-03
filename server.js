@@ -711,6 +711,34 @@ app.get('/getWeeklyWaterUsage/:uniq', (req,res)=>{
 		})
 });
 
+app.get('/groundLevel/:uniq', (req,res)=>{
+	var Uniq = req.params.uniq;
+	db.getDB().collection('industryWeekly').find({
+			uniq: Uniq
+		})
+		.toArray((err,docs)=>{
+			if(err)
+				console.log(err);
+			else{
+				var Month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+				var sendJson = [
+					{
+						name : 'Week',
+						series : []
+					}
+				];
+				for(var i=0; i<docs.length; i++){
+					var JsonData = {
+						name : `${docs[i].start_day_number} ${Month[docs[i].month_counter-1]}`,
+						value : docs[i].ground_water_depth
+					};
+					sendJson[0].series.push(JsonData);
+				}
+				res.json(sendJson);
+			}
+		});
+});
+
 
 //Establish Connection
 db.connect((err) => {
