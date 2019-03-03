@@ -14,11 +14,16 @@ export class WaterHarvestingService {
   getUsageConfig() {
     return this.http.get('http://localhost:8100/getUsageConfig');
   }
-  setUsageConfig(warningLimit, alertLimit) {
-    return this.http.get('http://localhost:8100/setUsageConfig?warningLimit=' + warningLimit + '&alertLimit=' + alertLimit);
+  setUsageConfig(warningLimit, alertLimit, criticalLimit, renewalNoticePeriod, ground_water_depth) {
+    return this.http.get('http://localhost:8100/setUsageConfig?warningLimit=' + warningLimit
+      + '&alertLimit=' + alertLimit
+      + '&criticalLimit=' + criticalLimit
+      + '&renewalNoticePeriod=' + renewalNoticePeriod
+      + '&ground_water_depth=' + ground_water_depth
+    );
   }
 
   industryDetail(nocid) {
-    return this.http.get('http://localhost:8100/getIndustryInfo/'+nocid);
+    return this.http.get('http://localhost:8100/getIndustryInfo/' + nocid);
   }
 }

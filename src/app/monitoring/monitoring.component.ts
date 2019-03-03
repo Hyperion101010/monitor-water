@@ -17,6 +17,7 @@ export interface WaterUsage {
   status: string;
   total_water_req: number;
   consumption: number;
+  ground_water_depth: number;
 }
 
 @Component({
@@ -52,7 +53,8 @@ export class MonitoringComponent implements OnInit {
   waterUsage: WaterUsage[] = [];
   waterUsagePage: WaterUsage[] = [];
   totals = [];
-  displayedColumns: string[] = ['name_of_industry', 'email', 'state', 'city', 'status', 'total_water_req', 'consumption'];
+  displayedColumns: string[] = ['name_of_industry', 'email', 'state', 'city', 'status',
+    'total_water_req', 'consumption', 'ground_water_depth'];
 
   selectedState: String = '';
   selectedCity: String = '';
@@ -164,6 +166,7 @@ export class MonitoringComponent implements OnInit {
   checkUsageDefaulters() {
     this.monitordbService.checkUsageDefaulters(this.selectedState, this.selectedCity).subscribe((response) => {
       this.waterUsage = response['defaulters'];
+      console.log(this.waterUsage);
       this.waterUsagePage = this.waterUsage.slice(0, 10);
       this.totals = response['totals'];
     });

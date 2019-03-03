@@ -19,6 +19,27 @@
             </mat-form-field>
           </td>
         </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="criticalLimit" [(ngModel)]="usageConfig.criticalLimit" name="criticalLimit" required>times water limit
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="renewalNoticePeriod" [(ngModel)]="usageConfig.renewalNoticePeriod" name="renewalNoticePeriod" required>Renewal Notice Period (Months)
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="ground_water_depth" [(ngModel)]="usageConfig.ground_water_depth" name="ground_water_depth" required>Ground water depth (meters)
+            </mat-form-field>
+          </td>
+        </tr>
       </table>
     </form>
     <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->

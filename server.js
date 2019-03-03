@@ -62,20 +62,20 @@ app.post('/postData', (req, res) => {
 		});
 });
 
-app.post('/postDataIndustry', (req,res)=>{
+app.post('/postDataIndustry', (req, res) => {
 	const userInput = req.body;
 	db.getDB().collection('industry')
-	.insertOne(userInput,(err,result)=>{
-		if(err)
-			console.log(err)
+		.insertOne(userInput, (err, result) => {
+			if (err)
+				console.log(err)
 
-		else{
+			else {
 				res.json({
 					result,
-					document : result.ops[0]
+					document: result.ops[0]
 				});
-		}	
-	});
+			}
+		});
 });
 
 //GET Data
@@ -191,15 +191,19 @@ app.get('/checkUsageDefaulters', (req, res) => {
 			else {
 				var warningLimit = docs[0].warningLimit;
 				var alertLimit = docs[0].alertLimit;
+				var criticalLimit = docs[0].criticalLimit;
+				var ground_water_depth = docs[0].ground_water_depth;
+				var criticalTotals = 0;
 				var alertTotals = 0;
 				var warningTotals = 0;
 				var safeTotals = 0;
-				
+
 				// console.log(warningLimit, alertLimit);
 				db.getDB().collection('telemetry').find(query).project({
 						"_id": 0,
 						"consumption": 1,
 						"total_water_req": 1,
+						'ground_water_depth': 1,
 						"name_of_industry": 1,
 						"state": 1,
 						"city": 1,
@@ -208,34 +212,40 @@ app.get('/checkUsageDefaulters', (req, res) => {
 					})
 					.forEach((doc) => {
 						var ratio = doc.consumption / doc.total_water_req;
+						var sendEmail = false;
 						// console.log(ratio);
-						if (ratio > warningLimit && ratio < alertLimit) {
-							// console.log(ratio, doc, 'warning');
-							doc.status = 'warning';
-							defaulters.push(doc);
-							++warningTotals;
-							if (creds.emailWhiteList.includes(doc.email)) {
-								mail.sendMail(doc.email);
-							}
-						} else if (ratio > alertLimit) {
-							// console.log(ratio, 'alert');
+						if (ratio >= criticalLimit) {
+							doc.status = 'critical';
+							++criticalTotals;
+							sendEmail = true;
+						} else if (ratio >= alertLimit && ratio < criticalLimit) {
 							doc.status = 'alert';
-							defaulters.push(doc);
 							++alertTotals;
-							if (creds.emailWhiteList.includes(doc.email)) {
-								mail.sendMail(doc.email);
-							}
+							sendEmail = true;
+						} else if (ratio >= warningLimit && ratio < alertLimit) {
+							doc.status = 'warning';
+							++warningTotals;
+							sendEmail = true;
 						} else {
 							doc.status = 'normal';
-							defaulters.push(doc);
 							++safeTotals;
+						}
+						defaulters.push(doc);
+						if (doc.ground_water_depth > ground_water_depth) {
+							sendEmail = true;
+						}
+						if (sendEmail) {
 							if (creds.emailWhiteList.includes(doc.email)) {
-								console.log(doc.email, 'ignored for normal');
+								mail.sendMail(doc.email);
 							}
 						}
+
 					}, function (err) {
 						// done or error
 						var totals = [{
+							'name': 'Over Exploited',
+							'value': criticalTotals
+						}, {
 							'name': 'Critical',
 							'value': alertTotals
 						}, {
@@ -270,11 +280,17 @@ app.get('/getUsageConfig', (req, res) => {
 app.get('/setUsageConfig', (req, res) => {
 	var warningLimit = req.query.warningLimit;
 	var alertLimit = req.query.alertLimit;
+	var criticalLimit = req.query.criticalLimit;
+	var renewalNoticePeriod = req.query.renewalNoticePeriod;
+	var ground_water_depth = req.query.ground_water_depth;
 	// console.log('setUsageConfig', warningLimit, alertLimit);
 	db.getDB().collection('usageConfig').findOneAndUpdate({}, {
 			$set: {
 				'warningLimit': warningLimit,
-				'alertLimit': alertLimit
+				'alertLimit': alertLimit,
+				'criticalLimit': criticalLimit,
+				'renewalNoticePeriod': renewalNoticePeriod,
+				'ground_water_depth': ground_water_depth
 			}
 		},
 		(err, result) => {
@@ -515,7 +531,7 @@ app.get('/getNOCIndustry/:uniq', (req, res) => {
 
 				for (var i = docs.length - 1, j = i - 7, counter = 0; counter < 7; i--, j--) {
 					var currentMonth = docs[i].month_counter;
-					if((currentMonth==1) && docs[i].current_year==2018	){
+					if ((currentMonth == 1) && docs[i].current_year == 2018) {
 						var temp1 = {
 							name: `${docs[i].start_day_number}-0${docs[i].month_counter}`,
 							value: docs[i].consumption
@@ -526,7 +542,7 @@ app.get('/getNOCIndustry/:uniq', (req, res) => {
 						};
 						industryArr[0].series.push(temp1);
 						industryArr[1].series.push(temp2);
-						counter++;	
+						counter++;
 					}
 				}
 				res.json(industryArr);
@@ -553,12 +569,12 @@ app.get('/getNOCIndustry/monthly/:uniq', (req, res) => {
 					}
 				];
 
-				var Month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+				var Month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
 				for (var i = docs.length - 1, j = i - 7, counter = 0; counter < 12; i--, j--) {
 					var currentDate = docs[i].start_day_number;
-					if(currentDate==15){
-						var temp1 = {							
+					if (currentDate == 15) {
+						var temp1 = {
 							name: `${Month[docs[i].month_counter-1]} ${docs[i].current_year}`,
 							value: docs[i].consumption
 						};
@@ -568,7 +584,7 @@ app.get('/getNOCIndustry/monthly/:uniq', (req, res) => {
 						// };
 						industryArr[0].series.push(temp1);
 						// industryArr[1].series.push(temp2);
-						counter++;	
+						counter++;
 					}
 				}
 				res.json(industryArr);
@@ -576,7 +592,7 @@ app.get('/getNOCIndustry/monthly/:uniq', (req, res) => {
 		});
 });
 
-app.get('/getIndustryInfo/:uniq', (req,res)=>{
+app.get('/getIndustryInfo/:uniq', (req, res) => {
 	var Uniq = req.params.uniq;
 	db.getDB().collection('noc').find({
 			uniq: Uniq
@@ -585,7 +601,7 @@ app.get('/getIndustryInfo/:uniq', (req,res)=>{
 			if (err)
 				console.log(err);
 			else {
-				
+
 				// for (var i = 0; i < docs.length; i++) {
 				// 	var quanta = (docs[i].breakup_of_recycle.total_treated_used / docs[i].breakup_of_recycle.total_usage) * 100;
 				// 	if (quanta >= 40 && quanta <= 50) {
@@ -598,12 +614,12 @@ app.get('/getIndustryInfo/:uniq', (req,res)=>{
 				// }
 				// res.json(docs);
 				var industryInfo = {
-					name : docs[0].name_of_industry,
-					typeIndustry : docs[0].type_of_activity,
-					typeStruct : docs[0].type_of_struct,
-					HpPump : docs[0].hp_of_pump,
-					avgDischarge : docs[0].discharge_of_struct,
-					region : 'Safe'	
+					name: docs[0].name_of_industry,
+					typeIndustry: docs[0].type_of_activity,
+					typeStruct: docs[0].type_of_struct,
+					HpPump: docs[0].hp_of_pump,
+					avgDischarge: docs[0].discharge_of_struct,
+					region: 'Safe'
 				};
 				res.json(industryInfo);
 			}
@@ -630,27 +646,27 @@ app.get('/getNOCIndustry/weekly/:uniq', (req, res) => {
 					}
 				];
 
-				var Month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+				var Month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
 				for (var i = docs.length - 1, j = i - 4, counter = 0; counter < 4; i--, j--) {
 					// var currentDate = docs[i].start_day_number;
 					// if(currentDate==15){
-						var temp1 = {							
-							name: `${docs[i].start_day_number} ${Month[docs[i].month_counter-1]}`,
-							value: docs[i].consumption
-						};
-						var temp2 = {
-							name: `${docs[i].start_day_number} ${Month[docs[i].month_counter-1]}`,
-							value: docs[j].consumption
-						};
-						industryArr[0].series.push(temp1);
-						industryArr[1].series.push(temp2);
-						counter++;	
-					}
-				res.json(industryArr);
+					var temp1 = {
+						name: `${docs[i].start_day_number} ${Month[docs[i].month_counter-1]}`,
+						value: docs[i].consumption
+					};
+					var temp2 = {
+						name: `${docs[i].start_day_number} ${Month[docs[i].month_counter-1]}`,
+						value: docs[j].consumption
+					};
+					industryArr[0].series.push(temp1);
+					industryArr[1].series.push(temp2);
+					counter++;
 				}
-				
-			})
+				res.json(industryArr);
+			}
+
+		})
 });
 
 
