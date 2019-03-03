@@ -23,4 +23,4 @@ exports.handleCORS = function (req, res, next) {
         next();
     }
 };
-exports.emailWhiteList = ['devendra.phadke@gmail.com'];
+exports.emailWhiteList = ['shrutiphadke25@gmail.com', 'prashantsa225@gmail.com', 'swapnil.sam.13@gmail.com'];

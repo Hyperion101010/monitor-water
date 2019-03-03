@@ -1,4 +1,17 @@
-<div id="mapframe">
-  <h1> Spatial Assessment: Groundwater Extraction </h1>
-  <iframe width="1000" height="550" frameBorder="0" scrolling="no" style="overflow:hidden;" src='../../assets/map.html'></iframe>
-</div>
+<mat-grid-list cols="4" rowHeight="100px">
+  <mat-grid-tile *ngFor="let tile of tiles;let i=index" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background-color]="tile.color">
+      <div *ngIf="i==1">
+        <h1> Spatial Assessment: Groundwater Extraction </h1>
+        <mat-form-field id="form_field">
+          <mat-select placeholder="Select State" [(value)]="selectedState" [(ngModel)]="selectedState" (ngModelChange)='handleStateChange(selectedState);'required>
+            <mat-option>--</mat-option>
+              <div *ngFor="let state of states;">
+                <mat-option value="{{state.name}}">{{state.name}}</mat-option>
+              </div>
+          </mat-select>
+        </mat-form-field>
+        <iframe id="mapframe" width="800" height="550" frameBorder="0" scrolling="no" style="overflow:hidden;" src='../../assets/map.html'></iframe>
+      </div>
+  </mat-grid-tile>
+</mat-grid-list>
+      
