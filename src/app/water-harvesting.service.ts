@@ -17,4 +17,8 @@ export class WaterHarvestingService {
   setUsageConfig(warningLimit, alertLimit) {
     return this.http.get('http://localhost:8100/setUsageConfig?warningLimit=' + warningLimit + '&alertLimit=' + alertLimit);
   }
+
+  industryDetail(nocid) {
+    return this.http.get('http://localhost:8100/getIndustryInfo/'+nocid);
+  }
 }
