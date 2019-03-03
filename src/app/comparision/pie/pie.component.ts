@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { single, multi } from 'src/app/comparision/pie/new_data';
-import {  single1} from '../../data';
+import {  single1 } from '../../data';
+import { MonitordbService } from 'src/app/monitordb.service';
 
 @Component({
   selector: 'app-pie',
@@ -9,6 +10,7 @@ import {  single1} from '../../data';
 })
 
 export class PieComponent implements OnInit {
+@Input() NOCid;
 
   water_usage : any[];
   multi_usage : any[];
@@ -19,6 +21,7 @@ export class PieComponent implements OnInit {
 
   single: any[];
   multi: any[];
+  reuse: any =[];
 
   view: any[] = [700, 400];
 
@@ -26,12 +29,19 @@ export class PieComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  constructor() {
-    Object.assign(this, { single, multi  })
+  constructor(private monitordbService : MonitordbService) {
+    // Object.assign(this, { single, multi  })
+    setInterval(()=>{
+      console.log(this.NOCid);
+    },1000);
   }
 
-  onSelect(event) {
-    console.log(event);
+
+  weeklyWaterUsage(NOCid){
+    this.monitordbService.weeklyWaterUsage(NOCid).subscribe((response) => {
+      console.log(response);
+      this.reuse = response;
+    });
   }
 
   ngOnInit() {

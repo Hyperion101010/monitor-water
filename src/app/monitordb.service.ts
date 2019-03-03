@@ -40,4 +40,8 @@ export class MonitordbService {
   industryDetail(nocid) {
     return this.http.get('http://localhost:8100/getIndustryInfo/'+nocid);
   }
+
+  weeklyWaterUsage(nocid) {
+    return this.http.get('http://localhost:8100/getWeeklyWaterUsage/'+nocid);
+  }
 }

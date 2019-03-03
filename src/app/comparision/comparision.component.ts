@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { single, multi } from '../data';
 import { MonitordbService } from '../monitordb.service';
+import { PieComponent } from './pie/pie.component';
 
 export interface Tile {
   color: string;
@@ -14,6 +15,8 @@ export interface Tile {
   styleUrls: ['./comparision.component.scss']
 })
 export class ComparisionComponent implements OnInit {
+  @ViewChild(PieComponent) pie: PieComponent;
+
   NOCid: number;
   tiles: Tile[] = [
     {cols: 2, rows: 1, color: '#fdfdfd'},
@@ -58,6 +61,8 @@ export class ComparisionComponent implements OnInit {
   }
 
   handleNOCinput(event){
+    this.pie.weeklyWaterUsage(this.NOCid);
+
     this.nocService.nocIndustry(this.NOCid).subscribe((response) => {
       console.log(response);
       this.reuse = response;
