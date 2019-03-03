@@ -19,9 +19,11 @@ export class ComparisionComponent implements OnInit {
 
   NOCid: number;
   tiles: Tile[] = [
+    {cols: 1, rows: 1, color: "white"},
     {cols: 2, rows: 1, color: '#fdfdfd'},
+    {cols: 1, rows: 1, color: "white"},
+    {cols: 2, rows: 6, color: 'white'},
     {cols: 2, rows: 3, color: 'white'},
-    {cols: 2, rows: 5, color: 'white'},
     {cols: 2, rows: 3, color: 'white'},
   ];
 
@@ -31,7 +33,7 @@ export class ComparisionComponent implements OnInit {
   reuse2: any = [];
   reuse3: any = [];
   reuse4: any = [];
-  view: any[] = [600, 400];
+  view: any[] = [600, 250];
   view34: any[] = [300, 300];
 
   // options
@@ -40,13 +42,22 @@ export class ComparisionComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Duration';
   showYAxisLabel = true;
-  yAxisLabel = 'Consumption';
-  // trimYAxisTicks = true;
-  // yScaleMin = 150;
+
+  xAxisLabel0 = 'Current Date';
+  yAxisLabel0 = 'Consumption';
+  xAxisLabel1 = 'Current Week';
+  yAxisLabel1 = 'Consumption';
+  xAxisLabel2 = 'Current Month';
+  yAxisLabel2 = 'Consumption';
+  xAxisLabel3 = 'Current Week';
+  yAxisLabel3 = 'Consumption';
+
   autoScale = true;
   colorScheme = {
+    domain: ['#8A2BE2', '#20B2AA', '#ADFF2F', '#9370DB']
+  };
+  colorScheme1 = {
     domain: ['#8A2BE2', '#20B2AA', '#ADFF2F', '#9370DB']
   };
 
