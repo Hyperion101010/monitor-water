@@ -601,7 +601,6 @@ app.get('/getIndustryInfo/:uniq', (req, res) => {
 			if (err)
 				console.log(err);
 			else {
-
 				// for (var i = 0; i < docs.length; i++) {
 				// 	var quanta = (docs[i].breakup_of_recycle.total_treated_used / docs[i].breakup_of_recycle.total_usage) * 100;
 				// 	if (quanta >= 40 && quanta <= 50) {
@@ -612,7 +611,8 @@ app.get('/getIndustryInfo/:uniq', (req, res) => {
 				// 		criticalCount++;
 				// 	}
 				// }
-				// res.json(docs);
+				console.log(docs);
+
 				var industryInfo = {
 					name: docs[0].name_of_industry,
 					typeIndustry: docs[0].type_of_activity,
@@ -666,6 +666,45 @@ app.get('/getNOCIndustry/weekly/:uniq', (req, res) => {
 				res.json(industryArr);
 			}
 
+		})
+});
+
+app.get('/getWeeklyWaterUsage/:uniq', (req,res)=>{
+	var Uniq = req.params.uniq;
+	db.getDB().collection('industry').find({
+			uniq: Uniq
+		})
+		.toArray((err, docs) => {
+			if (err)
+				console.log(err);
+			else {
+				var sum=0, waterUsage,waterJSON;
+				for(var i=docs.length-1,counter=0; counter<7; i--){
+					if(i%7==0)
+						break;
+					else
+						sum+=docs[i].consumption;
+				}
+				db.getDB().collection('noc').find({
+					uniq : Uniq
+				}).toArray((err1,docs1)=>{
+					if(err1)
+						console.log(err1);
+					else{
+						var waterUsage = docs1[0].proposed_water_req;
+						waterJSONArr = [	
+						{	
+							name : 'Water Used',
+							value : sum
+						},
+						{
+							name : 'Water Available',
+							value : waterUsage-sum
+						}];
+						res.json(waterJSONArr);
+					}
+				})	
+			}
 		})
 });
 
