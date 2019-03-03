@@ -1,3 +1,4 @@
+<h1 id="welcomemessage">REGION WISE MONITORING OF GROUNDWATER EXTRACTION</h1>
 <mat-grid-list cols="4" rowHeight="100px">
   <mat-grid-tile *ngFor="let tile of tiles;let i=index" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background-color]="tile.color">
     <div *ngIf="i===0">
@@ -23,8 +24,8 @@
     </div>
 
     <div *ngIf="i==1">
-      <h2 id="WandA">Warnings and Alarms</h2>
-      <h3 id="noc">NOC Validity</h3>
+      <h2 id="WandA">WARNINGS AND ALARMS</h2>
+      <h4 id="noc">NOC Validity</h4>
       <table>
         <tr id="customTable">
           <th id="customTable">Safe NOCs:</th>
@@ -95,11 +96,12 @@
     </div>
 
     <div *ngIf="i==3">
+      <strong>CLASSIFICATION OF INDUSTRIES WITH RESPECT TO QUANTUM OF EXTRACTION</strong>
+      <br><br>
       <ngx-charts-bar-vertical class="graph1" [view]="view" [scheme]="colorScheme" [results]="totals" [gradient]="gradient" [xAxis]="showXAxis"
         [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [yAxisLabel]="yAxisLabel" [xAxisLabel]="xAxisLabel"
         (select)="onSelect($event)">
       </ngx-charts-bar-vertical>
     </div>
-    
   </mat-grid-tile>
 </mat-grid-list>
