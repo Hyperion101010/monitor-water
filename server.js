@@ -611,6 +611,48 @@ app.get('/getIndustryInfo/:uniq', (req,res)=>{
 });
 
 
+app.get('/getNOCIndustry/weekly/:uniq', (req, res) => {
+	var Uniq = req.params.uniq;
+	db.getDB().collection('industryWeekly').find({
+			uniq: Uniq
+		})
+		.toArray((err, docs) => {
+			if (err)
+				console.log(err);
+			else {
+				var industryArr = [{
+						"name": "This Month",
+						"series": []
+					},
+					{
+						"name": "Previous Month",
+						"series": []
+					}
+				];
+
+				var Month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+
+				for (var i = docs.length - 1, j = i - 4, counter = 0; counter < 4; i--, j--) {
+					// var currentDate = docs[i].start_day_number;
+					// if(currentDate==15){
+						var temp1 = {							
+							name: `${docs[i].start_day_number} ${Month[docs[i].month_counter-1]}`,
+							value: docs[i].consumption
+						};
+						var temp2 = {
+							name: `${docs[i].start_day_number} ${Month[docs[i].month_counter-1]}`,
+							value: docs[j].consumption
+						};
+						industryArr[0].series.push(temp1);
+						industryArr[1].series.push(temp2);
+						counter++;	
+					}
+				res.json(industryArr);
+				}
+				
+			})
+});
+
 
 //Establish Connection
 db.connect((err) => {

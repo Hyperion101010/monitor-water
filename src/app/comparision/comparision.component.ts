@@ -39,14 +39,9 @@ export class ComparisionComponent implements OnInit {
   xAxisLabel = 'Duration';
   showYAxisLabel = true;
   yAxisLabel = 'Consumption';
-<<<<<<< HEAD
-
-
-=======
   // trimYAxisTicks = true;
   // yScaleMin = 150;
   autoScale = true;
->>>>>>> 69282ee0bd898b34ced9ae8a75348046e515d8b7
   colorScheme = {
     domain: ['#5AA154', '#A10A28', '#C7B42C', '#AAAAAA']
   };
