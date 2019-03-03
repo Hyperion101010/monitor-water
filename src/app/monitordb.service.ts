@@ -28,6 +28,11 @@ export class MonitordbService {
     return this.http.get('http://localhost:8100/getNOCIndustry/'+nocid);
   }
 
+  nocIndustryWeekly(nocid){
+    return this.http.get('http://localhost:8100/getNOCIndustry/weekly/'+nocid);
+  }
+
+
   nocIndustryMonthly(nocid){
     return this.http.get('http://localhost:8100/getNOCIndustry/monthly/'+nocid);
   }

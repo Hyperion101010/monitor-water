@@ -27,6 +27,7 @@ export class ComparisionComponent implements OnInit {
   reuse: any = [];
   reuse2: any = [];
   reuse3: any = [];
+  reuse4: any = [];
   view: any[] = [600, 400];
   view34: any[] = [300, 300];
 
@@ -70,6 +71,11 @@ export class ComparisionComponent implements OnInit {
     this.nocService.industryDetail(this.NOCid).subscribe((response2) => {
       console.log(response2);
       this.reuse3 = response2;
+    });
+
+    this.nocService.nocIndustryWeekly(this.NOCid).subscribe((response) => {
+      console.log(response);
+      this.reuse4 = response;
     });
 
 
