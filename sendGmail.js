@@ -12,7 +12,7 @@ const TOKEN_PATH = 'token.json';
 
 var to = 'contact@technobuz.in';
 var subject = 'warning / alert';
-var message = 'Hello, this is to bring to your attention that your water consumtion is exceeding the expected limits. Please take necessary action. Regards, CGWA';
+var message = 'Hello, this is to bring to your attention that your water consumption is exceeding the expected limits. Please take necessary action. Regards, CGWA';
 
 // Load client secrets from a local file.
 
