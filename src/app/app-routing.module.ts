@@ -7,6 +7,7 @@ import { MonitoringComponent } from './monitoring/monitoring.component';
 import { UsageConfigComponent } from './usage-config/usage-config.component';
 import { MapComponent } from './map/map.component';
 import { PredictionComponent } from './prediction/prediction.component';
+import { PieComponent } from './comparision/pie/pie.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'monitoring', component: MonitoringComponent, canActivate: [AuthGuard] },
   {path: 'usageconfig', component: UsageConfigComponent, canActivate: [AuthGuard] },
   {path: 'prediction', component: PredictionComponent, canActivate: [AuthGuard]},
-  {path: 'map', component: MapComponent, canActivate: [AuthGuard]}
+  { path: 'map', component: MapComponent, canActivate: [AuthGuard] },
+  { path: 'pie', component: PieComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

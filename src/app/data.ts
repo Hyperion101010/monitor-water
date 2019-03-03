@@ -13,6 +13,98 @@
     }
   ];
 
+/*export var multi = [
+  {
+    "name": "Week1",
+    "series": [
+      {
+        "name": "Monday",
+        "value": 3700
+      },
+      {
+        "name": "Tuesday",
+        "value": 3500
+      },
+      {
+        "name": "Wednesday",
+        "value": 4800
+      },
+      {
+        "name": "Thursday",
+        "value": 2100
+      },
+      {
+        "name": "Friday",
+        "value": 3200
+      }, {
+        "name": "Saturday",
+        "value": 4500
+      }, {
+        "name": "Sunday",
+        "value": 5200
+      },
+    ]
+  },
+  {
+
+  }
+];*/
+
+export var single1 = [
+  {
+    "name": "Week1",
+    "value": 89400
+  },
+  {
+    "name": "Week2",
+    "value": 50000
+  },
+  {
+    "name": "Week3",
+    "value": 72000
+  }
+];
+
+  export var water_usage = [
+    {
+      "name": "Water used",
+      "value": 100
+    },
+    {
+    "name": "Water available",
+    "value": 203
+    }
+  ];
+
+  export var multi_usage = [
+    {
+      "name": "Water used",
+      "series": [
+        {
+          "year" : 2010,
+          "usage" : 4545
+        },
+        {
+          "year" :2011,
+          "usage" :1545
+        }
+      ]
+    },
+    {
+      "name": "Water available",
+      "series": [
+        {
+          "year": 2010,
+          "usage": 2545
+        },
+        {
+          "year": 2011,
+          "usage": 4545
+        }
+      ]
+    }
+  ];
+
   export var month = [
     {
     "name" : "January",

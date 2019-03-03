@@ -19,6 +19,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UsageConfigComponent } from './usage-config/usage-config.component';
 import { MapComponent } from './map/map.component';
 import { PredictionComponent } from './prediction/prediction.component';
+import { PieComponent } from './comparision/pie/pie.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PredictionComponent } from './prediction/prediction.component';
     MonitoringComponent,
     UsageConfigComponent,
     MapComponent,
-    PredictionComponent
+    PredictionComponent,
+    PieComponent
   ],
   imports: [
     BrowserModule,
