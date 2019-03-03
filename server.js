@@ -601,11 +601,6 @@ app.get('/getIndustryInfo/:uniq', (req, res) => {
 			if (err)
 				console.log(err);
 			else {
-<<<<<<< HEAD
-				console.log('im here');
-=======
-
->>>>>>> 4a8b3fa987fa832854b9c31e19381de77ef35386
 				// for (var i = 0; i < docs.length; i++) {
 				// 	var quanta = (docs[i].breakup_of_recycle.total_treated_used / docs[i].breakup_of_recycle.total_usage) * 100;
 				// 	if (quanta >= 40 && quanta <= 50) {
