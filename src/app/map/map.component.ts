@@ -72,4 +72,9 @@ export class MapComponent implements OnInit {
   ngOnInit(){
   }
 
+  change(){
+    document.getElementById('mapframe')['contentWindow'].haha(this.selectedState);
+  }
+
 }
+

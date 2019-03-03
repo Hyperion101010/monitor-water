@@ -3,7 +3,7 @@
       <div *ngIf="i==1">
         <h1> Spatial Assessment: Groundwater Extraction </h1>
         <mat-form-field id="form_field">
-          <mat-select placeholder="Select State" [(value)]="selectedState" [(ngModel)]="selectedState" (ngModelChange)='handleStateChange(selectedState);'required>
+          <mat-select placeholder="Select State" [(value)]="selectedState" [(ngModel)]="selectedState" (ngModelChange)="change()"required>
             <mat-option>--</mat-option>
               <div *ngFor="let state of states;">
                 <mat-option value="{{state.name}}">{{state.name}}</mat-option>
