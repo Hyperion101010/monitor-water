@@ -2,7 +2,7 @@
   <mat-grid-tile *ngFor="let tile of tiles; let i=index" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background-color]="tile.color">
     
     <div *ngIf="i===0">
-      <a id="updatebutton" mat-raised-button color="primary" target="_blank" href="http://cgwa-noc.gov.in/ExternalLogin.aspxReturnUrl=%2fExternalUser%2fApplicantHome.aspx">Update NOC</a>    
+      <!-- <a id="updatebutton" mat-raised-button color="primary" target="_blank" href="http://cgwa-noc.gov.in/ExternalLogin.aspxReturnUrl=%2fExternalUser%2fApplicantHome.aspx">Update NOC</a>     -->
       <mat-form-field class="Input">
         <input matInput placeholder="Enter NOC ID" [(ngModel)]="NOCid" (keyup.enter)=handleNOCinput($event)>
       </mat-form-field>
@@ -22,20 +22,20 @@
     <div *ngIf="i==2">
       <h2> Industry Wise Consumption Data </h2>
       <mat-tab-group>
-        <mat-tab label="Weekly">  
+        <mat-tab label="Daily">  
           <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [results]="reuse" [gradient]="gradient" [xAxis]="showXAxis"
             [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale" (select)="onSelect($event)">
           </ngx-charts-line-chart>
         </mat-tab>
-         <mat-tab label="Monthly">
+         <mat-tab label="Weekly">
            <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [results]="multi" [gradient]="gradient" [xAxis]="showXAxis"
             [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale" (select)="onSelect($event)">
           </ngx-charts-line-chart>
         </mat-tab>
-         <mat-tab label="Yearly">
-           <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [results]="multi" [gradient]="gradient" [xAxis]="showXAxis"
+         <mat-tab label="Monthly">
+           <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [results]="reuse2" [gradient]="gradient" [xAxis]="showXAxis"
             [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
             [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale" (select)="onSelect($event)">
           </ngx-charts-line-chart>

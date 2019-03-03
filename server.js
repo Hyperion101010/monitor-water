@@ -508,23 +508,104 @@ app.get('/getNOCIndustry/:uniq', (req, res) => {
 						"series": []
 					}
 				];
+
 				for (var i = docs.length - 1, j = i - 7, counter = 0; counter < 7; i--, j--) {
-					var temp1 = {
-						name: `${docs[i].start_day_number}-0${docs[i].month_counter}`,
-						value: docs[i].consumption
-					};
-					var temp2 = {
-						name: `${docs[i].start_day_number}-0${docs[i].month_counter}`,
-						value: docs[j].consumption
-					};
-					industryArr[0].series.push(temp1);
-					industryArr[1].series.push(temp2);
-					counter++;
+					var currentMonth = docs[i].month_counter;
+					if((currentMonth==1) && docs[i].current_year==2018	){
+						var temp1 = {
+							name: `${docs[i].start_day_number}-0${docs[i].month_counter}`,
+							value: docs[i].consumption
+						};
+						var temp2 = {
+							name: `${docs[i].start_day_number}-0${docs[i].month_counter}`,
+							value: docs[j].consumption
+						};
+						industryArr[0].series.push(temp1);
+						industryArr[1].series.push(temp2);
+						counter++;	
+					}
 				}
 				res.json(industryArr);
 			}
 		});
 });
+
+app.get('/getNOCIndustry/monthly/:uniq', (req, res) => {
+	var Uniq = req.params.uniq;
+	db.getDB().collection('industry').find({
+			uniq: Uniq
+		})
+		.toArray((err, docs) => {
+			if (err)
+				console.log(err);
+			else {
+				var industryArr = [{
+						"name": "This Year",
+						"series": []
+					},
+					{
+						"name": "Previous Year",
+						"series": []
+					}
+				];
+
+				var Month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'];
+
+				for (var i = docs.length - 1, j = i - 7, counter = 0; counter < 12; i--, j--) {
+					var currentDate = docs[i].start_day_number;
+					if(currentDate==15){
+						var temp1 = {							
+							name: `${Month[docs[i].month_counter-1]} ${docs[i].current_year}`,
+							value: docs[i].consumption
+						};
+						// var temp2 = {
+						// 	name: `${docs[i].start_day_number}-0${docs[i].month_counter}`,
+						// 	value: docs[j].consumption
+						// };
+						industryArr[0].series.push(temp1);
+						// industryArr[1].series.push(temp2);
+						counter++;	
+					}
+				}
+				res.json(industryArr);
+			}
+		});
+});
+
+app.get('/getIndustryInfo/:uniq', (req,res)=>{
+	var Uniq = req.params.uniq;
+	db.getDB().collection('noc').find({
+			uniq: Uniq
+		})
+		.toArray((err, docs) => {
+			if (err)
+				console.log(err);
+			else {
+				
+				// for (var i = 0; i < docs.length; i++) {
+				// 	var quanta = (docs[i].breakup_of_recycle.total_treated_used / docs[i].breakup_of_recycle.total_usage) * 100;
+				// 	if (quanta >= 40 && quanta <= 50) {
+				// 		safeCount++;
+				// 	} else if (quanta > 50 && quanta <= 70) {
+				// 		semiCriticalCount++;
+				// 	} else {
+				// 		criticalCount++;
+				// 	}
+				// }
+				// res.json(docs);
+				var industryInfo = {
+					name : docs[0].name_of_industry,
+					typeIndustry : docs[0].type_of_activity,
+					typeStruct : docs[0].type_of_struct,
+					HpPump : docs[0].hp_of_pump,
+					avgDischarge : docs[0].discharge_of_struct,
+					region : 'Safe'	
+				};
+				res.json(industryInfo);
+			}
+		})
+});
+
 
 
 //Establish Connection
