@@ -23,7 +23,7 @@ export class PieComponent implements OnInit {
   view: any[] = [700, 400];
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#8A2BE2', '#20B2AA', '#ADFF2F', '#9370DB']
   };
 
   constructor() {

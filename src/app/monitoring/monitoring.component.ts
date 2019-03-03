@@ -46,7 +46,7 @@ export class MonitoringComponent implements OnInit {
   yAxisLabel = 'Number of Industries';
 
   colorScheme = {
-    domain: ['#0D88E3', '#17159C', '#4948C2', '#0F0E6A']
+    domain: ['#FF0000', '#FFFF00', '#00FF00', '#0000FF']
   };
 
   email = 'contact@technobuz.in';
