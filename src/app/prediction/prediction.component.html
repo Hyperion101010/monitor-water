@@ -3,3 +3,33 @@
 <img width="290" height="270" src="../assets/test.jpg">
 <img width="290" height="270" src="../assets/training.jpg">
 <br>
+<ngx-charts-bar-vertical
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="waterExtraction"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  (select)="onSelect($event)">
+</ngx-charts-bar-vertical>
+
+<ngx-charts-line-chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="groudwaterLevel"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="false"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [showRefLines]="true"
+    [referenceLines]="[{'name': 'reference', 'value': '7'}]"
+    >  
+</ngx-charts-line-chart>
