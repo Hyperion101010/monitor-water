@@ -8,7 +8,9 @@ Once you have installed the required dependencies, you can then run this applica
 
 1>First open a terminal and in your project directory run "node server.js" to run the node server in the backend.
 
-2>Then to run the AngularJs server using "ng serve"
+2>Then to run the AngularJs server type "ng serve" in a new terminal.
+
+3>Open https://127.0.0.1:4200 in your browser to see the application.
 
 Here is an overview of the tool:
 
