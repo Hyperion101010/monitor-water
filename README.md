@@ -12,6 +12,13 @@ Once you have installed the required dependencies, you can then run this applica
 
 3>Open https://127.0.0.1:4200 in your browser to see the application.
 
+login credentials:
+Username:admin
+Password:admin123
+
+Valid Noc id:8451651656
+
+
 Here is an overview of the tool:
 
 Home page:
